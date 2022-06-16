@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Teleport : Ability
+public class Teleport : Executable
 {
     void Awake()
     {

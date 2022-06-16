@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8593488029412658672}
   - component: {fileID: -4352120425656963169}
   - component: {fileID: -4297721484059589541}
+  - component: {fileID: 6945604044660488391}
   m_Layer: 0
   m_Name: Firewall
   m_TagString: Indestructible
@@ -144,3 +145,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f771f19a9fc8c5a40aab8733eec9a81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &6945604044660488391
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8593488029412658682}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.25, y: 1, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}

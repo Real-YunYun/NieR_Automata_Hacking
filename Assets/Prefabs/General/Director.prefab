@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3883883651654620416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3883883651654620422}
+  - component: {fileID: 3883883651654620417}
+  m_Layer: 0
+  m_Name: Director
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3883883651654620422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3883883651654620416}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3883883651654620417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3883883651654620416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94af86c343a3799408526334166bb705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Debugging: 1
+  SpawningBounds: {x: 10, y: 10}
+  Entities:
+  - {fileID: 7153527409479970420, guid: d2177f5f0bd09314f9dfd6fe7da3aa55, type: 3}
+  - {fileID: 3713626421213575533, guid: dc38ef1014b473847adfb7f6f165239e, type: 3}
+  - {fileID: 8283523349450054649, guid: f854b502c922f3047b6784c109667f87, type: 3}
+  - {fileID: 8283523349450054649, guid: 5b3afc9279e52534d9e94adca3c47ba9, type: 3}
+  - {fileID: 8142690493675382238, guid: 75a3e557094768641bdec1c996e72223, type: 3}
+  - {fileID: 7741247079408220451, guid: babce8751d430334887abff4679bea83, type: 3}
+  - {fileID: 7741247079408220451, guid: fedfe8ddb85c49248b0d8b98c2bdd233, type: 3}
+  - {fileID: 1850655494181906883, guid: 253376d89fd847744af9806fe8357169, type: 3}
+  - {fileID: 1850655494181906883, guid: 3ffb107b3ffcecd4c922ee1a067645b4, type: 3}
+  - {fileID: 2334538276649355116, guid: 44937c57740227c4d881bf2229ff4f63, type: 3}
+  - {fileID: 4131555834989589746, guid: e7ad1c6449715d3418245eecf7c757d8, type: 3}
+  MaxQueue: 15
+  MaxEntities: 150
+  SpawnedEntities: []

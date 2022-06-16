@@ -20,7 +20,7 @@ public class MainCamera : MonoBehaviour
     private GameObject UI_Menu_Canvas;
     private GameObject UI_Load_Canvas;
     private GameObject UI_Exit_Canvas;
-    private Image[] UI_Abilities_Canvas = new Image[4];
+    private Image[] UI_Executables_Canvas = new Image[4];
     [HideInInspector] public GameObject InteractText;
 
     void Awake()
@@ -32,11 +32,11 @@ public class MainCamera : MonoBehaviour
         UI_Menu_Canvas = transform.Find("UI Canvas/Menu Canvas").gameObject;
         UI_Load_Canvas = transform.Find("UI Canvas/Menu Canvas/Load Game Canvas").gameObject;
         UI_Exit_Canvas = transform.Find("UI Canvas/Menu Canvas/Exit Canvas").gameObject;
-        for (int i = 0; i < UI_Abilities_Canvas.Length; i++) UI_Abilities_Canvas[i] = transform.Find("UI Canvas/HUD Canvas/Abilities/Ability " + (i + 1)).GetComponent<Image>();
+        for (int i = 0; i < UI_Executables_Canvas.Length; i++) UI_Executables_Canvas[i] = transform.Find("UI Canvas/HUD Canvas/Executables/Executable " + (i + 1)).GetComponent<Image>();
 
         //Events and Delegates
-        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnAbilityUsedEvent += OnAbilityUsed;
-        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnAbilityAddedEvent += OnAbilityAdded;
+        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnExecutableUsedEvent += OnAbilityUsed;
+        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnExecutableAddedEvent += OnAbilityAdded;
     }
 
     // Update is called once per frame
@@ -94,10 +94,10 @@ public class MainCamera : MonoBehaviour
             UI_HUD_Canvas.transform.Find("Bits/Text").GetComponent<Text>().text = "Bits: " + GameManager.Instance.Data.Bits.ToString();
 
             //Handling Abilities 
-            if (GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Abilities[0].OnCooldown) UpdateAbility(0);
-            if (GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Abilities[1].OnCooldown) UpdateAbility(1);
-            if (GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Abilities[2].OnCooldown) UpdateAbility(2);
-            if (GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Abilities[3].OnCooldown) UpdateAbility(3);
+            if (GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[0].OnCooldown) UpdateAbility(0);
+            if (GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[1].OnCooldown) UpdateAbility(1);
+            if (GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[2].OnCooldown) UpdateAbility(2);
+            if (GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[3].OnCooldown) UpdateAbility(3);
 
         }
         if (GameManager.Instance.CurrentGameState == GameState.Exiting)
@@ -111,18 +111,18 @@ public class MainCamera : MonoBehaviour
 
     private void OnAbilityUsed(int slot)
     {
-        UI_Abilities_Canvas[slot].transform.Find("Fill").GetComponent<Image>().fillAmount = 1;
+        UI_Executables_Canvas[slot].transform.Find("Fill").GetComponent<Image>().fillAmount = 1;
     }
 
     private void UpdateAbility(int slot)
     {
-        AbilityStats stats = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Abilities[slot].GetStats();
-        UI_Abilities_Canvas[slot].transform.Find("Fill").GetComponent<Image>().fillAmount = 1 - (stats.Upkeep / stats.Cooldown);
+        ExecutableStats stats = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[slot].GetStats();
+        UI_Executables_Canvas[slot].transform.Find("Fill").GetComponent<Image>().fillAmount = 1 - (stats.Upkeep / stats.Cooldown);
     }
 
     public void OnAbilityAdded(int slot)
     {
-       UI_Abilities_Canvas[slot].sprite = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Abilities[slot].GetSprite(slot);
+        UI_Executables_Canvas[slot].sprite = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[slot].GetSprite(slot);
     }
 
     public void Resume()

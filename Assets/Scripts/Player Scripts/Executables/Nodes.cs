@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Nodes : Ability
+public class Nodes : Executable
 {
     [Header("Abilities Parameters")]
     private GameObject TurretPrefab;

@@ -22,12 +22,16 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Manager Parameters")]
     public string CurrentLevel = "Title";
-    public GameObject MainCamera;
-    public GameObject PlayerPrefab;
+    [SerializeField] private GameObject MainCamera;
+    [SerializeField] private GameObject PlayerPrefab;
+    [SerializeField] private GameObject DirectorPrefab;
     public bool IsGamePaused = false;
     public bool PossibleSaveGame = true;
+    public float DifficultyModifier = 1.3f; //Easy: 0.75f, Normal: 1f, Hard: 1.3f
+    public int StangeCount = 0;
     [HideInInspector] public GameObject PlayerInstance;
     [HideInInspector] public GameObject MainCameraInstance;
+    [HideInInspector] public GameObject DirectorInstance;
 
     //Game State Variables
     public GameState CurrentGameState { get; set; }
@@ -63,13 +67,12 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)) PauseGame();
         if (CurrentLevel == "Title Screen") CurrentGameState = GameState.Title;
-        if (Input.GetKeyDown(KeyCode.P)) PossibleSaveGame = !PossibleSaveGame;
     }
 
     public void PlayGame()
     {
         CurrentGameState = GameState.Playing;
-        SceneManager.LoadScene("HUB");
+        SceneManager.LoadScene("Loading");
     }
 
     public void SaveGame()
@@ -111,6 +114,15 @@ public class GameManager : MonoBehaviour
         MainCameraInstance = Instantiate(MainCamera, MainCamera.transform.position, MainCamera.transform.rotation);
         MainCameraInstance.GetComponent<MainCamera>().Player = PlayerInstance.transform;
 
+        if (CurrentLevel != "Title" || CurrentLevel != "HUB" || CurrentLevel != "Loading")
+        {
+            DirectorInstance = Instantiate(DirectorPrefab, new Vector3(0, 10, 0), Quaternion.identity);
+            DirectorInstance.transform.parent = transform;
+        }
+        else
+        {
+            if (DirectorInstance) Destroy(DirectorInstance);
+        }
 
         //Loading the Data to the new spawned Player
         //Getting Save File

@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -43,7 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2dc34ae850b49429fafadc83979eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentLevel: Title
   MainCamera: {fileID: 2486755633573521192, guid: 8b623c35c905cdd41b519da52c5a0003, type: 3}
   PlayerPrefab: {fileID: 5677938046833880138, guid: a0288e04100c6a04d901316c2b071ad7, type: 3}
+  DirectorPrefab: {fileID: 3883883651654620416, guid: 1442d737cfc844a4a90fbc03e8c220d4, type: 3}
+  IsGamePaused: 0
+  PossibleSaveGame: 1
+  DifficultyModifier: 1.3
   PlayerInstance: {fileID: 0}
   MainCameraInstance: {fileID: 0}
+  DirectorInstance: {fileID: 0}
+  Data:
+    CurrentDate: 
+    MaxHealth: 50
+    MaxEnergy: 25
+    Bits: 0
+    KillCount: 0
+    RunCount: 0

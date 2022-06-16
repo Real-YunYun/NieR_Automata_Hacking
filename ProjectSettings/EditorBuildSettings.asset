@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Title Screen.unity
     guid: b82e4aeb04d3ea246987c1967cd0ad44
   - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 6540206f06f2d3a4b98d279f313cb5d8
+  - enabled: 1
     path: Assets/Scenes/HUB.unity
     guid: b20fa645f2091254a870c1a9f1817df5
   - enabled: 1

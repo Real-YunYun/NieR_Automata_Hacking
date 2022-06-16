@@ -29,11 +29,11 @@ public class PlayerController : MonoBehaviour
     public delegate void OnFireDelegate();
     public event OnFireDelegate OnFireEvent;
 
-    public delegate void OnAbilityAddedDelegate<Ability>(int slot);
-    public event OnAbilityAddedDelegate<Ability> OnAbilityAddedEvent;
+    public delegate void OnExecutableAddedDelegate<Executable>(int slot);
+    public event OnExecutableAddedDelegate<Executable> OnExecutableAddedEvent;
     
-    public delegate void OnAbilityUsedDelegate(int slot);
-    public event OnAbilityUsedDelegate OnAbilityUsedEvent;
+    public delegate void OnExecutableUsedDelegate(int slot);
+    public event OnExecutableUsedDelegate OnExecutableUsedEvent;
 
     //Player Controller Booleans
     [Header("Player Controller Limitations")]
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
     //Abillities
     [Header("Abillites")]
-    public Ability[] Abilities = new Ability[4];
+    public Executable[] Executables = new Executable[4];
 
     [Header("Audio Clips")]
     private AudioSource shootingSource;
@@ -65,12 +65,12 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        for (int i = 1; i < Abilities.Length + 1; i++) AddAbility<NoAbility>(i);
+        for (int i = 1; i < Executables.Length + 1; i++) AddExecutable<NoExecutable>(i);
 
         //Adding Abilities
-        AddAbility<Nodes>(1);
-        AddAbility<Firewall>(2);
-        AddAbility<Teleport>(3);
+        AddExecutable<Nodes>(1);
+        AddExecutable<Firewall>(2);
+        AddExecutable<Teleport>(3);
     }
 
     // Update is called once per frame
@@ -81,6 +81,8 @@ public class PlayerController : MonoBehaviour
             //Player Input Devices
             Keyboard keyboard = Keyboard.current;
             Mouse mouse = Mouse.current;
+
+            if (_health > 50) _health = 50;
 
             //Keyboard Input
             if (CanMove)
@@ -102,29 +104,29 @@ public class PlayerController : MonoBehaviour
                 }
 
                 //Abillities Input
-                if (keyboard.digit1Key.isPressed && !Abilities[0].OnCooldown && Abilities[0].Usable)
+                if (keyboard.digit1Key.isPressed && !Executables[0].OnCooldown && Executables[0].Usable)
                 {
-                    Abilities[0].OnCooldown = true;
-                    Abilities[0].enabled = true;
-                    OnAbilityUsedEvent(0);
+                    Executables[0].OnCooldown = true;
+                    Executables[0].enabled = true;
+                    OnExecutableUsedEvent(0);
                 }
-                if (keyboard.digit2Key.isPressed && !Abilities[1].OnCooldown && Abilities[1].Usable)
+                if (keyboard.digit2Key.isPressed && !Executables[1].OnCooldown && Executables[1].Usable)
                 {
-                    Abilities[1].OnCooldown = true;
-                    Abilities[1].enabled = true;
-                    OnAbilityUsedEvent(1);
+                    Executables[1].OnCooldown = true;
+                    Executables[1].enabled = true;
+                    OnExecutableUsedEvent(1);
                 }
-                if (keyboard.digit3Key.isPressed && !Abilities[2].OnCooldown && Abilities[2].Usable)
+                if (keyboard.digit3Key.isPressed && !Executables[2].OnCooldown && Executables[2].Usable)
                 {
-                    Abilities[2].OnCooldown = true;
-                    Abilities[2].enabled = true;
-                    OnAbilityUsedEvent(2);
+                    Executables[2].OnCooldown = true;
+                    Executables[2].enabled = true;
+                    OnExecutableUsedEvent(2);
                 }
-                if (keyboard.digit4Key.isPressed && !Abilities[3].OnCooldown && Abilities[3].Usable)
+                if (keyboard.digit4Key.isPressed && !Executables[3].OnCooldown && Executables[3].Usable)
                 {
-                    Abilities[3].OnCooldown = true;
-                    Abilities[3].enabled = true;
-                    OnAbilityUsedEvent(3);
+                    Executables[3].OnCooldown = true;
+                    Executables[3].enabled = true;
+                    OnExecutableUsedEvent(3);
                 }
 
                 if (GravityOn) Controller.Move(new Vector3(0, Gravity * Time.deltaTime, 0));
@@ -142,12 +144,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void AddAbility<T>(int slot) where T : Ability
+    public void AddExecutable<T>(int slot) where T : Executable
     {
-        Destroy(Abilities[slot - 1]);
-        Abilities[slot - 1] = gameObject.AddComponent<T>();
-        if (OnAbilityAddedEvent != null) OnAbilityAddedEvent(slot - 1);
-        Abilities[slot - 1].enabled = false;
+        Destroy(Executables[slot - 1]);
+        Executables[slot - 1] = gameObject.AddComponent<T>();
+        if (OnExecutableAddedEvent != null) OnExecutableAddedEvent(slot - 1);
+        Executables[slot - 1].enabled = false;
     }
 
     private void Fire()

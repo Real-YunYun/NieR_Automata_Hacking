@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public struct AbilityStats
+public struct ExecutableStats
 {
     public string Name;
     public string Description;
@@ -12,7 +12,7 @@ public struct AbilityStats
     public float Cooldown;
     public float Upkeep;
 
-    public AbilityStats(string name = "None", string description = "None", int slot = 0, string sprite = "Player/UI Images/None", float duration = 0f, float cooldown = 0f, float upkeep = 0f)
+    public ExecutableStats(string name = "None", string description = "None", int slot = 0, string sprite = "Player/UI Images/None", float duration = 0f, float cooldown = 0f, float upkeep = 0f)
     {
         Name = name;
         Description = description;
@@ -25,14 +25,14 @@ public struct AbilityStats
 }
 
 [System.Serializable]
-public abstract class Ability : MonoBehaviour
+public abstract class Executable : MonoBehaviour
 {
     [Header("Abilities String")]
-    [SerializeField] protected AbilityStats Stats;
+    [SerializeField] protected ExecutableStats Stats;
     public bool OnCooldown = false;
     public bool Usable = false;
 
-    public AbilityStats GetStats()
+    public ExecutableStats GetStats()
     {
         return Stats;
     }

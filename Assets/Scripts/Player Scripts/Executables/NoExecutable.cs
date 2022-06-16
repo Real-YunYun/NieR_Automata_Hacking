@@ -1,6 +1,6 @@
 using UnityEngine; 
 using UnityEngine.UI;
-public class NoAbility : Ability
+public class NoExecutable : Executable
 {
     void Awake()
     {
