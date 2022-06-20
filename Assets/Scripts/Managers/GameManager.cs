@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
     public void PlayGame()
     {
         CurrentGameState = GameState.Playing;
+        CurrentLevel = "HUB";
         SceneManager.LoadScene("Loading");
     }
 

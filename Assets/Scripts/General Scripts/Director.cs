@@ -166,8 +166,6 @@ public class Director : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.gKey.IsPressed()) CurrentBounty.GenerateBounty(DifficultyTime % 60);
-
         //UI Debugging stuff
         if (Debugging)
         {
