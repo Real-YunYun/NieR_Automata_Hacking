@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -1164,6 +1164,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4840798065102030736, guid: 8e76b87600ff5994c844a59926002a80, type: 3}
+      propertyPath: ToolTip
+      value: Play Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 4840798065102030736, guid: 8e76b87600ff5994c844a59926002a80, type: 3}
+      propertyPath: LevelName
+      value: Main Game
+      objectReference: {fileID: 0}
     - target: {fileID: 4840798065102030737, guid: 8e76b87600ff5994c844a59926002a80, type: 3}
       propertyPath: m_RootOrder
       value: 0

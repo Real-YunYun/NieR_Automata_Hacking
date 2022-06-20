@@ -81,66 +81,105 @@ public class PlayerController : MonoBehaviour
             //Player Input Devices
             Keyboard keyboard = Keyboard.current;
             Mouse mouse = Mouse.current;
+            Gamepad gamepad = Gamepad.current;
 
             if (_health > 50) _health = 50;
 
             //Keyboard Input
             if (CanMove)
             {
-                float Forward = (keyboard.wKey.ReadValue() - keyboard.sKey.ReadValue());
-                float Side = (keyboard.dKey.ReadValue() - keyboard.aKey.ReadValue());
-                Vector3 Direction = new Vector3(Side, 0, Forward).normalized;
-                Vector3 MoveDir;
+                float Forward;
+                float Side;
+                if (Gamepad.current != null && GameManager.Instance.UseGamepad)
+                {
+                    Forward = gamepad.leftStick.up.ReadValue() - gamepad.leftStick.down.ReadValue();
+                    Side = gamepad.leftStick.right.ReadValue() - gamepad.leftStick.left.ReadValue();
 
-                //Turning the Character Model relative to the Movement Direction
-                if (Direction.magnitude >= 0.1f)
-                {
-                    float TurningAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
-                    float ResultAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TurningAngle, ref TurnSmoothVelocity, TurningSmoothing);
-                    transform.rotation = Quaternion.Euler(0f, ResultAngle, 0f);
-                    MoveDir = Quaternion.Euler(0f, TurningAngle, 0f) * Vector3.forward;
+                    Vector3 Direction = new Vector3(Side, 0, Forward).normalized;
+                    Vector3 MoveDir;
 
-                    Controller.Move(MoveDir * MoveSpeed * Time.deltaTime);
-                }
+                    //Turning the Character Model relative to the Movement Direction
+                    if (Direction.magnitude >= 0.1f)
+                    {
+                        float TurningAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
+                        float ResultAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TurningAngle, ref TurnSmoothVelocity, TurningSmoothing);
+                        transform.rotation = Quaternion.Euler(0f, ResultAngle, 0f);
+                        MoveDir = Quaternion.Euler(0f, TurningAngle, 0f) * Vector3.forward;
 
-                //Abillities Input
-                if (keyboard.digit1Key.isPressed && !Executables[0].OnCooldown && Executables[0].Usable)
-                {
-                    Executables[0].OnCooldown = true;
-                    Executables[0].enabled = true;
-                    OnExecutableUsedEvent(0);
-                }
-                if (keyboard.digit2Key.isPressed && !Executables[1].OnCooldown && Executables[1].Usable)
-                {
-                    Executables[1].OnCooldown = true;
-                    Executables[1].enabled = true;
-                    OnExecutableUsedEvent(1);
-                }
-                if (keyboard.digit3Key.isPressed && !Executables[2].OnCooldown && Executables[2].Usable)
-                {
-                    Executables[2].OnCooldown = true;
-                    Executables[2].enabled = true;
-                    OnExecutableUsedEvent(2);
-                }
-                if (keyboard.digit4Key.isPressed && !Executables[3].OnCooldown && Executables[3].Usable)
-                {
-                    Executables[3].OnCooldown = true;
-                    Executables[3].enabled = true;
-                    OnExecutableUsedEvent(3);
-                }
+                        Controller.Move(MoveDir * MoveSpeed * Time.deltaTime);
+                    }
 
-                if (GravityOn) Controller.Move(new Vector3(0, Gravity * Time.deltaTime, 0));
+                    //Firing
+                    if (CanShoot) if (gamepad.rightTrigger.ReadValue() > 0) Fire();
+
+                    //Right Stick Handling
+                    Vector2 aim = gamepad.rightStick.ReadValue();
+                    if (aim.x != 0 && aim.y != 0)
+                    {
+                        Vector3 rotation = new Vector3(aim.x, 0, aim.y);
+                        PlayerBody.transform.rotation = Quaternion.LookRotation(rotation);
+                    }
+                    else PlayerBody.transform.rotation = transform.rotation;
+
+                }
+                else
+                {
+                    Forward = (keyboard.wKey.ReadValue() - keyboard.sKey.ReadValue());
+                    Side = (keyboard.dKey.ReadValue() - keyboard.aKey.ReadValue());
+                    Vector3 Direction = new Vector3(Side, 0, Forward).normalized;
+                    Vector3 MoveDir;
+
+                    //Turning the Character Model relative to the Movement Direction
+                    if (Direction.magnitude >= 0.1f)
+                    {
+                        float TurningAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
+                        float ResultAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TurningAngle, ref TurnSmoothVelocity, TurningSmoothing);
+                        transform.rotation = Quaternion.Euler(0f, ResultAngle, 0f);
+                        MoveDir = Quaternion.Euler(0f, TurningAngle, 0f) * Vector3.forward;
+
+                        Controller.Move(MoveDir * MoveSpeed * Time.deltaTime);
+                    }
+
+                    //Abillities Keyboard Input
+                    if (keyboard.digit1Key.isPressed && !Executables[0].OnCooldown && Executables[0].Usable)
+                    {
+                        Executables[0].OnCooldown = true;
+                        Executables[0].enabled = true;
+                        OnExecutableUsedEvent(0);
+                    }
+                    if (keyboard.digit2Key.isPressed && !Executables[1].OnCooldown && Executables[1].Usable)
+                    {
+                        Executables[1].OnCooldown = true;
+                        Executables[1].enabled = true;
+                        OnExecutableUsedEvent(1);
+                    }
+                    if (keyboard.digit3Key.isPressed && !Executables[2].OnCooldown && Executables[2].Usable)
+                    {
+                        Executables[2].OnCooldown = true;
+                        Executables[2].enabled = true;
+                        OnExecutableUsedEvent(2);
+                    }
+                    if (keyboard.digit4Key.isPressed && !Executables[3].OnCooldown && Executables[3].Usable)
+                    {
+                        Executables[3].OnCooldown = true;
+                        Executables[3].enabled = true;
+                        OnExecutableUsedEvent(3);
+                    }
+
+                    //Mouse Input
+                    if (CanShoot) if (mouse.leftButton.ReadValue() > 0) Fire();
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, 0b_0100_1000))
+                    {
+                        Vector3 rotation = Quaternion.LookRotation(raycastHit.point - transform.position, Vector3.up).eulerAngles;
+                        rotation.x = rotation.z = 0;
+                        PlayerBody.transform.rotation = Quaternion.Euler(rotation);
+                    }
+                }
             }
 
-            //Mouse Input
-            if (CanShoot) if (mouse.leftButton.ReadValue() > 0) Fire();
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, 0b_0100_1000))
-            { 
-                Vector3 rotation = Quaternion.LookRotation(raycastHit.point - transform.position, Vector3.up).eulerAngles;
-                rotation.x = rotation.z = 0;
-                PlayerBody.transform.rotation = Quaternion.Euler(rotation);
-            }
+
+            if (GravityOn) Controller.Move(new Vector3(0, Gravity * Time.deltaTime, 0));
         }
     }
 

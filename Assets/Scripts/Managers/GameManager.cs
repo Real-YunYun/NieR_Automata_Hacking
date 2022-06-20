@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public PlayerControls Controls;
 
     [Header("Game Manager Parameters")]
-    public string CurrentLevel = "Title";
+    public string CurrentLevel = "HUB";
     [SerializeField] private GameObject MainCamera;
     [SerializeField] private GameObject PlayerPrefab;
     [SerializeField] private GameObject DirectorPrefab;
@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     public GameState CurrentGameState { get; set; }
 
     //Game Manager Parameters
+    public bool UseGamepad = false;
     public PlayerData Data;
     private static readonly string key = "43286579693697635478639456395002084630948674278724";
     static GameManager _instance = null;    
@@ -48,7 +49,6 @@ public class GameManager : MonoBehaviour
             return _instance; 
         }
     }
-
 
     // Start is called before the first frame update
     void Awake()
@@ -114,14 +114,22 @@ public class GameManager : MonoBehaviour
         MainCameraInstance = Instantiate(MainCamera, MainCamera.transform.position, MainCamera.transform.rotation);
         MainCameraInstance.GetComponent<MainCamera>().Player = PlayerInstance.transform;
 
-        if (CurrentLevel != "Title" || CurrentLevel != "HUB" || CurrentLevel != "Loading")
+        switch (SceneManager.GetActiveScene().name)
         {
-            DirectorInstance = Instantiate(DirectorPrefab, new Vector3(0, 10, 0), Quaternion.identity);
-            DirectorInstance.transform.parent = transform;
-        }
-        else
-        {
-            if (DirectorInstance) Destroy(DirectorInstance);
+            case "Main Game":
+                if (DirectorInstance) DirectorInstance.GetComponent<Director>().enabled = true;
+                else
+                {
+                    DirectorInstance = Instantiate(DirectorPrefab, new Vector3(0, 10, 0), Quaternion.identity);
+                    DirectorInstance.transform.parent = transform;
+                }
+                break;
+
+            case "Title":
+            case "HUB":
+            case "Loading":
+                if (DirectorInstance) Destroy(DirectorInstance);
+                break;
         }
 
         //Loading the Data to the new spawned Player
@@ -144,7 +152,6 @@ public class GameManager : MonoBehaviour
 #else
             Application.Quit();
 #endif
-
     }
 
     public void PromptInteract(string Message = "\0", bool state = false)

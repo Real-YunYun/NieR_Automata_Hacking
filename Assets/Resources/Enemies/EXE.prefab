@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Invincible: 0
-  _health: 10
+  _health: 15
   Stats:
     BuildTime: 0
     BuildCost: 0

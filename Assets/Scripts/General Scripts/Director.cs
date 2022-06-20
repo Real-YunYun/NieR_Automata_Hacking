@@ -2,28 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 public enum BountyType
 {
-    Kills,          //Kill x Entities in a time-frame
+    Kill,          //Kill x Entities in a time-frame
     Earn,           //Earn x Bits in a time-frame
-    Survival,       //Survive x Seconds
-
+    //Survival,       //Survive x Seconds
 }
 
 public struct Bounty
 {   
+    //Bounty Parameters
     public BountyType Type;     //Type of Bounty this is
     public int Current;         //Current Goal to Target
     public int Target;          //Target to achieve
-    public float TimeIssued;    //When (In Director's time) was issued
+    public float DeltaTime;     //Change in Time since the bounty was made
     public float Duration;      //How long does this Bounty's rewards persist
     public bool Expired;        //Has it expired
     public bool Completed;      //Has it been completed (EXE is vulnerable)
     public int Reward;          //In Bits
 
-    public void GenerateBounty(float TimeInMins = 0.0167f)
+    public Bounty(BountyType type = BountyType.Kill, int current = 0, int target = 0, float timeissued = 0f, float deltatime = 0, float duration = 0, bool expired = false, bool completed = false, int reward = 0)
+    {
+        Type = type;
+        Current = current;
+        Target = target;
+        DeltaTime = deltatime;
+        Duration = duration;
+        Expired = expired;
+        Completed = completed;
+        Reward = reward;
+    }
+
+    public void GenerateBounty(float RunTime = 0)
     {
         Type = RandomType<BountyType>();
+
+        float TimeInMins = RunTime % 60;
 
         float TimeFactor = 0.0506f * GameManager.Instance.DifficultyModifier;
         float StageFactor = Mathf.Pow(1.15f, GameManager.Instance.StangeCount);
@@ -31,29 +46,47 @@ public struct Bounty
 
         switch (Type)
         {
-            case BountyType.Kills: 
+            case BountyType.Kill: 
                 Current = 0; 
-                Target = Random.Range(5, 25);
-                TimeIssued = Time.time;
+                Target = Random.Range(5, 10);
+                DeltaTime = 0;
                 Duration = Random.Range(20, 120);
                 Reward = (int)(Random.Range((int)(80 * DifficultyCoe), (int)(160 * DifficultyCoe)) * GameManager.Instance.DifficultyModifier);
                 break;
             case BountyType.Earn:
                 Current = 0;
                 Target = Random.Range(10, 30);
-                TimeIssued = Time.time;
+                DeltaTime = 0;
                 Duration = Random.Range(20, 60);
                 Reward = Random.Range((int)(80 * DifficultyCoe), (int)(160 * DifficultyCoe));
                 break;
-            case BountyType.Survival:
-                Current = 0;
-                Target = Random.Range(30, 60);
-                TimeIssued = Time.time;
-                Duration = Target;
-                Reward = Random.Range((int)(Target * DifficultyCoe), (int)(120 * DifficultyCoe));
-                break;
         }
     }
+
+    public void HandleBounty(GameObject entity)
+    {
+        if (Type == BountyType.Kill)
+        {
+            Current++;
+            if (Current >= Target)
+            {
+                Completed = true;
+                GameManager.Instance.Data.Bits += Reward;
+                DeltaTime = 0;
+            }
+        }
+        if (Type == BountyType.Earn)
+        {
+            Current += (int)entity.GetComponent<Entity>().Stats.BuildCost;
+            if (Current >= Target)
+            {
+                Completed = true;
+                GameManager.Instance.Data.Bits += Reward;
+                DeltaTime = 0;
+            }
+        }
+    }
+
     private static T RandomType<T>()
     {
         System.Array values = System.Enum.GetValues(typeof(T));
@@ -90,26 +123,31 @@ public class Director : MonoBehaviour
     //Conditional Variables
     private GameObject ExecutableObject;
     public Bounty CurrentBounty;
-    private float TotalTime = 0f;
+    private float DifficultyTime = 0f;
+    private float RunTime = 0f;
     private int RandomEntityIndex = 0;
     private float BuildingTime = 0f;
     private float Credit = 0f;
     private float BuildRate = 1f; 
     private float CreditRate = 1f;
-    private int StageCount = 0;
     private bool CanSpawn = false;
     RaycastHit hit;
     Vector3 RandomCoordinate;
 
-    //Burst and Burnout System could be inplemented :D
-
     void Start()
     {
         RandomEntityIndex = Random.Range(0, Entities.Length);
+        
+        //Burnout System
+        Credit = 13f * 1.15f * GameManager.Instance.DifficultyModifier;
+        BuildingTime = 13f * 1.15f * GameManager.Instance.DifficultyModifier;
+    }
+
+    void OnEnable()
+    {
         Vector3 ExecutableObjectSpawn;
         RaycastHit hit;
-
-        CurrentBounty.GenerateBounty();
+        CurrentBounty.GenerateBounty(RunTime);
 
         while (!ExecutableObject)
         {
@@ -123,16 +161,14 @@ public class Director : MonoBehaviour
                 }
             }
         }
-        
-        //Burnout System
-        Credit = 13f * 1.15f * GameManager.Instance.DifficultyModifier;
-        BuildingTime = 13f * 1.15f * GameManager.Instance.DifficultyModifier;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //UI stuff
+        if (Keyboard.current.gKey.IsPressed()) CurrentBounty.GenerateBounty(DifficultyTime % 60);
+
+        //UI Debugging stuff
         if (Debugging)
         {
             if (GameManager.Instance.MainCameraInstance) PlayerCamera = GameManager.Instance.MainCameraInstance;
@@ -145,59 +181,66 @@ public class Director : MonoBehaviour
                 else BuildTime = "0";
                 GameObject UI_Director = PlayerCamera.transform.Find("UI Canvas/Director Stats").gameObject;
                 UI_Director.SetActive(true);
-                UI_Director.transform.Find("Text").GetComponent<Text>().text = 
-                    "Bounty: \n" +
-                    "Current Bounty: "+ CurrentBounty.Type + "\n" +
-                    "Bounty Objective: " + CurrentBounty.Current + "/"+ CurrentBounty.Target + "\n" +
-                    "Bounty Reward: " + CurrentBounty.Reward + "\n" +
-                    "Bounty Completed?: " + CurrentBounty.Completed + "\n" +
+                UI_Director.transform.Find("Text").GetComponent<Text>().text =
                     "Director Stats:\n" +
-                    "Total Time Elasped: " + TotalTime + "\n" +
+                    "Run Time: " + RunTime + "\n" +
+                    "Difficulty Time Elasped: " + DifficultyTime + "\n" +
                     "Building Time: " + (int)BuildingTime + "/" + BuildTime + "\n" +
                     "Credits: " + (int)Credit + "\n" +
                     "Difficulty Modifier: " + GameManager.Instance.DifficultyModifier + "\n" +
                     "Built Entities: " + SpawnedEntities.Count + " units\n" +
-                    "Build Rate: "  + BuildRate + " (/s)\n" +
-                    "Credit Rate: "  + CreditRate + " (/s)\n" +
-                    "Entities: " + ShowListEntities();
+                    "Build Rate: " + BuildRate + " (/s)\n" +
+                    "Credit Rate: " + CreditRate + " (/s)\n";
             }
         }
 
-        if (Time.timeScale == 1 && ExecutableObject)
+        RunTime += Time.deltaTime;
+        if (Time.timeScale == 1)
         {
             //Actual Director Algorithm
-            TotalTime += 0.005f + Mathf.Pow(Time.deltaTime, 2) * GameManager.Instance.DifficultyModifier;
-            //Enqueuing Entites
-            if (SpawningQueue.Count < MaxQueue)
+            DifficultyTime += 0.005f + Mathf.Pow(Time.deltaTime, 2) * GameManager.Instance.DifficultyModifier;
+            if (ExecutableObject)
             {
-                RandomEntityIndex = Random.Range(0, Entities.Length);
-                SpawningQueue.Enqueue(Entities[RandomEntityIndex]);
-            }
-
-            if (Credit >= SpawningQueue.Peek().GetComponent<Entity>().Stats.BuildCost) Credit -= SpawningQueue.Peek().GetComponent<Entity>().Stats.BuildCost;
-
-            if (!CanSpawn)
-            {
-                RandomCoordinate = new Vector3(Random.Range(GameManager.Instance.PlayerInstance.transform.position.x - SpawningBounds.x - 2.5f, GameManager.Instance.PlayerInstance.transform.position.x + SpawningBounds.x + 2.5f), transform.position.y, Random.Range(GameManager.Instance.PlayerInstance.transform.position.z - SpawningBounds.y - 2.5f, GameManager.Instance.PlayerInstance.transform.position.z + SpawningBounds.y + 2.5f));
-                if (Physics.Raycast(RandomCoordinate, transform.TransformDirection(Vector3.down), out hit, 999f, 0b_1000))
+                //Enqueuing Entites
+                if (SpawningQueue.Count < MaxQueue)
                 {
-                    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) CanSpawn = true;
+                    RandomEntityIndex = Random.Range(0, Entities.Length);
+                    SpawningQueue.Enqueue(Entities[RandomEntityIndex]);
                 }
+
+                if (Credit >= SpawningQueue.Peek().GetComponent<Entity>().Stats.BuildCost) Credit -= SpawningQueue.Peek().GetComponent<Entity>().Stats.BuildCost;
+
+                if (!CanSpawn)
+                {
+                    RandomCoordinate = new Vector3(Random.Range(GameManager.Instance.PlayerInstance.transform.position.x - SpawningBounds.x - 2.5f, GameManager.Instance.PlayerInstance.transform.position.x + SpawningBounds.x + 2.5f), transform.position.y, Random.Range(GameManager.Instance.PlayerInstance.transform.position.z - SpawningBounds.y - 2.5f, GameManager.Instance.PlayerInstance.transform.position.z + SpawningBounds.y + 2.5f));
+                    if (Physics.Raycast(RandomCoordinate, transform.TransformDirection(Vector3.down), out hit, 999f, 0b_1000))
+                    {
+                        if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) CanSpawn = true;
+                    }
+                }
+
+                //Spawning Entity
+                if (SpawningQueue.Peek().GetComponent<Entity>().Stats.BuildTime <= BuildingTime) StartCoroutine("Spawn");
+
+                CreditRate = (1.5f + DifficultyTime * 0.0506f) * 1.15f / 3600;
+                BuildRate = (1.5f + DifficultyTime * 0.0506f) * 1.15f / 3600;
+
+                Credit += CreditRate;
+                BuildingTime += BuildRate;
+
+                if (!CurrentBounty.Expired && !CurrentBounty.Completed) CurrentBounty.DeltaTime += Time.deltaTime;
+
+                if (CurrentBounty.Duration - CurrentBounty.DeltaTime <= 0) CurrentBounty.Expired = true;
+                if (CurrentBounty.Completed) ExecutableObject.transform.Find("Shield").gameObject.SetActive(false);
             }
-
-            //Spawning Entity
-            if (SpawningQueue.Peek().GetComponent<Entity>().Stats.BuildTime <= BuildingTime) StartCoroutine("Spawn");
-
-            CreditRate = (1 + TotalTime * 0.0506f) * 1.15f / 3600;
-            BuildRate = (1 + TotalTime * 0.0506f) * 1.15f / 3600;
-
-            Credit += CreditRate;
-            BuildingTime += BuildRate;
         }
+
+        if (!ExecutableObject) this.enabled = false;
     }
 
     public void OnEntityDeath(GameObject entity)
     {
+        if (!CurrentBounty.Completed || !CurrentBounty.Expired) CurrentBounty.HandleBounty(entity);
         GameManager.Instance.Data.KillCount++;
         SpawnedEntities.Remove(SpawnedEntities.Find(GetHashCode => entity));
     }
@@ -227,5 +270,7 @@ public class Director : MonoBehaviour
         return List;
     }
 
-    public int GetStage() { return StageCount; }
+    public Bounty GetBounty() { return CurrentBounty; }
+    public float GetDifficultyTime() { return DifficultyTime; }
+    public float GeRunTime() { return RunTime; }
 }

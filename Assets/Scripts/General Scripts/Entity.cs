@@ -42,7 +42,7 @@ public class Entity : MonoBehaviour
 
     public virtual void Death()
     {
-        OnDeathEvent(this.gameObject);
+        OnDeathEvent(gameObject);
         GameManager.Instance.Data.Bits += (int)Stats.BuildCost;
         Instantiate(DeathParticle, transform.position, DeathParticle.transform.rotation);
         Destroy(gameObject);

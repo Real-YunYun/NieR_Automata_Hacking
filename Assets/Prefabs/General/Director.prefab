@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94af86c343a3799408526334166bb705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Debugging: 1
+  Debugging: 0
   SpawningBounds: {x: 10, y: 10}
   Entities:
   - {fileID: 7153527409479970420, guid: d2177f5f0bd09314f9dfd6fe7da3aa55, type: 3}

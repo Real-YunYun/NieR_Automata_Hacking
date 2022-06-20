@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class EXE : Entity
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Death()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Instantiate(DeathParticle, transform.position, DeathParticle.transform.rotation);
+        Destroy(transform.parent.gameObject);
+        Destroy(gameObject);
     }
 }

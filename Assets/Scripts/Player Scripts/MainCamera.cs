@@ -90,8 +90,34 @@ public class MainCamera : MonoBehaviour
             for (int i = 1; i <= Player.gameObject.GetComponent<PlayerController>().Energy; i++) Energy += "/";
             UI_HUD_Canvas.transform.Find("Bars/Energy Bar").GetComponent<Text>().text = Energy;
 
-            //Handling Bits Bars
+            //Handling Bits Text
             UI_HUD_Canvas.transform.Find("Bits/Text").GetComponent<Text>().text = "Bits: " + GameManager.Instance.Data.Bits.ToString();
+
+            //Handling Bounty Text
+            if (GameManager.Instance.DirectorInstance)
+            {
+                UI_HUD_Canvas.transform.Find("Bounty").gameObject.SetActive(true);
+                Bounty CurrentBounty = GameManager.Instance.DirectorInstance.GetComponent<Director>().GetBounty();
+                string Objective = "";
+                string TimeRemaining = "";
+
+                if (CurrentBounty.Completed) UI_HUD_Canvas.transform.Find("Bounty/Text").GetComponent<Text>().color = new Color32(73, 216, 24, 255);
+                else if (CurrentBounty.Expired) UI_HUD_Canvas.transform.Find("Bounty/Text").GetComponent<Text>().color = new Color32(216, 41, 24, 255);
+                else UI_HUD_Canvas.transform.Find("Bounty/Text").GetComponent<Text>().color = new Color32(50, 50, 50, 255);
+
+                if (CurrentBounty.Type == BountyType.Kill) Objective = CurrentBounty.Type + ": " + CurrentBounty.Current + "/" + CurrentBounty.Target + " Entites\n";
+                if (CurrentBounty.Type == BountyType.Earn) Objective = CurrentBounty.Type + ": " + CurrentBounty.Current + " Bits/" + CurrentBounty.Target + " Bits\n";
+
+                if (!CurrentBounty.Expired && !CurrentBounty.Completed) TimeRemaining = "Time Remaining: " + (CurrentBounty.Duration - CurrentBounty.DeltaTime).ToString("n0") + "s\n";
+                else if (CurrentBounty.Completed) TimeRemaining = "Completed Objective";
+                else if (CurrentBounty.Expired) TimeRemaining = "Expired Objective";
+
+                UI_HUD_Canvas.transform.Find("Bounty/Text").GetComponent<Text>().text =
+                    Objective +
+                    "Reward: " + CurrentBounty.Reward + " Bits\n" +
+                    TimeRemaining;
+            }
+            else UI_HUD_Canvas.transform.Find("Bounty").gameObject.SetActive(false);
 
             //Handling Abilities 
             if (GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[0].OnCooldown) UpdateAbility(0);
