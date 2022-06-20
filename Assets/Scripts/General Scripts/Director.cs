@@ -220,8 +220,8 @@ public class Director : MonoBehaviour
                 //Spawning Entity
                 if (SpawningQueue.Peek().GetComponent<Entity>().Stats.BuildTime <= BuildingTime) StartCoroutine("Spawn");
 
-                CreditRate = (1.5f + DifficultyTime * 0.0506f) * 1.15f / 3600;
-                BuildRate = (1.5f + DifficultyTime * 0.0506f) * 1.15f / 3600;
+                CreditRate = (1.5f + DifficultyTime * 0.106f) * 1.15f / 3600;
+                BuildRate = (1.5f + DifficultyTime * 0.106f) * 1.15f / 3600;
 
                 Credit += CreditRate;
                 BuildingTime += BuildRate;

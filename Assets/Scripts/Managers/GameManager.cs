@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject DirectorPrefab;
     public bool IsGamePaused = false;
     public bool PossibleSaveGame = true;
-    public float DifficultyModifier = 1.3f; //Easy: 0.75f, Normal: 1f, Hard: 1.3f
+    public float DifficultyModifier = 2.25f; //Easy: 1f, Normal: 1.5f, Hard: 2.25f
     public int StangeCount = 0;
     [HideInInspector] public GameObject PlayerInstance;
     [HideInInspector] public GameObject MainCameraInstance;
