@@ -132,8 +132,8 @@ MonoBehaviour:
   Invincible: 0
   _health: 20
   Stats:
-    BuildTime: 15
-    BuildCost: 15
+    BuildTime: 10
+    BuildCost: 12
   DeathParticle: {fileID: 1963909997120546418, guid: f2a4b7626a244a04c83f06a5d8b0fbdc, type: 3}
   SpawningRate: 20
   Binary1: {fileID: 3713626421213575533, guid: dc38ef1014b473847adfb7f6f165239e, type: 3}

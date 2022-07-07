@@ -166,9 +166,8 @@ MonoBehaviour:
   Invincible: 0
   _health: 6
   Stats:
-    Type: 0
     BuildTime: 2
-    BuildCost: 4
+    BuildCost: 5
   DeathParticle: {fileID: 1963909997120546418, guid: f2a4b7626a244a04c83f06a5d8b0fbdc, type: 3}
   ProjectilePrefab: {fileID: 8968688179754820819, guid: 3b14888c0cc7d054e919f4de3ac76140, type: 3}
 --- !u!195 &7417108363715820076

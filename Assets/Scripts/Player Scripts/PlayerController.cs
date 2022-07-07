@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public int Health { get { return _health; } set { _health = value; } }
     public int Energy { get { return _energy; } set { _energy = value; } }
 
-    //Contorller Params
+    //Contorller Params 
     [Header("Player Controller Parameters")]
     public float MoveSpeed = 10f;
     public float FireRate = 8f;
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private readonly float Gravity = -9.8f;
     [HideInInspector] public bool GravityOn = true;
     private Vector3 Velocity = Vector3.zero;
+    private GameObject AimingLine;
 
     //Delegates and Events
     public delegate void OnFireDelegate();
@@ -71,6 +72,7 @@ public class PlayerController : MonoBehaviour
         AddExecutable<Nodes>(1);
         AddExecutable<Firewall>(2);
         AddExecutable<Teleport>(3);
+        AddExecutable<Rockets>(4);
     }
 
     // Update is called once per frame
@@ -88,94 +90,69 @@ public class PlayerController : MonoBehaviour
             //Keyboard Input
             if (CanMove)
             {
-                float Forward;
-                float Side;
-                if (Gamepad.current != null && GameManager.Instance.UseGamepad)
+                float Forward = (keyboard.wKey.ReadValue() - keyboard.sKey.ReadValue());
+                float Side = (keyboard.dKey.ReadValue() - keyboard.aKey.ReadValue());
+                Vector3 Direction = new Vector3(Side, 0, Forward).normalized;
+                Vector3 MoveDir;
+
+                //Turning the Character Model relative to the Movement Direction
+                if (Direction.magnitude >= 0.1f)
                 {
-                    Forward = gamepad.leftStick.up.ReadValue() - gamepad.leftStick.down.ReadValue();
-                    Side = gamepad.leftStick.right.ReadValue() - gamepad.leftStick.left.ReadValue();
+                    float TurningAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
+                    float ResultAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TurningAngle, ref TurnSmoothVelocity, TurningSmoothing);
+                    transform.rotation = Quaternion.Euler(0f, ResultAngle, 0f);
+                    MoveDir = Quaternion.Euler(0f, TurningAngle, 0f) * Vector3.forward;
 
-                    Vector3 Direction = new Vector3(Side, 0, Forward).normalized;
-                    Vector3 MoveDir;
-
-                    //Turning the Character Model relative to the Movement Direction
-                    if (Direction.magnitude >= 0.1f)
-                    {
-                        float TurningAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
-                        float ResultAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TurningAngle, ref TurnSmoothVelocity, TurningSmoothing);
-                        transform.rotation = Quaternion.Euler(0f, ResultAngle, 0f);
-                        MoveDir = Quaternion.Euler(0f, TurningAngle, 0f) * Vector3.forward;
-
-                        Controller.Move(MoveDir * MoveSpeed * Time.deltaTime);
-                    }
-
-                    //Firing
-                    if (CanShoot) if (gamepad.rightTrigger.ReadValue() > 0) Fire();
-
-                    //Right Stick Handling
-                    Vector2 aim = gamepad.rightStick.ReadValue();
-                    if (aim.x != 0 && aim.y != 0)
-                    {
-                        Vector3 rotation = new Vector3(aim.x, 0, aim.y);
-                        PlayerBody.transform.rotation = Quaternion.LookRotation(rotation);
-                    }
-                    else PlayerBody.transform.rotation = transform.rotation;
-
+                    Controller.Move(MoveDir * MoveSpeed * Time.deltaTime);
                 }
-                else
+
+                //Abillities Keyboard Input
+                if (keyboard.digit1Key.isPressed && !Executables[0].OnCooldown && Executables[0].Usable)
                 {
-                    Forward = (keyboard.wKey.ReadValue() - keyboard.sKey.ReadValue());
-                    Side = (keyboard.dKey.ReadValue() - keyboard.aKey.ReadValue());
-                    Vector3 Direction = new Vector3(Side, 0, Forward).normalized;
-                    Vector3 MoveDir;
-
-                    //Turning the Character Model relative to the Movement Direction
-                    if (Direction.magnitude >= 0.1f)
-                    {
-                        float TurningAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
-                        float ResultAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TurningAngle, ref TurnSmoothVelocity, TurningSmoothing);
-                        transform.rotation = Quaternion.Euler(0f, ResultAngle, 0f);
-                        MoveDir = Quaternion.Euler(0f, TurningAngle, 0f) * Vector3.forward;
-
-                        Controller.Move(MoveDir * MoveSpeed * Time.deltaTime);
-                    }
-
-                    //Abillities Keyboard Input
-                    if (keyboard.digit1Key.isPressed && !Executables[0].OnCooldown && Executables[0].Usable)
-                    {
-                        Executables[0].OnCooldown = true;
-                        Executables[0].enabled = true;
-                        OnExecutableUsedEvent(0);
-                    }
-                    if (keyboard.digit2Key.isPressed && !Executables[1].OnCooldown && Executables[1].Usable)
-                    {
-                        Executables[1].OnCooldown = true;
-                        Executables[1].enabled = true;
-                        OnExecutableUsedEvent(1);
-                    }
-                    if (keyboard.digit3Key.isPressed && !Executables[2].OnCooldown && Executables[2].Usable)
-                    {
-                        Executables[2].OnCooldown = true;
-                        Executables[2].enabled = true;
-                        OnExecutableUsedEvent(2);
-                    }
-                    if (keyboard.digit4Key.isPressed && !Executables[3].OnCooldown && Executables[3].Usable)
-                    {
-                        Executables[3].OnCooldown = true;
-                        Executables[3].enabled = true;
-                        OnExecutableUsedEvent(3);
-                    }
-
-                    //Mouse Input
-                    if (CanShoot) if (mouse.leftButton.ReadValue() > 0) Fire();
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, 0b_0100_1000))
-                    {
-                        Vector3 rotation = Quaternion.LookRotation(raycastHit.point - transform.position, Vector3.up).eulerAngles;
-                        rotation.x = rotation.z = 0;
-                        PlayerBody.transform.rotation = Quaternion.Euler(rotation);
-                    }
+                    Executables[0].OnCooldown = true;
+                    Executables[0].enabled = true;
+                    OnExecutableUsedEvent(0);
                 }
+                if (keyboard.digit2Key.isPressed && !Executables[1].OnCooldown && Executables[1].Usable)
+                {
+                    Executables[1].OnCooldown = true;
+                    Executables[1].enabled = true;
+                    OnExecutableUsedEvent(1);
+                }
+                if (keyboard.digit3Key.isPressed && !Executables[2].OnCooldown && Executables[2].Usable)
+                {
+                    Executables[2].OnCooldown = true;
+                    Executables[2].enabled = true;
+                    OnExecutableUsedEvent(2);
+                }
+                if (keyboard.digit4Key.isPressed && !Executables[3].OnCooldown && Executables[3].Usable)
+                {
+                    Executables[3].OnCooldown = true;
+                    Executables[3].enabled = true;
+                    OnExecutableUsedEvent(3);
+                }
+
+                //Mouse Input
+                if (CanShoot) if (mouse.leftButton.ReadValue() > 0) Fire();
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, 0b_0100_1000))
+                {
+                    Vector3 rotation = Quaternion.LookRotation(raycastHit.point - transform.position, Vector3.up).eulerAngles;
+                    rotation.x = rotation.z = 0;
+                    PlayerBody.transform.rotation = Quaternion.Euler(rotation);
+                }
+                if (CanShoot && mouse.rightButton.ReadValue() > 0)
+                {
+                    if (!AimingLine) AimingLine = Instantiate(Resources.Load<GameObject>("Player/Aiming Line"), ProjectileSpawn.position, ProjectileSpawn.rotation);
+                    RaycastHit hit;
+                    LineRenderer LineRendererComp = AimingLine.GetComponent<LineRenderer>();
+                    if (Physics.Raycast(ProjectileSpawn.position, ProjectileSpawn.forward, out hit, Mathf.Infinity))
+                    {
+                        LineRendererComp.positionCount = Mathf.Abs((int)(hit.point - ProjectileSpawn.position).magnitude);
+                        for (int i = 1; i < LineRendererComp.positionCount; i++) LineRendererComp.SetPosition(i, new Vector3(0, 0, 1f * i));
+                        AimingLine.transform.parent = ProjectileSpawn;
+                    }
+                } else Destroy(AimingLine);
             }
 
 
@@ -223,6 +200,11 @@ public class PlayerController : MonoBehaviour
             }
         }
         else return;
+    }
+
+    public void ChangeProjectile(GameObject Projectile)
+    {
+        ProjectilePrefab = Projectile;
     }
 
     IEnumerator InvincibilityFrames()

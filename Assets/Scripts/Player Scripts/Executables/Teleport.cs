@@ -11,7 +11,7 @@ public class Teleport : Executable
         Stats.Name = "Teleport";
         Stats.Description = "Teleport to the mouse Cursor";
         Stats.Sprite = "Player/UI Images/Teleport";
-        Stats.Duration = 10f;
+        Stats.Duration = 0.01f;
         Stats.Cooldown = 15f;
         Stats.Upkeep = 0f;
         this.enabled = false;

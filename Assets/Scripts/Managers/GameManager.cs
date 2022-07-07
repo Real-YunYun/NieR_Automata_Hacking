@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour
     public GameState CurrentGameState { get; set; }
 
     //Game Manager Parameters
-    public bool UseGamepad = false;
     public PlayerData Data;
     private static readonly string key = "43286579693697635478639456395002084630948674278724";
     static GameManager _instance = null;    
@@ -117,6 +116,7 @@ public class GameManager : MonoBehaviour
 
         switch (SceneManager.GetActiveScene().name)
         {
+            case "Loading":
             case "Main Game":
                 if (DirectorInstance) DirectorInstance.GetComponent<Director>().enabled = true;
                 else
@@ -128,7 +128,6 @@ public class GameManager : MonoBehaviour
 
             case "Title":
             case "HUB":
-            case "Loading":
                 if (DirectorInstance) Destroy(DirectorInstance);
                 break;
         }

@@ -31,11 +31,11 @@ public class Entity : MonoBehaviour
     public delegate void OnDeathDelegate(GameObject entity);
     public event OnDeathDelegate OnDeathEvent;
 
-    public virtual void TakeDamage()
+    public virtual void TakeDamage(int value = 1)
     {
         if (!Invincible)
         {
-            Health -= 1;
+            Health -= value;
             if (Health <= 0) Death();
         }
     }
