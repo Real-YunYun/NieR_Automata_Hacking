@@ -22,7 +22,7 @@ public class Teleport : Executable
         OnCooldown = true;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, 0b_1000))
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, 0b_0000_0111))
         {
             transform.GetComponent<PlayerController>().GravityOn = false;
             raycastHit.point = new Vector3(raycastHit.point.x, raycastHit.point.y + 1.5f, raycastHit.point.z);

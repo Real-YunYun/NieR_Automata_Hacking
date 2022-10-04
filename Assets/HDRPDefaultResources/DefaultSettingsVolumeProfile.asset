@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   quality:
-    m_OverrideState: 1
-    m_Value: 1
+    m_OverrideState: 0
+    m_Value: 3
   intensity:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0.5
   maximumVelocity:
     m_OverrideState: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   m_SampleCount:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 8
 --- !u!114 &-1016694868962581565
 MonoBehaviour:
@@ -137,7 +137,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   exposure:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 11
   multiplier:
     m_OverrideState: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   hdriSky:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {fileID: 8900000, guid: 8253d41e6e8b11a4cbe77a4f8f82934d, type: 3}
   distortionMode:
     m_OverrideState: 0
@@ -298,7 +298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   skyType:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   cloudType:
     m_OverrideState: 0

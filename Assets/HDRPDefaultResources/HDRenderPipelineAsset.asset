@@ -30,12 +30,12 @@ MonoBehaviour:
     supportTransparentBackface: 1
     supportTransparentDepthPrepass: 1
     supportTransparentDepthPostpass: 1
-    colorBufferFormat: 74
+    colorBufferFormat: 48
     supportCustomPass: 1
-    customBufferFormat: 12
+    customBufferFormat: 48
     supportedLitShaderMode: 2
     planarReflectionResolution:
-      m_Values: 000100000004000000040000
+      m_Values: 400000004000000040000000
       m_SchemaId:
         m_Id: With3Levels
     supportDecals: 1
@@ -57,9 +57,9 @@ MonoBehaviour:
       cookieFormat: 74
       cookieAtlasLastValidMip: 0
       cookieTexArraySize: 1
-      planarReflectionAtlasSize: 1024
-      reflectionProbeCacheSize: 64
-      reflectionCubemapSize: 256
+      planarReflectionAtlasSize: 64
+      reflectionProbeCacheSize: 16
+      reflectionCubemapSize: 128
       reflectionCacheCompressed: 0
       reflectionProbeFormat: 74
       skyReflectionSize: 256
@@ -140,7 +140,7 @@ MonoBehaviour:
       singlePass: 1
       occlusionMesh: 1
       cameraJitter: 0
-      allowMotionBlur: 1
+      allowMotionBlur: 0
     postProcessQualitySettings:
       NearBlurSampleCount: 030000000500000008000000
       NearBlurMaxRadius:

@@ -27,7 +27,7 @@ public struct ExecutableStats
 [System.Serializable]
 public abstract class Executable : MonoBehaviour
 {
-    [Header("Abilities String")]
+    [Header("Executable Fields")]
     [SerializeField] protected ExecutableStats Stats;
     public bool OnCooldown = false;
     public bool Usable = false;

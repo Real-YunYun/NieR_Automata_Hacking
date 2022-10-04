@@ -71,17 +71,17 @@ public struct Bounty
             if (Current >= Target)
             {
                 Completed = true;
-                GameManager.Instance.Data.Bits += Reward;
+                if (!Expired) GameManager.Instance.Data.Bits += Reward;
                 DeltaTime = 0;
             }
         }
         if (Type == BountyType.Earn)
         {
-            Current += (int)entity.GetComponent<Entity>().Stats.BuildCost;
+            Current += (int)entity.GetComponent<Enemy>().Stats.BuildCost;
             if (Current >= Target)
             {
                 Completed = true;
-                GameManager.Instance.Data.Bits += Reward;
+                if (!Expired) GameManager.Instance.Data.Bits += Reward;
                 DeltaTime = 0;
             }
         }
@@ -175,7 +175,7 @@ public class Director : MonoBehaviour
             if (PlayerCamera)
             {
                 string BuildTime;
-                if (SpawningQueue.Count != 0) BuildTime = SpawningQueue.Peek().GetComponent<Entity>().Stats.BuildCost.ToString();
+                if (SpawningQueue.Count != 0) BuildTime = SpawningQueue.Peek().GetComponent<Enemy>().Stats.BuildCost.ToString();
                 else BuildTime = "0";
                 GameObject UI_Director = PlayerCamera.transform.Find("UI Canvas/Director Stats").gameObject;
                 UI_Director.SetActive(true);
@@ -206,7 +206,7 @@ public class Director : MonoBehaviour
                     SpawningQueue.Enqueue(Entities[RandomEntityIndex]);
                 }
 
-                if (Credit >= SpawningQueue.Peek().GetComponent<Entity>().Stats.BuildCost) Credit -= SpawningQueue.Peek().GetComponent<Entity>().Stats.BuildCost;
+                if (Credit >= SpawningQueue.Peek().GetComponent<Enemy>().Stats.BuildCost) Credit -= SpawningQueue.Peek().GetComponent<Enemy>().Stats.BuildCost;
 
                 if (!CanSpawn)
                 {
@@ -218,7 +218,7 @@ public class Director : MonoBehaviour
                 }
 
                 //Spawning Entity
-                if (SpawningQueue.Peek().GetComponent<Entity>().Stats.BuildTime <= BuildingTime) StartCoroutine("Spawn");
+                if (SpawningQueue.Peek().GetComponent<Enemy>().Stats.BuildTime <= BuildingTime) StartCoroutine("Spawn");
 
                 CreditRate = (1.5f + DifficultyTime * 0.106f) * 1.15f / 3600;
                 BuildRate = (1.5f + DifficultyTime * 0.106f) * 1.15f / 3600;
@@ -234,6 +234,9 @@ public class Director : MonoBehaviour
         }
 
         if (!ExecutableObject) this.enabled = false;
+
+        if (Keyboard.current.equalsKey.wasPressedThisFrame) GameManager.Instance.DifficultyModifier++;
+        if (Keyboard.current.minusKey.wasPressedThisFrame) GameManager.Instance.DifficultyModifier--;
     }
 
     public void OnEntityDeath(GameObject entity)
@@ -247,10 +250,10 @@ public class Director : MonoBehaviour
     {
         if (SpawnedEntities.Count < MaxEntities)
         {
-            BuildingTime -= SpawningQueue.Peek().GetComponent<Entity>().Stats.BuildTime;
+            BuildingTime -= SpawningQueue.Peek().GetComponent<Enemy>().Stats.BuildTime;
             RandomCoordinate.y = hit.point.y + 1;
             var entity = Instantiate(SpawningQueue.Peek(), RandomCoordinate, Quaternion.identity);
-            entity.GetComponent<Entity>().OnDeathEvent += OnEntityDeath;
+            entity.GetComponent<Enemy>().OnDeathEvent += OnEntityDeath;
             SpawnedEntities.Add(entity);
             SpawningQueue.Dequeue();
         }

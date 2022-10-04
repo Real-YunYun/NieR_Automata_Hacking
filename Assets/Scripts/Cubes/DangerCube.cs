@@ -8,7 +8,6 @@ public class DangerCube : MonoBehaviour
     {
         // Player Touched Entity 
         if (other.gameObject.CompareTag("Entity")) other.gameObject.GetComponent<Entity>().TakeDamage();
-        if (other.gameObject.CompareTag("Player")) other.gameObject.GetComponent<PlayerController>().TakeDamage();
 
         //Projectile Hits Cube
         if (other.gameObject.CompareTag("Player Projectile")) Destroy(other.gameObject);

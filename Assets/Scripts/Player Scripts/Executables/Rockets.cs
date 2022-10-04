@@ -44,7 +44,7 @@ public class Rockets : Executable
     {
         transform.GetComponent<PlayerController>().ChangeProjectile(RocketProjectile);
         transform.GetComponent<PlayerController>().FireRate = 1f;
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(Stats.Duration);
         transform.GetComponent<PlayerController>().ChangeProjectile(OriginalProjectile);
         transform.GetComponent<PlayerController>().FireRate = 8f;
     }

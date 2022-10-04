@@ -1,27 +1,24 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketProjectile : MonoBehaviour
+public class RocketProjectile : Projectile
 {
     [Header("Rocket Projectile Parameters")]
-    private float ProjectileSpeed = 500f;
     private int ExplosionDamage = 10;
     private float ExplosionRadius = 7.5f;
     private float ExplosionTime = 0.75f;
     private GameObject RocketParticle;
 
-    void Start()
+    override protected void Awake()
     {
-        gameObject.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, ProjectileSpeed));
+        base.Awake();
         RocketParticle = Resources.Load<GameObject>("General/Explosion Particle");
         StartCoroutine("TriggerExplosion");
     }
 
-    private void OnTriggerEnter(Collider other)
+    override protected void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Indestructible")) Explode();
-        if (other.gameObject.CompareTag("Destructible") || other.gameObject.CompareTag("Entity") || other.CompareTag("Enemy Projectile")) Explode();
+        if (other.gameObject.CompareTag("Indestructible") || other.gameObject.CompareTag("Destructible") || other.gameObject.CompareTag("Entity") || other.CompareTag("Enemy Projectile")) Explode();
     }
 
     private void Explode()
@@ -30,10 +27,8 @@ public class RocketProjectile : MonoBehaviour
         
         foreach (Collider collider in Colliders)
         {
-            if (collider.CompareTag("Entity"))
-            {
-                collider.GetComponent<Entity>().TakeDamage((int)(ExplosionDamage *  (1 - (transform.position - collider.transform.position).magnitude / ExplosionRadius)) + 1);
-            }
+            if (collider.GetComponent<Entity>()) collider.GetComponent<Entity>().TakeDamage((int)(ExplosionDamage - (ExplosionDamage *  (1 - (transform.position - collider.transform.position).magnitude / ExplosionRadius)) + 1));
+
             if (collider.CompareTag("Enemy Projectile")) Destroy(collider.gameObject);
         }
         Instantiate(RocketParticle, transform.position, Quaternion.identity);

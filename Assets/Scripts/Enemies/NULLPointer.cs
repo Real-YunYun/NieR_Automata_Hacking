@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NULLPointer : Entity
+public class NULLPointer : Enemy
 {
     [Header("Pointer Parameters")]
     [SerializeField] private float FireRate = 0.1f;

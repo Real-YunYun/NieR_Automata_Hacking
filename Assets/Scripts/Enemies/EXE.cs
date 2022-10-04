@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EXE : Entity
+public class EXE : Enemy
 {
-
     public override void TakeDamage(int value = 1)
     {
         if (!transform.parent.Find("Shield").gameObject.activeSelf) base.TakeDamage(value);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Binary : Entity
+public class Binary : Enemy
 {
     [Header("Biary Parameters")]
     [SerializeField] private GameObject ProjectilePrefab;

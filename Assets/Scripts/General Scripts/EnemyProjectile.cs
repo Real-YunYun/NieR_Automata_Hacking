@@ -1,21 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyProjectile : MonoBehaviour
+public class EnemyProjectile : Projectile
 {
     [Header("Projectile Parameters")]
     [SerializeField] private bool Indestructible = false;
 
-    void Start()
+    override protected void Awake()
     {
-        gameObject.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, 250f));
+        ProjectileSpeed = 250f;
+        base.Awake();
     }
 
-    private void OnTriggerEnter(Collider other)
+    override protected void OnTriggerEnter(Collider other)
     {
-        // More Difficult
-        //if (other.gameObject.CompareTag("Player Projectile") && Indestructible) Destroy(other.gameObject);
         if (other.gameObject.CompareTag("Player Projectile") && !Indestructible)
         {
             Destroy(other.gameObject);

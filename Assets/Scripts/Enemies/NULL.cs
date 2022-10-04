@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent), typeof(BoxCollider))]
-public class NULL : Entity
+public class NULL : Enemy
 {
     [Header("NULL Parameters")]
     private NavMeshAgent Agent;

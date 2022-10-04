@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BinaryPointer : Entity
+public class BinaryPointer : Enemy
 {
     [Header("Pointer Parameters")]
     [SerializeField] private float SpawningRate = 25f;

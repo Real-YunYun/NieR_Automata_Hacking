@@ -3,18 +3,18 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Entity
 {
     //This GameObject Components
     private CharacterController Controller;
 
     [Header("Player Stats")]
-    private int _health = 50;
+    new private int _health = 50;
     private int _energy = 25;
-    public int Health { get { return _health; } set { _health = value; } }
+    new public int Health { get { return _health; } set { _health = value; } }
     public int Energy { get { return _energy; } set { _energy = value; } }
 
-    //Contorller Params 
+    #region Contorller Params 
     [Header("Player Controller Parameters")]
     public float MoveSpeed = 10f;
     public float FireRate = 8f;
@@ -24,9 +24,10 @@ public class PlayerController : MonoBehaviour
     private readonly float Gravity = -9.8f;
     [HideInInspector] public bool GravityOn = true;
     private Vector3 Velocity = Vector3.zero;
-    private GameObject AimingLine;
+    //private GameObject AimingLine;
+    #endregion
 
-    //Delegates and Events
+    #region Delegates and Events
     public delegate void OnFireDelegate();
     public event OnFireDelegate OnFireEvent;
 
@@ -35,27 +36,30 @@ public class PlayerController : MonoBehaviour
     
     public delegate void OnExecutableUsedDelegate(int slot);
     public event OnExecutableUsedDelegate OnExecutableUsedEvent;
+    #endregion
 
-    //Player Controller Booleans
+    #region Player Controller Booleans
     [Header("Player Controller Limitations")]
     [SerializeField] private bool CanMove = true;
     [SerializeField] private bool CanShoot = true;
-    private bool Invincible { get; set; }
+    new private bool Invincible { get; set; }
+    #endregion
 
-    //Player Children
+    #region Player Children
     [Header("Controller Children")]
     [SerializeField] private GameObject ProjectilePrefab;
     private GameObject PlayerBody;
     private Transform ProjectileSpawn;
+    #endregion
 
-    //Abillities
+    #region Abillities
     [Header("Abillites")]
     public Executable[] Executables = new Executable[4];
+    #endregion
 
     [Header("Audio Clips")]
     private AudioSource shootingSource;
 
-    // Start is called before the first frame update
     void Awake()
     {
         Controller = GetComponent<CharacterController>();
@@ -70,9 +74,9 @@ public class PlayerController : MonoBehaviour
 
         //Adding Abilities
         AddExecutable<Nodes>(1);
-        AddExecutable<Firewall>(2);
+        AddExecutable<Rockets>(2);
         AddExecutable<Teleport>(3);
-        AddExecutable<Rockets>(4);
+        AddExecutable<Homing>(4);
     }
 
     // Update is called once per frame
@@ -80,16 +84,17 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.Instance.IsGamePaused)
         {
-            //Player Input Devices
+            #region Player Input Devices
             Keyboard keyboard = Keyboard.current;
             Mouse mouse = Mouse.current;
             Gamepad gamepad = Gamepad.current;
+            #endregion
 
             if (_health > 50) _health = 50;
 
-            //Keyboard Input
             if (CanMove)
             {
+                #region Keyboard Input  
                 float Forward = (keyboard.wKey.ReadValue() - keyboard.sKey.ReadValue());
                 float Side = (keyboard.dKey.ReadValue() - keyboard.aKey.ReadValue());
                 Vector3 Direction = new Vector3(Side, 0, Forward).normalized;
@@ -105,42 +110,33 @@ public class PlayerController : MonoBehaviour
 
                     Controller.Move(MoveDir * MoveSpeed * Time.deltaTime);
                 }
+                #endregion
 
+                #region Keyboard Input For Exectuables
                 //Abillities Keyboard Input
-                if (keyboard.digit1Key.isPressed && !Executables[0].OnCooldown && Executables[0].Usable)
-                {
-                    Executables[0].OnCooldown = true;
-                    Executables[0].enabled = true;
-                    OnExecutableUsedEvent(0);
-                }
-                if (keyboard.digit2Key.isPressed && !Executables[1].OnCooldown && Executables[1].Usable)
-                {
-                    Executables[1].OnCooldown = true;
-                    Executables[1].enabled = true;
-                    OnExecutableUsedEvent(1);
-                }
-                if (keyboard.digit3Key.isPressed && !Executables[2].OnCooldown && Executables[2].Usable)
-                {
-                    Executables[2].OnCooldown = true;
-                    Executables[2].enabled = true;
-                    OnExecutableUsedEvent(2);
-                }
-                if (keyboard.digit4Key.isPressed && !Executables[3].OnCooldown && Executables[3].Usable)
-                {
-                    Executables[3].OnCooldown = true;
-                    Executables[3].enabled = true;
-                    OnExecutableUsedEvent(3);
-                }
+                if (keyboard.digit1Key.isPressed && !Executables[0].OnCooldown && Executables[0].Usable) UseExecutable(0);
+                if (keyboard.digit2Key.isPressed && !Executables[1].OnCooldown && Executables[1].Usable) UseExecutable(1);
+                if (keyboard.digit3Key.isPressed && !Executables[2].OnCooldown && Executables[2].Usable) UseExecutable(2);
+                if (keyboard.digit4Key.isPressed && !Executables[3].OnCooldown && Executables[3].Usable) UseExecutable(3);
+                #endregion
 
-                //Mouse Input
+                #region Mouse Input
                 if (CanShoot) if (mouse.leftButton.ReadValue() > 0) Fire();
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, 0b_0100_1000))
+                if (Physics.Raycast(ray, out RaycastHit rayHit, Mathf.Infinity, 0b_0000_0111))
                 {
-                    Vector3 rotation = Quaternion.LookRotation(raycastHit.point - transform.position, Vector3.up).eulerAngles;
+                    Vector3 rotation = Quaternion.LookRotation(rayHit.point - transform.position, Vector3.up).eulerAngles;
                     rotation.x = rotation.z = 0;
                     PlayerBody.transform.rotation = Quaternion.Euler(rotation);
+
+                    #region Debugging Aiming Line
+                    #if UNITY_EDITOR_WIN
+                        Debug.DrawLine(rayHit.point, rayHit.point + (Vector3.up * 5f), Color.red);
+                        Debug.DrawLine(ProjectileSpawn.transform.position, ProjectileSpawn.transform.position + (ProjectileSpawn.transform.forward * 1000f), Color.green);
+                    #endif
+                    #endregion
                 }
+                /*
                 if (CanShoot && mouse.rightButton.ReadValue() > 0)
                 {
                     if (!AimingLine) AimingLine = Instantiate(Resources.Load<GameObject>("Player/Aiming Line"), ProjectileSpawn.position, ProjectileSpawn.rotation);
@@ -153,7 +149,9 @@ public class PlayerController : MonoBehaviour
                         AimingLine.transform.parent = ProjectileSpawn;
                     }
                 } else Destroy(AimingLine);
+                */
             }
+            #endregion
 
 
             if (GravityOn) Controller.Move(new Vector3(0, Gravity * Time.deltaTime, 0));
@@ -186,13 +184,13 @@ public class PlayerController : MonoBehaviour
         FireRateDelay = false;
     }
 
-    public void TakeDamage()
+    public override void TakeDamage(int value = 1)
     {
         //Checking if the Player is Invincible
         if (!Invincible)
         {
             StartCoroutine("InvincibilityFrames");
-            Health -= 1;
+            Health -= value;
             if (Health <= 0)
             {
                 GameManager.Instance.SaveGame();
@@ -202,9 +200,21 @@ public class PlayerController : MonoBehaviour
         else return;
     }
 
+    private void UseExecutable(int slot)
+    {
+        Executables[slot].OnCooldown = true;
+        Executables[slot].enabled = true;
+        OnExecutableUsedEvent(slot);
+    }
+
     public void ChangeProjectile(GameObject Projectile)
     {
         ProjectilePrefab = Projectile;
+    }
+
+    public GameObject GetProjectile()
+    {
+        return ProjectilePrefab;
     }
 
     IEnumerator InvincibilityFrames()

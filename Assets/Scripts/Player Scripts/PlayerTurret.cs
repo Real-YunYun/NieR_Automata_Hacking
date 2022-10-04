@@ -12,6 +12,8 @@ public class PlayerTurret : MonoBehaviour
     void Start()
     {
         GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnFireEvent += OnFire;
+        //Optional Detail perhaps an upgrade?
+        ProjectilePrefab = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().GetProjectile();
     }
 
     // Update is called once per frame
@@ -22,7 +24,7 @@ public class PlayerTurret : MonoBehaviour
             transform.position = Vector3.SmoothDamp(transform.position, PlayerTurretSpawn.position, ref Velocity, SmoothTime);
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, 0b_0100_1000))
+            if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, 0b_0000_0111))
             {
                 Vector3 rotation = Quaternion.LookRotation(raycastHit.point - transform.position, Vector3.up).eulerAngles;
                 rotation.x = rotation.z = 0;

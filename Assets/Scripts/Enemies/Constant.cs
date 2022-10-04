@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Constant : Entity
+public class Constant : Enemy
 {
 	[Header("Constant Parameters")]
 	public int random;

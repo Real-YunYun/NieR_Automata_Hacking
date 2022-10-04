@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 [System.Serializable]
@@ -14,7 +15,6 @@ public enum GroundType
     Elevation,
     None
 }
-
 public class Ground : MonoBehaviour
 {
     public GroundType Type;
