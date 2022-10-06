@@ -10,6 +10,7 @@ public struct EnemyStats
     public float BuildCost;
 }
 
+[DefaultExecutionOrder(1)]
 public class Enemy : Entity
 {
     [Header("Enemy Parameters")]

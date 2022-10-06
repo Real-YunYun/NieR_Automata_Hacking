@@ -168,7 +168,6 @@ MonoBehaviour:
     BuildCost: 10
   DeathParticle: {fileID: 1963909997120546418, guid: f2a4b7626a244a04c83f06a5d8b0fbdc, type: 3}
   FireRate: 0.2
-  NULL: {fileID: 6980814868325675225, guid: e818df862c7d42b4d9d0e17d7e5cd0a0, type: 3}
 --- !u!65 &7741247079408220452
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -192,7 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8048448059151933095}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: Rotator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -123,7 +123,7 @@ public class PlayerController : Entity
                 #region Mouse Input
                 if (CanShoot) if (mouse.leftButton.ReadValue() > 0) Fire();
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out RaycastHit rayHit, Mathf.Infinity, 0b_0000_0111))
+                if (Physics.Raycast(ray, out RaycastHit rayHit, Mathf.Infinity, 0b_1000_0000))
                 {
                     Vector3 rotation = Quaternion.LookRotation(rayHit.point - transform.position, Vector3.up).eulerAngles;
                     rotation.x = rotation.z = 0;

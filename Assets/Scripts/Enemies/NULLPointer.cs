@@ -6,18 +6,22 @@ public class NULLPointer : Enemy
 {
     [Header("Pointer Parameters")]
     [SerializeField] private float FireRate = 0.1f;
-    [SerializeField] private GameObject NULL;
+    private GameObject NULL;
     private Transform Player;
     private bool FireRateDelay;
     private Transform Rotator;
     private Transform SpawnTransform;
 
-    // Start is called before the first frame update
+    void Awake()
+    {
+        NULL = Resources.Load<GameObject>("Enemies/NULL");
+        Rotator = transform.Find("Rotator");
+        SpawnTransform = transform.Find("Rotator/NULL Spawn Point");
+    }
+
     void Start()
     {
         Player = GameManager.Instance.PlayerInstance.transform;
-        Rotator = transform.Find("Spawner");
-        SpawnTransform = transform.Find("Spawner/NULL Spawn Point");
     }
 
     // Update is called once per frame
