@@ -94,6 +94,9 @@ public class LevelManager : MonoBehaviour
 {
     [Header("Level Manager Parameters")]
     private bool Started = false;
+    private bool BossRoom = false;
+    private bool ItemRoom = false;
+    private bool GearRoom = false;
     private int GenerateSeed = 7689;
     private GameObject StartingRoom;
 
