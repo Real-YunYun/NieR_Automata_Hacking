@@ -1,9 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DangerCube : MonoBehaviour
+public class DangerCube : Entity
 {
+    void Awake()
+    {
+        Invincible = true;
+    }
+
     private void OnTriggerStay(Collider other)
     {
         // Player Touched Entity 

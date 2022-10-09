@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 public static class RoomTemplate
@@ -84,28 +87,143 @@ public static class RoomTemplate
         }
     }
 
-    //Random Starter Room Getter
+    // Random Starter Room Getter
     static public GameObject StarterRoom { get { return StarterRooms[Random.Range(0, StarterRooms.Length)]; } }
 
 }
+
+[System.Serializable]
+public class RoomDictionary
+{
+    public List<RoomInformation> D = new List<RoomInformation>();
+    public List<RoomInformation> DL = new List<RoomInformation>();
+    public List<RoomInformation> DLR = new List<RoomInformation>();
+    public List<RoomInformation> DR = new List<RoomInformation>();
+    public List<RoomInformation> L = new List<RoomInformation>();
+    public List<RoomInformation> LR = new List<RoomInformation>();
+    public List<RoomInformation> R = new List<RoomInformation>();
+    public List<RoomInformation> U = new List<RoomInformation>();
+    public List<RoomInformation> UD = new List<RoomInformation>();
+    public List<RoomInformation> UDL = new List<RoomInformation>();
+    public List<RoomInformation> UDLR = new List<RoomInformation>();
+    public List<RoomInformation> UDR = new List<RoomInformation>();
+    public List<RoomInformation> UL = new List<RoomInformation>();
+    public List<RoomInformation> ULR = new List<RoomInformation>();
+    public List<RoomInformation> UR = new List<RoomInformation>();    
+} 
 
 [DefaultExecutionOrder(1)]
 public class LevelManager : MonoBehaviour
 {
     [Header("Level Manager Parameters")]
-    private bool Started = false;
-    private bool BossRoom = false;
-    private bool ItemRoom = false;
-    private bool GearRoom = false;
-    private int GenerateSeed = 7689;
+    private int GenerateSeed = 7688;
+    [SerializeField] private bool CanStart = true;
     private GameObject StartingRoom;
+
+    [Header("Importing/Overwriting Parameters")]
+    private RoomDictionary Dictionary;
+    [SerializeField] private TextAsset RoomInformationText;
+    [SerializeField] private int DictionaryIndex = -1;
+
+
+    static public void ImportRoom(TextAsset Asset)
+    {
+        RoomInformation ImportedInformation = JsonUtility.FromJson<RoomInformation>(Asset.ToString());
+        Debug.Log("RoomType: " + ImportedInformation.RoomType);
+    } 
 
     void Awake()
     {
-        Random.InitState(GenerateSeed);
-        StartingRoom = Instantiate(RoomTemplate.StarterRoom, Vector3.zero, Quaternion.identity);
-        StartingRoom.transform.parent = transform;
-        Started = true;
+        if (CanStart)
+        {
+            Random.InitState(GenerateSeed);
+            StartingRoom = Instantiate(RoomTemplate.StarterRoom, Vector3.zero, Quaternion.identity);
+            StartingRoom.transform.parent = transform;
+        }
+    }
+
+    public void ImportInformation()
+    {
+        // Importing to the last of the List
+        if (RoomInformationText == null)
+        {
+            Debug.LogError("Uploaded file field is null");
+            return;
+        }
+
+        RoomInformation ImportingInformation = JsonUtility.FromJson<RoomInformation>(RoomInformationText.text);
+        RoomType ImportingRoomType = ImportingInformation.RoomType;
+
+        // Appending to Lists
+        if (DictionaryIndex == -1)
+        {
+            // D, DL, DLR, DR, L, LR, R, U, UD, UDL, UDLR, UDR, UL, ULR, UR
+            if (ImportingRoomType == RoomType.D) Dictionary.D.Add(ImportingInformation);
+            else if (ImportingRoomType == RoomType.DL) Dictionary.DL.Add(ImportingInformation);
+            else if (ImportingRoomType == RoomType.DLR) Dictionary.DLR.Add(ImportingInformation);
+            else if (ImportingRoomType == RoomType.DR) Dictionary.DR.Add(ImportingInformation);
+            else if (ImportingRoomType == RoomType.L) Dictionary.L.Add(ImportingInformation);
+            else if (ImportingRoomType == RoomType.LR) Dictionary.LR.Add(ImportingInformation);
+            else if (ImportingRoomType == RoomType.R) Dictionary.R.Add(ImportingInformation);
+            else if (ImportingRoomType == RoomType.U) Dictionary.U.Add(ImportingInformation);
+            else if (ImportingRoomType == RoomType.UD) Dictionary.UD.Add(ImportingInformation);
+            else if (ImportingRoomType == RoomType.UDL) Dictionary.UDL.Add(ImportingInformation);
+            else if (ImportingRoomType == RoomType.UDLR) Dictionary.UDLR.Add(ImportingInformation);
+            else if (ImportingRoomType == RoomType.UDR) Dictionary.UDR.Add(ImportingInformation);
+            else if (ImportingRoomType == RoomType.UL) Dictionary.UL.Add(ImportingInformation);
+            else if (ImportingRoomType == RoomType.ULR) Dictionary.ULR.Add(ImportingInformation);
+            else if (ImportingRoomType == RoomType.UR) Dictionary.UR.Add(ImportingInformation);
+
+            Debug.Log("Imported Room at " + ImportingRoomType + " [" + DictionaryIndex + "]");
+        }
+        else if (DictionaryIndex != -1 && DictionaryIndex >= 0) OverwriteInformation();
+        else Debug.LogError("Dictionary Index was Invalid");
+
+        SaveDictionary();
+    }
+
+    public void OverwriteInformation()
+    {
+        RoomInformation OverwritingInformation = JsonUtility.FromJson<RoomInformation>(RoomInformationText.ToString());
+        RoomType ImportingRoomType = OverwritingInformation.RoomType;
+
+        if (DictionaryIndex > 0)
+        {
+            if (ImportingRoomType == RoomType.D) Dictionary.D.Insert(DictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.DL) Dictionary.DL.Insert(DictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.DLR) Dictionary.DLR.Insert(DictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.DR) Dictionary.DR.Insert(DictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.L) Dictionary.L.Insert(DictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.LR) Dictionary.LR.Insert(DictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.R) Dictionary.R.Insert(DictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.U) Dictionary.U.Insert(DictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.UD) Dictionary.UD.Insert(DictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.UDL) Dictionary.UDL.Insert(DictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.UDLR) Dictionary.UDLR.Insert(DictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.UDR) Dictionary.UDR.Insert(DictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.UL) Dictionary.UL.Insert(DictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.ULR) Dictionary.ULR.Insert(DictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.UR) Dictionary.UR.Insert(DictionaryIndex, OverwritingInformation);
+
+            Debug.Log("Overwriten Room at " + ImportingRoomType + " [" + DictionaryIndex + "]");
+        }
+        else Debug.LogError("Index for Dictionary was Invalid");
+    }
+
+    public void RemoveInformation(List<RoomInformation> RemovingList)
+    {
+        RemovingList.RemoveAt(DictionaryIndex);
+    }
+
+    public void SaveDictionary()
+    {
+        string SavingInformation = JsonUtility.ToJson(Dictionary);
+        File.WriteAllText(Application.dataPath + "/Dictionary/Rooms.dictionary", SavingInformation);
+    }
+
+    public void LoadDictionary()
+    {
+        Dictionary = JsonUtility.FromJson<RoomDictionary>(File.ReadAllText(Application.dataPath + "/Dictionary/Rooms.dictionary"));
     }
 
 }
