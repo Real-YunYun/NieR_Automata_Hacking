@@ -8,7 +8,7 @@ public class Firewall : Executable
     [Header("Abilities Parameters")]
     private GameObject FirewallPrefab;
 
-    void Awake()
+    protected override void Awake()
     {
         Usable = true;
         Stats.Name = "Firewall";
@@ -28,16 +28,5 @@ public class Firewall : Executable
         GameObject Firewall = Instantiate(FirewallPrefab, ProjectileSpawn.position, ProjectileSpawn.rotation);
         Firewall.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, 5), ForceMode.Impulse);
         Destroy(Firewall, Stats.Duration);
-    }
-
-    void Update()
-    {
-        Stats.Upkeep += Time.deltaTime;
-        if (Stats.Upkeep >= Stats.Cooldown)
-        {
-            Stats.Upkeep = 0;
-            OnCooldown = false;
-            this.enabled = false;
-        }
     }
 }

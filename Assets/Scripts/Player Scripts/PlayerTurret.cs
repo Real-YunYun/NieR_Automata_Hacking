@@ -6,7 +6,8 @@ public class PlayerTurret : MonoBehaviour
     [SerializeField] private GameObject ProjectilePrefab;
     private float SmoothTime = 0.025f;
     [HideInInspector] public Transform PlayerTurretSpawn;
-    private Vector3 Velocity = Vector3.zero;
+    private float VelocityX = 0.0f;
+    private float VelocityZ = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -19,9 +20,12 @@ public class PlayerTurret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.timeScale == 1)
-        { 
-            transform.position = Vector3.SmoothDamp(transform.position, PlayerTurretSpawn.position, ref Velocity, SmoothTime);
+        if (!GameManager.Instance.IsGamePaused)
+        {
+            float NewX = Mathf.SmoothDamp(transform.position.x, PlayerTurretSpawn.position.x, ref VelocityX, SmoothTime, Mathf.Infinity, Time.unscaledDeltaTime);
+            float NewY = PlayerTurretSpawn.position.y;
+            float NewZ = Mathf.SmoothDamp(transform.position.z, PlayerTurretSpawn.position.z, ref VelocityZ, SmoothTime, Mathf.Infinity, Time.unscaledDeltaTime);
+            transform.position = new Vector3(NewX, NewY, NewZ);
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, 0b_1000_0000))
@@ -38,7 +42,7 @@ public class PlayerTurret : MonoBehaviour
         Instantiate(ProjectilePrefab, transform.Find("Projectile Spawn").position, transform.Find("Projectile Spawn").rotation);
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnFireEvent -= OnFire;
     }

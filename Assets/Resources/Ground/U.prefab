@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 6945429302625643452}
   - component: {fileID: 3829877713542918336}
   - component: {fileID: 5803874195268148146}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 3237512980735496924}
   - component: {fileID: 5266886825923623283}
   - component: {fileID: 2915174969442458944}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 3237512981093648009}
   - component: {fileID: 5266886825580277030}
   - component: {fileID: 2872239551874023705}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 3237512981514250236}
   - component: {fileID: 5266886826235743315}
   - component: {fileID: 6656756999630147911}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 3572490304633852657}
   - component: {fileID: 3572490304633852656}
   - component: {fileID: 9134483382920984475}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -613,7 +613,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5601963502015089475}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpawnPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 5400242942963380609}
   - component: {fileID: 3390028642440206894}
   - component: {fileID: 6565280357842436310}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -741,7 +741,7 @@ GameObject:
   - component: {fileID: 6321078836310090808}
   - component: {fileID: 2949953442087190575}
   - component: {fileID: 9122539044618605461}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Up
   m_TagString: Room Spawner
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}

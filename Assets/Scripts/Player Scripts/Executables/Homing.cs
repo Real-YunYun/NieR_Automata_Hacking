@@ -8,7 +8,7 @@ public class Homing : Executable
     private GameObject OriginalProjectile;
     private GameObject HomingProjectile;
 
-    void Awake()
+    protected override void Awake()
     {
         Usable = true;
         Stats.Name = "Homing";
@@ -27,17 +27,6 @@ public class Homing : Executable
         OriginalProjectile = Resources.Load<GameObject>("General/Player Projectile");
         HomingProjectile = Resources.Load<GameObject>("General/Homing Projectile");
         StartCoroutine("HomingCooldown");
-    }
-
-    void Update()
-    {
-        Stats.Upkeep += Time.deltaTime;
-        if (Stats.Upkeep >= Stats.Cooldown)
-        {
-            Stats.Upkeep = 0;
-            OnCooldown = false;
-            this.enabled = false;
-        }
     }
 
     IEnumerator HomingCooldown()

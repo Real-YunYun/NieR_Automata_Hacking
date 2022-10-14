@@ -9,9 +9,9 @@ public class PlayerController : Entity
     private CharacterController Controller;
 
     [Header("Player Stats")]
-    new private int _health = 50;
+    // new private int _health = 50;
     private int _energy = 25;
-    new public int Health { get { return _health; } set { _health = value; } }
+    // public int Health { get { return _health; } set { _health = value; } }
     public int Energy { get { return _energy; } set { _energy = value; } }
 
     #region Contorller Params 
@@ -42,6 +42,7 @@ public class PlayerController : Entity
     [Header("Player Controller Limitations")]
     [SerializeField] private bool CanMove = true;
     [SerializeField] private bool CanShoot = true;
+    [SerializeField] private bool CanExecute = true;
     new private bool Invincible { get; set; }
     #endregion
 
@@ -74,9 +75,9 @@ public class PlayerController : Entity
 
         //Adding Abilities
         AddExecutable<Nodes>(1);
-        AddExecutable<Rockets>(2);
+        AddExecutable<Homing>(2);
         AddExecutable<Teleport>(3);
-        AddExecutable<Homing>(4);
+        AddExecutable<Overclock>(4);
     }
 
     // Update is called once per frame
@@ -202,11 +203,15 @@ public class PlayerController : Entity
 
     private void UseExecutable(int slot)
     {
-        Executables[slot].OnCooldown = true;
-        Executables[slot].enabled = true;
-        OnExecutableUsedEvent(slot);
+        if (CanExecute)
+        {
+            Executables[slot].OnCooldown = true;
+            Executables[slot].enabled = true;
+            OnExecutableUsedEvent(slot);
+        }
     }
 
+    #region Player Projectile Funcitons
     public void ChangeProjectile(GameObject Projectile)
     {
         ProjectilePrefab = Projectile;
@@ -216,6 +221,14 @@ public class PlayerController : Entity
     {
         return ProjectilePrefab;
     }
+
+    #endregion
+
+    #region Player Controller Boolean Parameters
+    public void SetCanExecute(bool state = true) { CanExecute = state; }
+    public void SetCanShoot(bool state = true) { CanShoot = state; }
+    public void SetMoveShoot(bool state = true) { CanMove = state; }
+    #endregion
 
     IEnumerator InvincibilityFrames()
     {

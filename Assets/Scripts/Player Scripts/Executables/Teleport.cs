@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Teleport : Executable
 {
-    void Awake()
+    protected override void Awake()
     {
         Usable = true;
         Stats.Name = "Teleport";
@@ -22,23 +22,15 @@ public class Teleport : Executable
         OnCooldown = true;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, 0b_0000_0111))
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, 0b_0111_1011))
         {
-            transform.GetComponent<PlayerController>().GravityOn = false;
-            raycastHit.point = new Vector3(raycastHit.point.x, raycastHit.point.y + 1.5f, raycastHit.point.z);
-            this.gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, raycastHit.point, Vector3.Distance(raycastHit.point, gameObject.transform.position));
-            StartCoroutine("TeleportCooldown");
-        }
-    }
-
-    void Update()
-    {
-        Stats.Upkeep += Time.deltaTime;
-        if (Stats.Upkeep >= Stats.Cooldown)
-        {
-            Stats.Upkeep = 0;
-            OnCooldown = false;
-            this.enabled = false;
+            if (raycastHit.collider.CompareTag("Room"))
+            {
+                transform.GetComponent<PlayerController>().GravityOn = false;
+                raycastHit.point = new Vector3(raycastHit.point.x, raycastHit.point.y + 1.5f, raycastHit.point.z);
+                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, raycastHit.point, Vector3.Distance(raycastHit.point, gameObject.transform.position));
+                StartCoroutine("TeleportCooldown");
+            }
         }
     }
 

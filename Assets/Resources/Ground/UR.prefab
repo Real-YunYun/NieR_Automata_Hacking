@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2089930440415638396}
   - component: {fileID: 6568038425524173744}
   - component: {fileID: 3604075637418856093}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 173002404772173472}
   - component: {fileID: 9020160804107268791}
   - component: {fileID: 4613801237084244989}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Up
   m_TagString: Room Spawner
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 3950848527565563438}
   - component: {fileID: 5993854062012108161}
   - component: {fileID: 4891886901978173221}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 3950848528220768091}
   - component: {fileID: 5993854062432447732}
   - component: {fileID: 2655356949213656639}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 3147389604938412630}
   - component: {fileID: 3147389604938412631}
   - component: {fileID: 3300091163654347983}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +565,7 @@ GameObject:
   - component: {fileID: 6291968384882311535}
   - component: {fileID: 4365817223223141983}
   - component: {fileID: 2504622264813550074}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Right
   m_TagString: Room Spawner
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: 5820985474914865446}
   - component: {fileID: 3833128690844859017}
   - component: {fileID: 5641012771046}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -799,7 +799,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1756535163307391451}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpawnPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -834,7 +834,7 @@ GameObject:
   - component: {fileID: 3180787799760026782}
   - component: {fileID: 5400196303008569392}
   - component: {fileID: 7937756624095926028}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -896,7 +896,7 @@ GameObject:
   - component: {fileID: 1508929672328227465}
   - component: {fileID: 4737163667208477565}
   - component: {fileID: 2408044765679733917}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

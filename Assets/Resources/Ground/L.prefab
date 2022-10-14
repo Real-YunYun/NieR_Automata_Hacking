@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4225431271204714646}
   - component: {fileID: 6870793272455058233}
   - component: {fileID: 5345709557700644397}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 4225431272434961846}
   - component: {fileID: 6870793274428761625}
   - component: {fileID: 4484041023762121258}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 4225431272931531235}
   - component: {fileID: 6870793273947009612}
   - component: {fileID: 3572046210386878067}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 2871681091232517531}
   - component: {fileID: 2871681091232517530}
   - component: {fileID: 7532973517576481009}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 1388747554154276026}
   - component: {fileID: 8318466823592480547}
   - component: {fileID: 9040488244386616328}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,7 +615,7 @@ GameObject:
   - component: {fileID: 6683288956777328363}
   - component: {fileID: 4126852702941005124}
   - component: {fileID: 5571731256508997564}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -678,7 +678,7 @@ GameObject:
   - component: {fileID: 1558410009975271703}
   - component: {fileID: 5495779175865008316}
   - component: {fileID: 7592412551890523443}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Left
   m_TagString: Room Spawner
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -752,7 +752,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3091651796063258334}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpawnPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}

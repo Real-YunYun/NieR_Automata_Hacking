@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1832467791816354023}
   - component: {fileID: 8976926340672832328}
   - component: {fileID: 5307058870663987495}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7011469507176899940}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpawnPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 7314441090673345887}
   - component: {fileID: 240706325535302129}
   - component: {fileID: 2850465591304744653}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 2759539149498416348}
   - component: {fileID: 3048481211264414297}
   - component: {fileID: 2504121719757904975}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Down
   m_TagString: Room Spawner
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 6725769009098593096}
   - component: {fileID: 584264588029436604}
   - component: {fileID: 7551805645202715996}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ GameObject:
   - component: {fileID: 3349630125414964688}
   - component: {fileID: 5024810542424341216}
   - component: {fileID: 7253492614991096497}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Right
   m_TagString: Room Spawner
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -561,7 +561,7 @@ GameObject:
   - component: {fileID: 7064941540200729495}
   - component: {fileID: 7064941540200729494}
   - component: {fileID: 7235656913311589646}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 9183485053607813103}
   - component: {fileID: 1911780578455139392}
   - component: {fileID: 740008664651740900}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -685,7 +685,7 @@ GameObject:
   - component: {fileID: 9183485055403949722}
   - component: {fileID: 1911780579882161461}
   - component: {fileID: 7890247028556566526}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -786,7 +786,7 @@ GameObject:
   - component: {fileID: 2578039883200862584}
   - component: {fileID: 6057253269675291556}
   - component: {fileID: 1621797700976386587}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}

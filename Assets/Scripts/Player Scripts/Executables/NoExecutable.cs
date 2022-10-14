@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class NoExecutable : Executable
 {
-    void Awake()
+    protected override void Awake()
     {
         Usable = false;
         Stats.Name = "None";

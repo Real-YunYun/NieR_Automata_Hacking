@@ -115,15 +115,21 @@ public class RoomDictionary
 [DefaultExecutionOrder(1)]
 public class LevelManager : MonoBehaviour
 {
+    [Header("Generation Parameters")]
+    private RoomDictionary Dictionary;
+
     [Header("Level Manager Parameters")]
-    private int GenerateSeed = 7688;
-    [SerializeField] private bool CanStart = true;
+    public int GenerateSeed = -1;
+    public bool CanStart = true;
     private GameObject StartingRoom;
 
     [Header("Importing/Overwriting Parameters")]
-    private RoomDictionary Dictionary;
-    [SerializeField] private TextAsset RoomInformationText;
-    [SerializeField] private int DictionaryIndex = -1;
+    public TextAsset RoomFile;
+    public int ImportingDictionaryIndex = -1;
+
+    [Header("Removing Parameters")]
+    public RoomType RemovingRoomType = RoomType.U;
+    public int RemovingDictionaryIndex = 0;
 
 
     static public void ImportRoom(TextAsset Asset)
@@ -136,7 +142,7 @@ public class LevelManager : MonoBehaviour
     {
         if (CanStart)
         {
-            Random.InitState(GenerateSeed);
+            if (GenerateSeed != -1 && GenerateSeed >= 0) Random.InitState(GenerateSeed);
             StartingRoom = Instantiate(RoomTemplate.StarterRoom, Vector3.zero, Quaternion.identity);
             StartingRoom.transform.parent = transform;
         }
@@ -145,17 +151,17 @@ public class LevelManager : MonoBehaviour
     public void ImportInformation()
     {
         // Importing to the last of the List
-        if (RoomInformationText == null)
+        if (RoomFile == null)
         {
             Debug.LogError("Uploaded file field is null");
             return;
         }
 
-        RoomInformation ImportingInformation = JsonUtility.FromJson<RoomInformation>(RoomInformationText.text);
+        RoomInformation ImportingInformation = JsonUtility.FromJson<RoomInformation>(RoomFile.text);
         RoomType ImportingRoomType = ImportingInformation.RoomType;
 
         // Appending to Lists
-        if (DictionaryIndex == -1)
+        if (ImportingDictionaryIndex == -1)
         {
             // D, DL, DLR, DR, L, LR, R, U, UD, UDL, UDLR, UDR, UL, ULR, UR
             if (ImportingRoomType == RoomType.D) Dictionary.D.Add(ImportingInformation);
@@ -174,9 +180,9 @@ public class LevelManager : MonoBehaviour
             else if (ImportingRoomType == RoomType.ULR) Dictionary.ULR.Add(ImportingInformation);
             else if (ImportingRoomType == RoomType.UR) Dictionary.UR.Add(ImportingInformation);
 
-            Debug.Log("Imported Room at " + ImportingRoomType + " [" + DictionaryIndex + "]");
+            Debug.Log("Imported Room at " + ImportingRoomType + " [" + ImportingDictionaryIndex + "]");
         }
-        else if (DictionaryIndex != -1 && DictionaryIndex >= 0) OverwriteInformation();
+        else if (ImportingDictionaryIndex != -1 && ImportingDictionaryIndex >= 0) OverwriteInformation();
         else Debug.LogError("Dictionary Index was Invalid");
 
         SaveDictionary();
@@ -184,35 +190,49 @@ public class LevelManager : MonoBehaviour
 
     public void OverwriteInformation()
     {
-        RoomInformation OverwritingInformation = JsonUtility.FromJson<RoomInformation>(RoomInformationText.ToString());
+        RoomInformation OverwritingInformation = JsonUtility.FromJson<RoomInformation>(RoomFile.ToString());
         RoomType ImportingRoomType = OverwritingInformation.RoomType;
 
-        if (DictionaryIndex > 0)
+        if (ImportingDictionaryIndex > 0)
         {
-            if (ImportingRoomType == RoomType.D) Dictionary.D.Insert(DictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.DL) Dictionary.DL.Insert(DictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.DLR) Dictionary.DLR.Insert(DictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.DR) Dictionary.DR.Insert(DictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.L) Dictionary.L.Insert(DictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.LR) Dictionary.LR.Insert(DictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.R) Dictionary.R.Insert(DictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.U) Dictionary.U.Insert(DictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.UD) Dictionary.UD.Insert(DictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.UDL) Dictionary.UDL.Insert(DictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.UDLR) Dictionary.UDLR.Insert(DictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.UDR) Dictionary.UDR.Insert(DictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.UL) Dictionary.UL.Insert(DictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.ULR) Dictionary.ULR.Insert(DictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.UR) Dictionary.UR.Insert(DictionaryIndex, OverwritingInformation);
+            if (ImportingRoomType == RoomType.D) Dictionary.D.Insert(ImportingDictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.DL) Dictionary.DL.Insert(ImportingDictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.DLR) Dictionary.DLR.Insert(ImportingDictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.DR) Dictionary.DR.Insert(ImportingDictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.L) Dictionary.L.Insert(ImportingDictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.LR) Dictionary.LR.Insert(ImportingDictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.R) Dictionary.R.Insert(ImportingDictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.U) Dictionary.U.Insert(ImportingDictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.UD) Dictionary.UD.Insert(ImportingDictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.UDL) Dictionary.UDL.Insert(ImportingDictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.UDLR) Dictionary.UDLR.Insert(ImportingDictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.UDR) Dictionary.UDR.Insert(ImportingDictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.UL) Dictionary.UL.Insert(ImportingDictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.ULR) Dictionary.ULR.Insert(ImportingDictionaryIndex, OverwritingInformation);
+            else if (ImportingRoomType == RoomType.UR) Dictionary.UR.Insert(ImportingDictionaryIndex, OverwritingInformation);
 
-            Debug.Log("Overwriten Room at " + ImportingRoomType + " [" + DictionaryIndex + "]");
+            Debug.Log("Overwriten Room at " + ImportingRoomType + " [" + ImportingDictionaryIndex + "]");
         }
         else Debug.LogError("Index for Dictionary was Invalid");
     }
 
-    public void RemoveInformation(List<RoomInformation> RemovingList)
+    public void RemoveInformation()
     {
-        RemovingList.RemoveAt(DictionaryIndex);
+        if (RemovingRoomType == RoomType.D) Dictionary.D.RemoveAt(RemovingDictionaryIndex);
+        else if (RemovingRoomType == RoomType.DL) Dictionary.DL.RemoveAt(RemovingDictionaryIndex);
+        else if (RemovingRoomType == RoomType.DLR) Dictionary.DLR.RemoveAt(RemovingDictionaryIndex);
+        else if (RemovingRoomType == RoomType.DR) Dictionary.DR.RemoveAt(RemovingDictionaryIndex);
+        else if (RemovingRoomType == RoomType.L) Dictionary.L.RemoveAt(RemovingDictionaryIndex);
+        else if (RemovingRoomType == RoomType.LR) Dictionary.LR.RemoveAt(RemovingDictionaryIndex);
+        else if (RemovingRoomType == RoomType.R) Dictionary.R.RemoveAt(RemovingDictionaryIndex);
+        else if (RemovingRoomType == RoomType.U) Dictionary.U.RemoveAt(RemovingDictionaryIndex);
+        else if (RemovingRoomType == RoomType.UD) Dictionary.UD.RemoveAt(RemovingDictionaryIndex);
+        else if (RemovingRoomType == RoomType.UDL) Dictionary.UDL.RemoveAt(RemovingDictionaryIndex);
+        else if (RemovingRoomType == RoomType.UDLR) Dictionary.UDLR.RemoveAt(RemovingDictionaryIndex);
+        else if (RemovingRoomType == RoomType.UDR) Dictionary.UDR.RemoveAt(RemovingDictionaryIndex);
+        else if (RemovingRoomType == RoomType.UL) Dictionary.UL.RemoveAt(RemovingDictionaryIndex);
+        else if (RemovingRoomType == RoomType.ULR) Dictionary.ULR.RemoveAt(RemovingDictionaryIndex);
+        else if (RemovingRoomType == RoomType.UR) Dictionary.UR.RemoveAt(RemovingDictionaryIndex);
     }
 
     public void SaveDictionary()

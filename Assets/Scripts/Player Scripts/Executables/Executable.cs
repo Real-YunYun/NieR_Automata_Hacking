@@ -24,7 +24,7 @@ public struct ExecutableStats
     }
 }
 
-[System.Serializable]
+[System.Serializable, DefaultExecutionOrder(2)]
 public abstract class Executable : MonoBehaviour
 {
     [Header("Executable Fields")]
@@ -35,6 +35,32 @@ public abstract class Executable : MonoBehaviour
     public ExecutableStats GetStats()
     {
         return Stats;
+    }
+
+    protected virtual void Awake()
+    {
+        Usable = false;
+        Stats.Name = "";
+        Stats.Description = "";
+        Stats.Sprite = "Player/UI Images/None";
+        Stats.Duration = 0f;
+        Stats.Cooldown = 0f;
+        Stats.Upkeep = 0f;
+        this.enabled = false;
+    }
+
+    protected virtual void Update()
+    {
+        if (!GameManager.Instance.IsGamePaused)
+        {
+            Stats.Upkeep += Time.deltaTime;
+            if (Stats.Upkeep >= Stats.Cooldown)
+            {
+                Stats.Upkeep = 0;
+                OnCooldown = false;
+                this.enabled = false;
+            }
+        }
     }
 
     public Sprite GetSprite(int slot)

@@ -7,7 +7,8 @@ public class EnemyProjectile : Projectile
 
     override protected void Awake()
     {
-        ProjectileSpeed = 250f;
+        ProjectileSpeed = 1000f;
+        LifeSpan = 5f;
         base.Awake();
     }
 

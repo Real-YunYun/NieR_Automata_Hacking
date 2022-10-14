@@ -8,7 +8,7 @@ public class Nodes : Executable
     private Transform TurretSpawn1;
     private Transform TurretSpawn2;
 
-    void Awake()
+    protected override void Awake()
     {
         Usable = true;
         Stats.Name = "Nodes";
@@ -37,16 +37,4 @@ public class Nodes : Executable
         Destroy(Turret1, Stats.Duration);
         Destroy(Turret2, Stats.Duration);
     }
-
-    void Update()
-    {
-        Stats.Upkeep += Time.deltaTime;
-        if (Stats.Upkeep >= Stats.Cooldown)
-        {
-            Stats.Upkeep = 0;
-            OnCooldown = false;
-            this.enabled = false;
-        }
-    }
-
 }

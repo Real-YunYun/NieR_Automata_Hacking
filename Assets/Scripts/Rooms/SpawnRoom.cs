@@ -52,33 +52,40 @@ public class SpawnRoom : MonoBehaviour
         else return null;
     }
 
+#pragma warning disable
     private async void Spawn()
     {
         if (!Spawned)
         {
+            GameObject TempGameObject;
+            GameObject TempBridge;
             if (RequiredDirection == GroundDirection.Up)
             {
-                Instantiate(RoomTemplate.Up, transform.position, Quaternion.identity);
-                Instantiate(RoomTemplate.BUD, transform.position + new Vector3(0, 0, 27.5f), Quaternion.identity);
+                TempGameObject = Instantiate(RoomTemplate.Up, transform.position, Quaternion.identity);
+                TempBridge = Instantiate(RoomTemplate.BUD, transform.position + new Vector3(0, 0, 27.5f), Quaternion.identity);
             } 
             else if (RequiredDirection == GroundDirection.Down)
             {
-                Instantiate(RoomTemplate.Down, transform.position, Quaternion.identity);
-                Instantiate(RoomTemplate.BUD, transform.position + new Vector3(0, 0, -27.5f), Quaternion.identity);
+                TempGameObject = Instantiate(RoomTemplate.Down, transform.position, Quaternion.identity);
+                TempBridge = Instantiate(RoomTemplate.BUD, transform.position + new Vector3(0, 0, -27.5f), Quaternion.identity);
             }
             else if (RequiredDirection == GroundDirection.Left)
             {
-                Instantiate(RoomTemplate.Left, transform.position, Quaternion.identity);
-                Instantiate(RoomTemplate.BLR, transform.position + new Vector3(-27.5f, 0, 0), Quaternion.identity);
+                TempGameObject = Instantiate(RoomTemplate.Left, transform.position, Quaternion.identity);
+                TempBridge = Instantiate(RoomTemplate.BLR, transform.position + new Vector3(-27.5f, 0, 0), Quaternion.identity);
             }
             else
             {
-                Instantiate(RoomTemplate.Right, transform.position, Quaternion.identity);
-                Instantiate(RoomTemplate.BLR, transform.position + new Vector3(27.5f, 0, 0), Quaternion.identity);
+                TempGameObject = Instantiate(RoomTemplate.Right, transform.position, Quaternion.identity);
+                TempBridge = Instantiate(RoomTemplate.BLR, transform.position + new Vector3(27.5f, 0, 0), Quaternion.identity);
             }
+
+            TempGameObject.transform.parent = GameObject.Find("Level Generation").transform;
+            TempBridge.transform.parent = TempGameObject.transform;
             Spawned = true;
         }
     }
+#pragma warning restore
 
     private void GenerateRoom(GameObject Room)
     {
@@ -91,14 +98,19 @@ public class SpawnRoom : MonoBehaviour
         {
             foreach (Block Block in Information.Blocks)
             {
-                // Reference to the GameObject we're trying to create
                 GameObject CreatedBlock;
 
-                if (Block.Type == BlockType.Destructible) CreatedBlock = Instantiate(RoomBlocks.Destructible, new Vector3(Block.Position.x, 1, Block.Position.y), Quaternion.identity);
-                else if (Block.Type == BlockType.Danger) CreatedBlock = Instantiate(RoomBlocks.Danger, new Vector3(Block.Position.x, 1, Block.Position.y), Quaternion.identity);
-                else CreatedBlock = Instantiate(RoomBlocks.Default, new Vector3(Block.Position.x, 1, Block.Position.y), Quaternion.identity);
+                if (Block.Type == BlockType.Destructible) CreatedBlock = Instantiate(RoomBlocks.Destructible, Layout.transform);
+                else if (Block.Type == BlockType.Danger) CreatedBlock = Instantiate(RoomBlocks.Danger, Layout.transform);
+                else if (Block.Type == BlockType.Default10x10) CreatedBlock = Instantiate(RoomBlocks.Default10x10, Layout.transform);
+                else if (Block.Type == BlockType.Default8x8) CreatedBlock = Instantiate(RoomBlocks.Default8x8, Layout.transform);
+                else if (Block.Type == BlockType.Default6x6) CreatedBlock = Instantiate(RoomBlocks.Default6x6, Layout.transform);
+                else if (Block.Type == BlockType.Default4x4) CreatedBlock = Instantiate(RoomBlocks.Default4x4, Layout.transform);
+                else CreatedBlock = Instantiate(RoomBlocks.Default, Layout.transform);
 
                 CreatedBlock.transform.parent = Layout.transform;
+                CreatedBlock.transform.position = new Vector3(Block.Position.x + Room.transform.position.x, 1, Block.Position.y + Room.transform.position.z);
+                CreatedBlock.transform.rotation = Quaternion.identity;
             }
         }
     }

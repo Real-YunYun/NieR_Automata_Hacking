@@ -3,11 +3,13 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Projectile : MonoBehaviour
 {
-    protected float ProjectileSpeed = 1000f;
+    protected float ProjectileSpeed = 2500f;
+    protected float LifeSpan = 5f;
     protected int Damage = 1;
     protected virtual void Awake()
     {
         gameObject.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, ProjectileSpeed));
+        Destroy(gameObject, LifeSpan);
     }
 
     virtual protected void OnTriggerEnter(Collider other)

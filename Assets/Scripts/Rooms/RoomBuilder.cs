@@ -5,7 +5,16 @@ using System.IO;
 using UnityEditor;
 
 [Serializable] public enum RoomType { U, UD, UDL, UDLR, UDR, UL, ULR, UR, D, DL, DLR, DR, L, LR, R }
-[Serializable] public enum BlockType : int { None = 0, Default = 1, Destructible = 2, Danger = 3 }
+[Serializable] public enum BlockType : int {
+    None, 
+    Default, 
+    Default4x4, 
+    Default6x6, 
+    Default8x8, 
+    Default10x10, 
+    Destructible, 
+    Danger 
+}
 
 [Serializable]
 public class Block
@@ -29,11 +38,15 @@ public static class RoomBlocks
 
     // Blocks
     static public GameObject Default { get { return Resources.Load<GameObject>(Path + "Default Cube"); } }
+    static public GameObject Default4x4 { get { return Resources.Load<GameObject>(Path + "Default Cube 4x4"); } }
+    static public GameObject Default6x6 { get { return Resources.Load<GameObject>(Path + "Default Cube 6x6"); } }
+    static public GameObject Default8x8 { get { return Resources.Load<GameObject>(Path + "Default Cube 8x8"); } }
+    static public GameObject Default10x10 { get { return Resources.Load<GameObject>(Path + "Default Cube 10x10"); } }
     static public GameObject Destructible { get { return Resources.Load<GameObject>(Path + "Destructible Cube"); } }
     static public GameObject Danger { get { return Resources.Load<GameObject>(Path + "Danger Cube"); } }
 }
 
-
+#if UNITY_EDITOR
 public class RoomBuilder : MonoBehaviour
 {
 
@@ -66,6 +79,11 @@ public class RoomBuilder : MonoBehaviour
                 else if (Layout.GetChild(i).gameObject.CompareTag("Indestructible"))
                 {
                     if (Layout.GetChild(i).gameObject.GetComponent<DangerCube>() != null) TempBlock.Type = BlockType.Danger;
+                    // Check Scale (Difference between Blocks
+                    else if (Layout.GetChild(i).gameObject.transform.localScale.x == 10) TempBlock.Type = BlockType.Default10x10;
+                    else if (Layout.GetChild(i).gameObject.transform.localScale.x == 8) TempBlock.Type = BlockType.Default8x8;
+                    else if (Layout.GetChild(i).gameObject.transform.localScale.x == 6) TempBlock.Type = BlockType.Default6x6;
+                    else if (Layout.GetChild(i).gameObject.transform.localScale.x == 4) TempBlock.Type = BlockType.Default4x4;
                     else TempBlock.Type = BlockType.Default;
                 }
                 else TempBlock.Type = BlockType.None;
@@ -126,11 +144,17 @@ public class RoomBuilder : MonoBehaviour
                 // Reference to the GameObject we're trying to create
                 GameObject CreatedBlock;
 
-                if (Block.Type == BlockType.Destructible) CreatedBlock = Instantiate(RoomBlocks.Destructible, new Vector3(Block.Position.x, 1, Block.Position.y), Quaternion.identity);
-                else if (Block.Type == BlockType.Danger) CreatedBlock = Instantiate(RoomBlocks.Danger, new Vector3(Block.Position.x, 1, Block.Position.y), Quaternion.identity);
-                else CreatedBlock = Instantiate(RoomBlocks.Default, new Vector3(Block.Position.x, 1, Block.Position.y), Quaternion.identity);
+                if (Block.Type == BlockType.Destructible) CreatedBlock = Instantiate(RoomBlocks.Destructible, Layout);
+                else if (Block.Type == BlockType.Danger) CreatedBlock = Instantiate(RoomBlocks.Danger, Layout);
+                else if (Block.Type == BlockType.Default10x10) CreatedBlock = Instantiate(RoomBlocks.Default10x10, Layout);
+                else if (Block.Type == BlockType.Default8x8) CreatedBlock = Instantiate(RoomBlocks.Default8x8, Layout);
+                else if (Block.Type == BlockType.Default6x6) CreatedBlock = Instantiate(RoomBlocks.Default6x6, Layout);
+                else if (Block.Type == BlockType.Default4x4) CreatedBlock = Instantiate(RoomBlocks.Default4x4, Layout);
+                else CreatedBlock = Instantiate(RoomBlocks.Default, Layout);
 
-                CreatedBlock.transform.parent = Layout;
+                CreatedBlock.transform.parent = Layout.transform;
+                CreatedBlock.transform.position = new Vector3(Block.Position.x, 1, Block.Position.y);
+                CreatedBlock.transform.rotation = Quaternion.identity;
             }
         }
         else return null;
@@ -138,3 +162,4 @@ public class RoomBuilder : MonoBehaviour
         return ImportedInformation;
     }
 }
+#endif

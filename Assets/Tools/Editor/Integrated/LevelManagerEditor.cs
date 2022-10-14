@@ -22,7 +22,7 @@ public class LevelManagerEditor : Editor
 
         if (GUILayout.Button("Remove Room from Dictionary"))
         {
-            
+            LevelManagerScript.RemoveInformation();
         }
 
         if (GUILayout.Button("Manually Save Data"))

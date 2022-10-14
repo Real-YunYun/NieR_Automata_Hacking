@@ -9,7 +9,7 @@ public class Rockets : Executable
     private GameObject RocketProjectile;
 
     // Start is called before the first frame update
-    void Awake()
+    protected override void Awake()
     {
         Usable = true;
         Stats.Name = "Rockets";
@@ -30,16 +30,6 @@ public class Rockets : Executable
         StartCoroutine("RocketCooldown");
     }
 
-    void Update()
-    {
-        Stats.Upkeep += Time.deltaTime;
-        if (Stats.Upkeep >= Stats.Cooldown)
-        {
-            Stats.Upkeep = 0;
-            OnCooldown = false;
-            this.enabled = false;
-        }
-    }
     IEnumerator RocketCooldown()
     {
         transform.GetComponent<PlayerController>().ChangeProjectile(RocketProjectile);

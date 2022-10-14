@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7968852933535755249}
   - component: {fileID: 4312776424571853317}
   - component: {fileID: 6560849636779986405}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7909048912711962465}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpawnPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 2616499935769343064}
   - component: {fileID: 9092503732809538630}
   - component: {fileID: 9141833680804688308}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 3924396573413618726}
   - component: {fileID: 2377756787713058469}
   - component: {fileID: 9168428821601224485}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 1246370958498626550}
   - component: {fileID: 1154726980072578062}
   - component: {fileID: 5598561479551727499}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -501,7 +501,7 @@ GameObject:
   - component: {fileID: 3075832641607667806}
   - component: {fileID: 5716691026022480881}
   - component: {fileID: 8820232997599852958}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -564,7 +564,7 @@ GameObject:
   - component: {fileID: 3081854638010603225}
   - component: {fileID: 2792594375014602844}
   - component: {fileID: 4413140455562407349}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Down
   m_TagString: Room Spawner
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: 2518478186819336149}
   - component: {fileID: 5275015729366094053}
   - component: {fileID: 2925819159395903108}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Right
   m_TagString: Room Spawner
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -717,7 +717,7 @@ GameObject:
   - component: {fileID: 5527040180221412899}
   - component: {fileID: 2975107543153552780}
   - component: {fileID: 6827033847556699975}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -779,7 +779,7 @@ GameObject:
   - component: {fileID: 5527040180642015062}
   - component: {fileID: 2975107543809019129}
   - component: {fileID: 4144647802000658013}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -889,7 +889,7 @@ GameObject:
   - component: {fileID: 5893523220888138542}
   - component: {fileID: 5893523220888138543}
   - component: {fileID: 6317285162985201079}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Border (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -992,7 +992,7 @@ GameObject:
   - component: {fileID: 8630095065495265306}
   - component: {fileID: 616127885991642125}
   - component: {fileID: 5567857770774348738}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Up
   m_TagString: Room Spawner
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}

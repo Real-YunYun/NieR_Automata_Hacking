@@ -7,10 +7,12 @@ using UnityEngine;
 public class MainCamera : MonoBehaviour
 {
     [Header("Camera Parameters")]
-    public Vector3 Posistion = new Vector3(0, 10, -8);
+    public Vector3 Position = new Vector3(0, 12, -10);
     public float SmoothTime = 0.25f;
     public Transform Player;
-    private Vector3 Velocity = Vector3.zero;
+    private float VelocityX = 0.0f;
+    private float VelocityY = 0.0f;
+    private float VelocityZ = 0.0f;
 
     private bool ExitingGame = false;
 
@@ -40,9 +42,19 @@ public class MainCamera : MonoBehaviour
     }
 
     // Update is called once per frame
+    void Update()
+    {
+        if (!GameManager.Instance.IsGamePaused)
+        {
+            float NewX = Mathf.SmoothDamp(transform.position.x, Player.position.x + Position.x, ref VelocityX, SmoothTime, Mathf.Infinity, Time.unscaledDeltaTime);
+            float NewY = Mathf.SmoothDamp(transform.position.y, Player.position.y + Position.y, ref VelocityY, SmoothTime, Mathf.Infinity, Time.unscaledDeltaTime);
+            float NewZ = Mathf.SmoothDamp(transform.position.z, Player.position.z + Position.z, ref VelocityZ, SmoothTime, Mathf.Infinity, Time.unscaledDeltaTime);
+            transform.position = new Vector3(NewX, NewY, NewZ);
+        }
+    }
+
     void LateUpdate()
     {
-        transform.position = Vector3.SmoothDamp(transform.position, Player.position + Posistion, ref Velocity, SmoothTime);
         HandleUI();
     }
 

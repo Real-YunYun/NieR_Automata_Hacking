@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
 #if UNITY_STANDALONE_WIN
-    Application.targetFrameRate = 165;
+    //Application.targetFrameRate = 165;
 #endif
         if (_instance) Destroy(gameObject);
         else
