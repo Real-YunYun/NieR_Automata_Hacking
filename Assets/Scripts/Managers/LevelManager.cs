@@ -110,7 +110,22 @@ public class RoomDictionary
     public List<RoomInformation> UL = new List<RoomInformation>();
     public List<RoomInformation> ULR = new List<RoomInformation>();
     public List<RoomInformation> UR = new List<RoomInformation>();    
-} 
+}
+
+public static class RoomBlocks
+{
+    [Header("Room Blocks Parameters")]
+    static private string Path = "Building Blocks/";
+
+    // Blocks
+    static public GameObject Default { get { return Resources.Load<GameObject>(Path + "Default Cube"); } }
+    static public GameObject Default4x4 { get { return Resources.Load<GameObject>(Path + "Default Cube 4x4"); } }
+    static public GameObject Default6x6 { get { return Resources.Load<GameObject>(Path + "Default Cube 6x6"); } }
+    static public GameObject Default8x8 { get { return Resources.Load<GameObject>(Path + "Default Cube 8x8"); } }
+    static public GameObject Default10x10 { get { return Resources.Load<GameObject>(Path + "Default Cube 10x10"); } }
+    static public GameObject Destructible { get { return Resources.Load<GameObject>(Path + "Destructible Cube"); } }
+    static public GameObject Danger { get { return Resources.Load<GameObject>(Path + "Danger Cube"); } }
+}
 
 [DefaultExecutionOrder(1)]
 public class LevelManager : MonoBehaviour

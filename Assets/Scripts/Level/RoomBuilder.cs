@@ -4,48 +4,6 @@ using System;
 using System.IO;
 using UnityEditor;
 
-[Serializable] public enum RoomType { U, UD, UDL, UDLR, UDR, UL, ULR, UR, D, DL, DLR, DR, L, LR, R }
-[Serializable] public enum BlockType : int {
-    None, 
-    Default, 
-    Default4x4, 
-    Default6x6, 
-    Default8x8, 
-    Default10x10, 
-    Destructible, 
-    Danger 
-}
-
-[Serializable]
-public class Block
-{
-    public BlockType Type = BlockType.None;
-    public Vector2Int Position = Vector2Int.zero;
-}
-
-[Serializable]
-public class RoomInformation
-{
-    public RoomType RoomType = RoomType.U;
-    public List<Block> Blocks = new List<Block>();
-    public List<Enemy> Enemies = new List<Enemy>();
-}
-
-public static class RoomBlocks
-{
-    [Header("Room Blocks Parameters")]
-    static private string Path = "Building Blocks/";
-
-    // Blocks
-    static public GameObject Default { get { return Resources.Load<GameObject>(Path + "Default Cube"); } }
-    static public GameObject Default4x4 { get { return Resources.Load<GameObject>(Path + "Default Cube 4x4"); } }
-    static public GameObject Default6x6 { get { return Resources.Load<GameObject>(Path + "Default Cube 6x6"); } }
-    static public GameObject Default8x8 { get { return Resources.Load<GameObject>(Path + "Default Cube 8x8"); } }
-    static public GameObject Default10x10 { get { return Resources.Load<GameObject>(Path + "Default Cube 10x10"); } }
-    static public GameObject Destructible { get { return Resources.Load<GameObject>(Path + "Destructible Cube"); } }
-    static public GameObject Danger { get { return Resources.Load<GameObject>(Path + "Danger Cube"); } }
-}
-
 #if UNITY_EDITOR
 public class RoomBuilder : MonoBehaviour
 {

@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 1388747554154276026}
   - component: {fileID: 8318466823592480547}
   - component: {fileID: 9040488244386616328}
-  m_Layer: 2
+  m_Layer: 31
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -15,6 +15,6 @@ public class EXE : Enemy
         Destroy(transform.parent.gameObject);
         Destroy(gameObject);
         Vector3 quaternion = new Vector3(90, 0, 0);
-        Instantiate(Resources.Load("General/Level Interact"), new Vector3(transform.position.x, transform.position.y - 0.99f, transform.position.z), Quaternion.Euler(quaternion));
+        Instantiate(Resources.Load("Level/Level Interact"), new Vector3(transform.position.x, transform.position.y - 0.99f, transform.position.z), Quaternion.Euler(quaternion));
     }
 }

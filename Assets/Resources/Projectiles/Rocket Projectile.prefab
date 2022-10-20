@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1206404090263812219}
   - component: {fileID: 1206404090263812216}
   - component: {fileID: 4742430464181420109}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Rocket Projectile
   m_TagString: Player Projectile
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1206404090263812217}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 2}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 336782560917604492}
   - component: {fileID: 9013565820836261225}
   - component: {fileID: 5307675306681358592}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,6 +537,10 @@ PrefabInstance:
     - target: {fileID: 3607896280079042863, guid: c788cc7df6ed8b847b3c88a65f49e304, type: 3}
       propertyPath: m_Name
       value: 'NULL Trail Particle '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3607896280079042863, guid: c788cc7df6ed8b847b3c88a65f49e304, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c788cc7df6ed8b847b3c88a65f49e304, type: 3}

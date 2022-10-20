@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Overclock : Executable
 {
-    [Header("Overclock Parameter")]
-    private GameObject AfterImage;
-    GameObject[] Trail = new GameObject[10];
-    private bool CreateImage = true;
-
     protected override void Awake()
     {
         Usable = true;
@@ -23,8 +18,6 @@ public class Overclock : Executable
 
     void OnEnable()
     {
-        AfterImage = Resources.Load<GameObject>("Player/Player After Image");
-
         OnCooldown = true;
         Time.timeScale = 0.1f;
         GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().MoveSpeed = 10f / Time.timeScale + 2f;
@@ -32,36 +25,11 @@ public class Overclock : Executable
         StartCoroutine("Cooldown");
     }
 
-    protected override void Update()
-    {
-        if (!GameManager.Instance.IsGamePaused)
-        {
-            Stats.Upkeep += Time.unscaledDeltaTime;
-            if (Stats.Upkeep >= Stats.Cooldown)
-            {
-                Stats.Upkeep = 0;
-                OnCooldown = false;
-                this.enabled = false;
-            }
-            if (Time.timeScale != 1 && CreateImage) StartCoroutine("CreateAfterImage");
-        }
-    }
-
     IEnumerator Cooldown()
     {
         yield return new WaitForSeconds(Stats.Duration * Time.timeScale);
-        CreateImage = false;
         Time.timeScale = 1f;
         GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().MoveSpeed = 10f;
         GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().FireRate = 8f;
-    }
-
-    IEnumerator CreateAfterImage()
-    {
-        GameObject TempObject = Instantiate(AfterImage, GameManager.Instance.PlayerInstance.transform.position, GameManager.Instance.PlayerInstance.transform.Find("Player Mesh").transform.rotation);
-        Destroy(TempObject, 0.1f);
-        CreateImage = false;
-        yield return new WaitForSecondsRealtime(0.1f);
-        CreateImage = true;
     }
 }

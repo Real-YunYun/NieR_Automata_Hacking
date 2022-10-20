@@ -10,13 +10,12 @@ public class Pointer : Enemy
     [SerializeField] private GameObject Projectile2;
     private bool FireRateDelay;
     private Transform OrbTransform;
-    private Transform[] Orbs;
+    private Transform[] Orbs = new Transform[4];
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         OrbTransform = transform.Find("Cylinder/Orbs");
-        Orbs = GetComponentsInChildren<Transform>();
+        for (int i = 0; i < OrbTransform.childCount; i++) Orbs[i] = OrbTransform.GetChild(i).transform;
     }
 
     // Update is called once per frame
@@ -29,10 +28,13 @@ public class Pointer : Enemy
     {
         if (!FireRateDelay)
         {
-            for (var i = 3; i < Orbs.Length; i++)
+            for (var i = 0; i < Orbs.Length - 1; i++)
             {
-                if (i % 2 == 0) Instantiate(Projectile1, Orbs[i].position, Orbs[i].rotation);
-                else Instantiate(Projectile2, Orbs[i].position, Orbs[i].rotation);
+                if (Orbs[i])
+                {
+                    if (i == 1 || i == 3) Instantiate(Projectile1, Orbs[i].position, Orbs[i].rotation);
+                    else Instantiate(Projectile2, Orbs[i].position, Orbs[i].rotation);
+                }
             }
             StartCoroutine("ShootingDelay");
         }

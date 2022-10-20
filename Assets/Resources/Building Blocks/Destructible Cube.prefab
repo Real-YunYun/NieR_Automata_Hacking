@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6356550610844476416}
   - component: {fileID: 1080365015863156774}
   - component: {fileID: 1667693027828139527}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Destructible Cube
   m_TagString: Destructible
   m_Icon: {fileID: 0}

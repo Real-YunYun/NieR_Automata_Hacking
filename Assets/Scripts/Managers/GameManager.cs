@@ -3,6 +3,19 @@ using System.IO;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Scripting;
+
+[Serializable]
+public class PlayerData
+{
+    public string CurrentDate = "\0";
+    public int MaxHealth = 50;
+    public int MaxEnergy = 25;
+    public int Bits = 0;
+
+    public int KillCount = 0;
+    public int RunCount = 0;
+}
 
 public enum GameState
 {
@@ -15,11 +28,9 @@ public enum GameState
     Exiting = 0b_0101_0110,
 }
 
+[DefaultExecutionOrder(-1)]
 public class GameManager : MonoBehaviour
 {
-    //In Game Components
-    public PlayerControls Controls;
-
     [Header("Game Manager Parameters")]
     public string CurrentLevel = "HUB";
     [SerializeField] private GameObject MainCamera;
@@ -52,16 +63,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-#if UNITY_STANDALONE_WIN
-    //Application.targetFrameRate = 165;
-#endif
         if (_instance) Destroy(gameObject);
         else
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        Controls = new PlayerControls();
+        GarbageCollector.incrementalTimeSliceNanoseconds = 250000;
     }
 
     // Update is called once per frame

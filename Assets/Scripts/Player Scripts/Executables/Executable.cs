@@ -53,7 +53,7 @@ public abstract class Executable : MonoBehaviour
     {
         if (!GameManager.Instance.IsGamePaused)
         {
-            Stats.Upkeep += Time.deltaTime;
+            Stats.Upkeep += Time.unscaledDeltaTime;
             if (Stats.Upkeep >= Stats.Cooldown)
             {
                 Stats.Upkeep = 0;

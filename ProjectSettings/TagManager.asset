@@ -22,6 +22,8 @@ TagManager:
   - UI
   - NavMeshBaker
   - Aiming
+  - Player
+  - Minimap Icon
   - 
   - 
   - 
@@ -43,9 +45,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - Debug
   m_SortingLayers:
   - name: Default
     uniqueID: 0

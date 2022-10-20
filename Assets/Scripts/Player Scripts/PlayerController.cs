@@ -24,6 +24,7 @@ public class PlayerController : Entity
     private readonly float Gravity = -9.8f;
     [HideInInspector] public bool GravityOn = true;
     private Vector3 Velocity = Vector3.zero;
+    private GameObject Minimap;
     //private GameObject AimingLine;
     #endregion
 
@@ -67,6 +68,7 @@ public class PlayerController : Entity
         PlayerBody = GameObject.Find("Player Mesh");
         ProjectileSpawn = transform.Find("Player Mesh/Projectile Spawn");
         shootingSource = transform.Find("Player Mesh/Projectile Spawn").GetComponent<AudioSource>();
+        Minimap = Instantiate(Resources.Load<GameObject>("Player/MiniMapCamera"));
     }
 
     void Start()

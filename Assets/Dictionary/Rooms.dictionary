@@ -2,6 +2,11 @@
   "D": [
     {
       "RoomType": 8,
+      "Blocks": [],
+      "Enemies": []
+    },
+    {
+      "RoomType": 8,
       "Blocks": [
         {
           "Type": 5,
@@ -146,4 +151,137 @@
       ],
       "Enemies": []
     }
-  ],"DL":[],"DLR":[],"DR":[],"L":[],"LR":[],"R":[],"U":[],"UD":[],"UDL":[],"UDLR":[],"UDR":[],"UL":[],"ULR":[],"UR":[]}
+  ],
+  "DL": [
+    {
+      "RoomType": 9,
+      "Blocks": [],
+      "Enemies": []
+    }
+  ],
+  "DLR": [
+    {
+      "RoomType": 10,
+      "Blocks": [],
+      "Enemies": []
+    }
+  ],
+  "DR": [
+    {
+      "RoomType": 11,
+      "Blocks": [],
+      "Enemies": []
+    }
+  ],
+  "L": [
+    {
+      "RoomType": 12,
+      "Blocks": [],
+      "Enemies": []
+    }
+  ],
+  "LR": [
+    {
+      "RoomType": 13,
+      "Blocks": [],
+      "Enemies": []
+    }
+  ],
+  "R": [
+    {
+      "RoomType": 14,
+      "Blocks": [],
+      "Enemies": []
+    }
+  ],
+  "U": [
+    {
+      "RoomType": 0,
+      "Blocks": [],
+      "Enemies": []
+    }
+  ],
+  "UD": [
+    {
+      "RoomType": 1,
+      "Blocks": [],
+      "Enemies": []
+    }
+  ],
+  "UDL": [
+    {
+      "RoomType": 2,
+      "Blocks": [],
+      "Enemies": []
+    }
+  ],
+  "UDLR": [
+    {
+      "RoomType": 3,
+      "Blocks": [],
+      "Enemies": []
+    },
+    {
+      "RoomType": 3,
+      "Blocks": [
+        {
+          "Type": 5,
+          "Position": {
+            "x": -12,
+            "y": -12
+          }
+        },
+        {
+          "Type": 5,
+          "Position": {
+            "x": 12,
+            "y": -12
+          }
+        },
+        {
+          "Type": 5,
+          "Position": {
+            "x": 12,
+            "y": 12
+          }
+        },
+        {
+          "Type": 5,
+          "Position": {
+            "x": -12,
+            "y": 12
+          }
+        }
+      ],
+      "Enemies": []
+    }
+  ],
+  "UDR": [
+    {
+      "RoomType": 4,
+      "Blocks": [],
+      "Enemies": []
+    }
+  ],
+  "UL": [
+    {
+      "RoomType": 5,
+      "Blocks": [],
+      "Enemies": []
+    }
+  ],
+  "ULR": [
+    {
+      "RoomType": 6,
+      "Blocks": [],
+      "Enemies": []
+    }
+  ],
+  "UR": [
+    {
+      "RoomType": 7,
+      "Blocks": [],
+      "Enemies": []
+    }
+  ]
+}

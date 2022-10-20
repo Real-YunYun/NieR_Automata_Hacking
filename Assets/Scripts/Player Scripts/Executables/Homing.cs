@@ -24,8 +24,8 @@ public class Homing : Executable
     {
         OnCooldown = true;
 
-        OriginalProjectile = Resources.Load<GameObject>("General/Player Projectile");
-        HomingProjectile = Resources.Load<GameObject>("General/Homing Projectile");
+        OriginalProjectile = Resources.Load<GameObject>("Projectiles/Player Projectile");
+        HomingProjectile = Resources.Load<GameObject>("Projectiles/Homing Projectile");
         StartCoroutine("HomingCooldown");
     }
 

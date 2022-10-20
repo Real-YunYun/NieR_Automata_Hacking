@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6189575667780842941}
   - component: {fileID: 5041834835041126176}
   - component: {fileID: 2671470643675787160}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Test Cube
   m_TagString: Indestructible
   m_Icon: {fileID: 0}
@@ -100,6 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f771f19a9fc8c5a40aab8733eec9a81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Invincible: 0
+  _health: 50
 --- !u!65 &2978246665100954722
 BoxCollider:
   m_ObjectHideFlags: 0
