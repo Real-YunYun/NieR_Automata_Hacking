@@ -117,10 +117,10 @@ public class PlayerController : Entity
 
                 #region Keyboard Input For Exectuables
                 //Abillities Keyboard Input
-                if (keyboard.digit1Key.isPressed && !Executables[0].OnCooldown && Executables[0].Usable) UseExecutable(0);
-                if (keyboard.digit2Key.isPressed && !Executables[1].OnCooldown && Executables[1].Usable) UseExecutable(1);
-                if (keyboard.digit3Key.isPressed && !Executables[2].OnCooldown && Executables[2].Usable) UseExecutable(2);
-                if (keyboard.digit4Key.isPressed && !Executables[3].OnCooldown && Executables[3].Usable) UseExecutable(3);
+                if (keyboard.digit1Key.wasPressedThisFrame && !Executables[0].OnCooldown && Executables[0].Usable) UseExecutable(0);
+                if (keyboard.digit2Key.wasPressedThisFrame && !Executables[1].OnCooldown && Executables[1].Usable) UseExecutable(1);
+                if (keyboard.digit3Key.wasPressedThisFrame && !Executables[2].OnCooldown && Executables[2].Usable) UseExecutable(2);
+                if (keyboard.digit4Key.wasPressedThisFrame && !Executables[3].OnCooldown && Executables[3].Usable) UseExecutable(3);
                 #endregion
 
                 #region Mouse Input
@@ -155,7 +155,6 @@ public class PlayerController : Entity
                 */
             }
             #endregion
-
 
             if (GravityOn) Controller.Move(new Vector3(0, Gravity * Time.deltaTime, 0));
         }

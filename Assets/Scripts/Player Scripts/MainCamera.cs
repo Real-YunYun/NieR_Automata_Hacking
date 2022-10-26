@@ -23,6 +23,7 @@ public class MainCamera : MonoBehaviour
     private GameObject UI_Load_Canvas;
     private GameObject UI_Exit_Canvas;
     private Image[] UI_Executables_Canvas = new Image[4];
+    private GameObject UI_Minimap;
     [HideInInspector] public GameObject InteractText;
 
     void Awake()
@@ -34,6 +35,7 @@ public class MainCamera : MonoBehaviour
         UI_Menu_Canvas = transform.Find("UI Canvas/Menu Canvas").gameObject;
         UI_Load_Canvas = transform.Find("UI Canvas/Menu Canvas/Load Game Canvas").gameObject;
         UI_Exit_Canvas = transform.Find("UI Canvas/Menu Canvas/Exit Canvas").gameObject;
+        UI_Minimap = transform.Find("UI Canvas/HUD Canvas/MiniMap").gameObject;
         for (int i = 0; i < UI_Executables_Canvas.Length; i++) UI_Executables_Canvas[i] = transform.Find("UI Canvas/HUD Canvas/Executables/Executable " + (i + 1)).GetComponent<Image>();
 
         //Events and Delegates
@@ -172,6 +174,11 @@ public class MainCamera : MonoBehaviour
     public void SaveGame()
     {
         GameManager.Instance.SaveGame();
+    }
+
+    public void HandleMinimap(bool state)
+    {
+        UI_Minimap.SetActive(state);
     }
 
     //Loading Handles

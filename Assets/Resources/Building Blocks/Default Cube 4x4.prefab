@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4729033149771395702}
   - component: {fileID: 8073693859183973218}
   - component: {fileID: 2600068800796158012}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Default Cube 4x4
   m_TagString: Indestructible
   m_Icon: {fileID: 0}

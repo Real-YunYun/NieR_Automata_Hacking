@@ -28,11 +28,11 @@ public class Pointer : Enemy
     {
         if (!FireRateDelay)
         {
-            for (var i = 0; i < Orbs.Length - 1; i++)
+            for (var i = 0; i < Orbs.Length; i++)
             {
                 if (Orbs[i])
                 {
-                    if (i == 1 || i == 3) Instantiate(Projectile1, Orbs[i].position, Orbs[i].rotation);
+                    if (i == 0 || i == 2) Instantiate(Projectile1, Orbs[i].position, Orbs[i].rotation);
                     else Instantiate(Projectile2, Orbs[i].position, Orbs[i].rotation);
                 }
             }

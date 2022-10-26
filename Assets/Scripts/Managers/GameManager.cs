@@ -69,7 +69,8 @@ public class GameManager : MonoBehaviour
             _instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        GarbageCollector.incrementalTimeSliceNanoseconds = 250000;
+        GarbageCollector.incrementalTimeSliceNanoseconds = 25000;
+        Application.targetFrameRate = 165;
     }
 
     // Update is called once per frame

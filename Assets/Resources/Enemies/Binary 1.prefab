@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7324357528883886416}
   - component: {fileID: 921965462215850797}
   - component: {fileID: 3541292831640490524}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2112385200710604518}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Projectile Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 8914192437487585021}
   - component: {fileID: 7041090270773499430}
   - component: {fileID: 1413338304224481043}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 6843990854003623586}
   - component: {fileID: 7250034698355740585}
   - component: {fileID: 6907098784018313584}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 7703544688001063669}
   - component: {fileID: 7417108363715820076}
   - component: {fileID: 8572017080934572295}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Binary 1
   m_TagString: Entity
   m_Icon: {fileID: 0}
@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 9006022374355540369}
   - component: {fileID: 4733770348790435366}
   - component: {fileID: 1565844987537690255}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pyramid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -649,7 +649,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6678418844439730514}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Components
   m_TagString: Untagged
   m_Icon: {fileID: 0}

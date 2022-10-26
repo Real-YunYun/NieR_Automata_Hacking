@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8771266884766623767}
   - component: {fileID: 3028068937327091745}
   - component: {fileID: 229320363010202629}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 5452731952160005910}
   - component: {fileID: 8066502141522476727}
   - component: {fileID: 3537253842796688251}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 8142690492785500584}
   - component: {fileID: 8142690492785500590}
   - component: {fileID: 8142690492785500591}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pyramid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 8142690492878304507}
   - component: {fileID: 8142690492878304505}
   - component: {fileID: 8142690492878304506}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Base Plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 8142690493156904096}
   - component: {fileID: 8142690493156904102}
   - component: {fileID: 8142690493156904103}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,7 +435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8142690493260669238}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,7 +469,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8142690493574750540}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Projectile Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -502,7 +502,7 @@ GameObject:
   - component: {fileID: 8142690493675382237}
   - component: {fileID: 8142690493675382211}
   - component: {fileID: 8142690493675382236}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Constant
   m_TagString: Entity
   m_Icon: {fileID: 0}
@@ -568,7 +568,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5934723174545415421}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Components
   m_TagString: Untagged
   m_Icon: {fileID: 0}

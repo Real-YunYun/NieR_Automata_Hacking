@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2039210746}
   - component: {fileID: 2039210749}
   - component: {fileID: 2039210748}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pointer1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 9053957721722226003}
   - component: {fileID: 5192494676584655932}
   - component: {fileID: 8858772693814619844}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 454914657459721852}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Orbs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6507207546477063396}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Components
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 7879720053116614375}
   - component: {fileID: 1677323812972993317}
   - component: {fileID: 4861134750246666315}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pointer2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 7741247078668445507}
   - component: {fileID: 7741247078668445510}
   - component: {fileID: 7741247078668445509}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 7741247079408220453}
   - component: {fileID: 3948417390616453243}
   - component: {fileID: 7741247079408220452}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pointer 0
   m_TagString: Entity
   m_Icon: {fileID: 0}
@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 5211916017423074241}
   - component: {fileID: 418794009827937013}
   - component: {fileID: 3959982616297265121}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

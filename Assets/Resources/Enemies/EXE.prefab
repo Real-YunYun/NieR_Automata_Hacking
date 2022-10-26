@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7355659850751585728}
   - component: {fileID: 7355659850751585735}
   - component: {fileID: 7355659850751585734}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shield
   m_TagString: Indestructible
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 7355659851928208818}
   - component: {fileID: 7355659851928208817}
   - component: {fileID: 1874074771129586949}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sphere
   m_TagString: Entity
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7355659852577145036}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EXE
   m_TagString: Untagged
   m_Icon: {fileID: 0}

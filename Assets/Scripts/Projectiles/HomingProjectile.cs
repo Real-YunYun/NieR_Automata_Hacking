@@ -12,7 +12,7 @@ public class HomingProjectile : Projectile
     private bool TargetAquired = false;
     private Transform TargetTransform;
 
-    void Update()
+    void FixedUpdate()
     {
         if (!TargetAquired) Track();
         if (TargetAquired && TargetTransform) EvaluateRadialForce();
@@ -30,7 +30,7 @@ public class HomingProjectile : Projectile
 
     private void Track()
     {
-        Collider[] Colliders = Physics.OverlapSphere(transform.position, TrackingRadius);
+        Collider[] Colliders = Physics.OverlapSphere(transform.position, TrackingRadius, 0b_0100_0000_0000);
 
         foreach (Collider collider in Colliders)
         {

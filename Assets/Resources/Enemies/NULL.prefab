@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1825998501019621343}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Components
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8414637782633587916}
   - component: {fileID: 1709438699890778585}
   - component: {fileID: 769000352926174946}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 7748990404378012080}
   - component: {fileID: 758141307955804775}
   - component: {fileID: 1324376401286105988}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 6980814868325675226}
   - component: {fileID: 6980814868325675221}
   - component: {fileID: 6980814868325675220}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: NULL
   m_TagString: Entity
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 6980814869066202632}
   - component: {fileID: 6980814869066202629}
   - component: {fileID: 6980814869066202634}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 6980814870247506932}
   - component: {fileID: 6980814870247506929}
   - component: {fileID: 6980814870247506934}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,6 +537,10 @@ PrefabInstance:
     - target: {fileID: 3607896280079042863, guid: c788cc7df6ed8b847b3c88a65f49e304, type: 3}
       propertyPath: m_Name
       value: 'NULL Trail Particle '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3607896280079042863, guid: c788cc7df6ed8b847b3c88a65f49e304, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c788cc7df6ed8b847b3c88a65f49e304, type: 3}

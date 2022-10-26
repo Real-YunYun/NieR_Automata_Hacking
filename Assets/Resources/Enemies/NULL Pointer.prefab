@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6182695477612686087}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Components
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3398027300337907403}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: NULL Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 7741247078668445507}
   - component: {fileID: 7741247078668445510}
   - component: {fileID: 7741247078668445509}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 7741247079408220453}
   - component: {fileID: 5142658764604562122}
   - component: {fileID: 7741247079408220452}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: NULL Pointer
   m_TagString: Entity
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 7910338290584917615}
   - component: {fileID: 7394858172202045359}
   - component: {fileID: 2466550452496521175}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 2000235234482967333}
   - component: {fileID: 522709824681067490}
   - component: {fileID: 7307527620426948820}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -400,7 +400,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8048448059151933095}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rotator
   m_TagString: Untagged
   m_Icon: {fileID: 0}

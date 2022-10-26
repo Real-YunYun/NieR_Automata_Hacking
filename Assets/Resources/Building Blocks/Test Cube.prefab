@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6189575667780842941}
   - component: {fileID: 5041834835041126176}
   - component: {fileID: 2671470643675787160}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Test Cube
   m_TagString: Indestructible
   m_Icon: {fileID: 0}

@@ -16,6 +16,7 @@ public class MinimapManager : MonoBehaviour
     private float VelocityZ = 0.0f;
 
     [Header("Minimap Parameters")]
+    private bool ActiveMinimap = true;
     private Camera MiniMapCamera;
     private float[] ZoomLevels = { 15f, 25f, 40f, 60f, 75f, 100f };
     private int ZoomLevel = 1;
@@ -38,8 +39,11 @@ public class MinimapManager : MonoBehaviour
 
     void Update()
     {
-        if(Keyboard.current.equalsKey.wasPressedThisFrame) ZoomIn = true;
-        if(Keyboard.current.minusKey.wasPressedThisFrame) ZoomOut = true;
+        Keyboard keyboard = Keyboard.current;
+
+        if (keyboard.tabKey.wasPressedThisFrame) UpdateMinimap();
+        if (keyboard.equalsKey.wasPressedThisFrame) ZoomIn = true;
+        if (keyboard.minusKey.wasPressedThisFrame) ZoomOut = true;
         MiniMapCamera.orthographicSize = Mathf.SmoothDamp(MiniMapCamera.orthographicSize, ZoomLevels[ZoomLevel], ref VelocityZoom, SmoothTime, Mathf.Infinity, Time.deltaTime);
     }
 
@@ -80,6 +84,26 @@ public class MinimapManager : MonoBehaviour
                 else transform.rotation = Quaternion.Euler(90, Player.rotation.eulerAngles.y, 0);
             }
             else transform.rotation = Quaternion.Euler(90, 0, 0);
+        }
+    }
+
+    void UpdateMinimap()
+    {
+        Debug.Log(ActiveMinimap);
+        // Turning off Minimap
+        if (ActiveMinimap)
+        {
+            GetComponent<Camera>().enabled = false;
+            ActiveMinimap = false;
+            GameManager.Instance.MainCameraInstance.GetComponent<MainCamera>().HandleMinimap(false);
+        }
+
+        // Turning on Minimap
+        else if (!ActiveMinimap)
+        {
+            GetComponent<Camera>().enabled = true;
+            ActiveMinimap = true;
+            GameManager.Instance.MainCameraInstance.GetComponent<MainCamera>().HandleMinimap(true);
         }
     }
 }
