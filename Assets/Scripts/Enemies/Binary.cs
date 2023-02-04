@@ -32,7 +32,7 @@ public class Binary : Enemy
     {
         if (transform.parent)
         {
-            Instantiate(base.DeathParticle, gameObject.transform.position, gameObject.transform.rotation);
+            Instantiate(base.DeathParticle, gameObject.transform.position, transform.rotation);
             Destroy(gameObject);
         }
         else base.Death();

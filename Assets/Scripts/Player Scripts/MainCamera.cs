@@ -156,7 +156,7 @@ public class MainCamera : MonoBehaviour
 
     private void UpdateAbility(int slot)
     {
-        ExecutableStats stats = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[slot].GetStats();
+        Executables.ExecutableStats stats = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[slot].GetStats();
         UI_Executables_Canvas[slot].transform.Find("Fill").GetComponent<Image>().fillAmount = 1 - (stats.Upkeep / stats.Cooldown);
     }
 

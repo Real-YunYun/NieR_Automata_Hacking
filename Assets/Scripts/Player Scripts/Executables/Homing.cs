@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Executables;
 
 public class Homing : Executable
 {
-    [Header("Abilities Parameters")]
-    private GameObject OriginalProjectile;
+    [Header("Abilities Parameters")] private GameObject OriginalProjectile;
     private GameObject HomingProjectile;
 
     protected override void Awake()

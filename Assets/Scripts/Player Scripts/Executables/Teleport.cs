@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using Executables;
 
 public class Teleport : Executable
 {
@@ -28,7 +27,8 @@ public class Teleport : Executable
             {
                 transform.GetComponent<PlayerController>().GravityOn = false;
                 raycastHit.point = new Vector3(raycastHit.point.x, raycastHit.point.y + 1.5f, raycastHit.point.z);
-                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, raycastHit.point, Vector3.Distance(raycastHit.point, gameObject.transform.position));
+                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, raycastHit.point,
+                    Vector3.Distance(raycastHit.point, gameObject.transform.position));
                 StartCoroutine("TeleportCooldown");
             }
         }

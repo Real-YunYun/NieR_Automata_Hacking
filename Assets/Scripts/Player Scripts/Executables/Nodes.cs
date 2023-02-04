@@ -1,10 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI;
+using Executables;
 
 public class Nodes : Executable
 {
-    [Header("Abilities Parameters")]
-    private GameObject TurretPrefab;
+    [Header("Abilities Parameters")] private GameObject TurretPrefab;
     private Transform TurretSpawn1;
     private Transform TurretSpawn2;
 

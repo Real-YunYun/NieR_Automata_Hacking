@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using Executables;
 
 public class Firewall : Executable
 {
-    [Header("Abilities Parameters")]
-    private GameObject FirewallPrefab;
+    [Header("Abilities Parameters")] private GameObject FirewallPrefab;
 
     protected override void Awake()
     {

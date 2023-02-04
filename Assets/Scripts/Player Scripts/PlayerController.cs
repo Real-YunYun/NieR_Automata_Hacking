@@ -2,6 +2,8 @@ using System.Collections;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Executables;
+using Threads;
 
 public class PlayerController : Entity
 {
@@ -60,14 +62,14 @@ public class PlayerController : Entity
     #endregion
 
     [Header("Audio Clips")]
-    private AudioSource shootingSource;
+    private AudioSource ShootingSource;
 
     void Awake()
     {
         Controller = GetComponent<CharacterController>();
         PlayerBody = GameObject.Find("Player Mesh");
         ProjectileSpawn = transform.Find("Player Mesh/Projectile Spawn");
-        shootingSource = transform.Find("Player Mesh/Projectile Spawn").GetComponent<AudioSource>();
+        ShootingSource = transform.Find("Player Mesh/Projectile Spawn").GetComponent<AudioSource>();
         Minimap = Instantiate(Resources.Load<GameObject>("Player/MiniMapCamera"));
     }
 
@@ -77,7 +79,7 @@ public class PlayerController : Entity
 
         //Adding Abilities
         AddExecutable<Nodes>(1);
-        AddExecutable<Homing>(2);
+        AddExecutable<Firewall>(2);
         AddExecutable<Teleport>(3);
         AddExecutable<Overclock>(4);
     }
@@ -174,7 +176,7 @@ public class PlayerController : Entity
         {
             StartCoroutine("ShootingDelay");
             Instantiate(ProjectilePrefab, ProjectileSpawn.position, ProjectileSpawn.rotation);
-            shootingSource.Play();
+            ShootingSource.Play();
             if (OnFireEvent != null) OnFireEvent();
         }
     }
