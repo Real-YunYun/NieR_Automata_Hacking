@@ -8,17 +8,15 @@ namespace Executables {
     {
         public string Name;
         public string Description;
-        public int Slot;
         public string Sprite;
         public float Duration;
         public float Cooldown;
         public float Upkeep;
 
-        public ExecutableStats(string name = "None", string description = "None", int slot = 0, string sprite = "Player/UI Images/None", float duration = 0f, float cooldown = 0f, float upkeep = 0f)
+        public ExecutableStats(string name = "None", string description = "None", string sprite = "Player/UI Images/None", float duration = 0f, float cooldown = 0f, float upkeep = 0f)
         {
             Name = name;
             Description = description;
-            Slot = slot;
             Sprite = sprite;
             Duration = duration;
             Cooldown = cooldown;
@@ -64,7 +62,7 @@ namespace Executables {
             this.enabled = false;
         }
 
-        public Sprite GetSprite(int slot)
+        public Sprite GetSprite()
         {
             return Resources.Load<Sprite>(Stats.Sprite);
         }

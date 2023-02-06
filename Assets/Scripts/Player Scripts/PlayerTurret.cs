@@ -12,7 +12,7 @@ public class PlayerTurret : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnFireEvent += OnFire;
+        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnFire += OnFire;
         //Optional Detail perhaps an upgrade?
         ProjectilePrefab = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().GetProjectile();
     }
@@ -44,6 +44,6 @@ public class PlayerTurret : MonoBehaviour
 
     void OnDisable()
     {
-        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnFireEvent -= OnFire;
+        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnFire -= OnFire;
     }
 }

@@ -39,8 +39,8 @@ public class MainCamera : MonoBehaviour
         for (int i = 0; i < UI_Executables_Canvas.Length; i++) UI_Executables_Canvas[i] = transform.Find("UI Canvas/HUD Canvas/Executables/Executable " + (i + 1)).GetComponent<Image>();
 
         //Events and Delegates
-        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnExecutableUsedEvent += OnAbilityUsed;
-        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnExecutableAddedEvent += OnAbilityAdded;
+        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnExecutableUsed += i => OnExecutableUsed(i);
+        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnExecutableAdded += i => OnExecutableAdded(i);
     }
 
     // Update is called once per frame
@@ -134,10 +134,10 @@ public class MainCamera : MonoBehaviour
             else UI_HUD_Canvas.transform.Find("Bounty").gameObject.SetActive(false);
 
             //Handling Abilities 
-            if (GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[0].OnCooldown) UpdateAbility(0);
-            if (GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[1].OnCooldown) UpdateAbility(1);
-            if (GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[2].OnCooldown) UpdateAbility(2);
-            if (GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[3].OnCooldown) UpdateAbility(3);
+            if (GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[0].OnCooldown) UpdateExecutable(0);
+            if (GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[1].OnCooldown) UpdateExecutable(1);
+            if (GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[2].OnCooldown) UpdateExecutable(2);
+            if (GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[3].OnCooldown) UpdateExecutable(3);
 
         }
         if (GameManager.Instance.CurrentGameState == GameState.Exiting)
@@ -149,20 +149,20 @@ public class MainCamera : MonoBehaviour
         }
     }
 
-    private void OnAbilityUsed(int slot)
+    private void OnExecutableUsed(int slot)
     {
         UI_Executables_Canvas[slot].transform.Find("Fill").GetComponent<Image>().fillAmount = 1;
     }
 
-    private void UpdateAbility(int slot)
+    private void UpdateExecutable(int slot)
     {
         Executables.ExecutableStats stats = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[slot].GetStats();
         UI_Executables_Canvas[slot].transform.Find("Fill").GetComponent<Image>().fillAmount = 1 - (stats.Upkeep / stats.Cooldown);
     }
 
-    public void OnAbilityAdded(int slot)
+    private void OnExecutableAdded(int slot)
     {
-        UI_Executables_Canvas[slot].sprite = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[slot].GetSprite(slot);
+        UI_Executables_Canvas[slot].sprite = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[slot].GetSprite();
     }
 
     public void Resume()

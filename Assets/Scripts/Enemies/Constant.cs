@@ -9,7 +9,9 @@ public class Constant : Enemy
 
 	void Start()
 	{
+		base.Start();
 		
+		AddThread<PointerOrbital>();
 	}
 
 	void Update() 

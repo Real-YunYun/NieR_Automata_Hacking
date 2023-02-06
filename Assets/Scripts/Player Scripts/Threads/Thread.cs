@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Threads
@@ -11,6 +12,7 @@ namespace Threads
         Constant,       // Constantly Active
     }
 
+    [Serializable]
     public struct ThreadStats
     {
         public string Name;
@@ -31,24 +33,30 @@ namespace Threads
         }
     }
 
-    [System.Serializable, DefaultExecutionOrder(2)]
+    [Serializable, DefaultExecutionOrder(2)]
     public abstract class Thread : MonoBehaviour
     {
-        [Header("Thread Fields")]
-        protected ThreadStats Stats;
-        protected EThreadBehaviour Type;
+        [Header("Thread Parameters")]
+        [SerializeField] protected ThreadStats Stats;
+        protected EThreadBehaviour Type = EThreadBehaviour.EventBased;
 
+        /// Event Based Parameters
+        public delegate void OnThreadStartedDelegate();
+        public delegate void OnThreadEndedDelegate();
+        public event OnThreadStartedDelegate OnThreadStarted;
+        public event OnThreadEndedDelegate OnThreadEnded;
+ 
+        
         public ThreadStats GetStats() { return Stats; }
         
         protected virtual void Awake()
         {
-            Stats.Name = "";
+            Stats.Name = "None";
             Stats.Description = "";
             Stats.Sprite = "Player/UI Images/None";
             Stats.Duration = 0f;
             Stats.Cooldown = 0f;
             Stats.Upkeep = 0f;
-            this.enabled = false;
         }
     }
 }
