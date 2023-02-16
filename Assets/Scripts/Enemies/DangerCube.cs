@@ -7,9 +7,14 @@ public class DangerCube : Entity
         Invincible = true;
     }
 
+    protected override void Start()
+    {
+        
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        // Player Touched Entity 
+        // Cube Touched Entity 
         if (other.gameObject.CompareTag("Entity")) other.gameObject.GetComponent<Entity>().TakeDamage();
 
         //Projectile Hits Cube

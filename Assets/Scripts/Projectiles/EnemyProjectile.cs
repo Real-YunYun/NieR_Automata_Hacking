@@ -1,4 +1,5 @@
 using UnityEngine;
+using Projectiles;
 
 public class EnemyProjectile : Projectile
 {
@@ -12,7 +13,13 @@ public class EnemyProjectile : Projectile
         base.Awake();
     }
 
-    override protected void OnTriggerEnter(Collider other)
+    protected override void OnEnable()
+    {
+        if (Indestructible) GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/M_Enemy_Projectile1");
+        else GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/M_Enemy_Projectile2");
+    }
+
+    protected new void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player Projectile") && !Indestructible)
         {

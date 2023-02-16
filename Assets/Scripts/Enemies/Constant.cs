@@ -7,15 +7,10 @@ public class Constant : Enemy
 	[Header("Constant Parameters")]
 	public int random;
 
-	void Start()
+	protected override void Start()
 	{
 		base.Start();
 		
 		AddThread<PointerOrbital>();
-	}
-
-	void Update() 
-	{ 
-
 	}
 }

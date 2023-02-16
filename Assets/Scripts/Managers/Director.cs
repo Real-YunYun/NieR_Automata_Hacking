@@ -253,7 +253,7 @@ public class Director : MonoBehaviour
             BuildingTime -= SpawningQueue.Peek().GetComponent<Enemy>().Stats.BuildTime;
             RandomCoordinate.y = hit.point.y + 1;
             var entity = Instantiate(SpawningQueue.Peek(), RandomCoordinate, Quaternion.identity);
-            entity.GetComponent<Enemy>().OnDeathEvent += OnEntityDeath;
+            entity.GetComponent<Enemy>().OnEnemyDeath += OnEntityDeath;
             SpawnedEntities.Add(entity);
             SpawningQueue.Dequeue();
         }

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 679f396db09cbc04480f820bce30fde4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Owner: {instanceID: 0}
+  - OrbitingPrefab: {fileID: 2978246665100954725, guid: dc7400dca1e43a5418604fb474c079cf, type: 3}
+  - Collider: {fileID: 9026361353150559130, guid: dc7400dca1e43a5418604fb474c079cf, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

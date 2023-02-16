@@ -9,6 +9,10 @@ public class Overclock : Executable
     GameObject[] Trail = new GameObject[10];
     private bool CreateImage = true;
 
+    [Header("Previous Parameters")] 
+    private float pre_MoveSpeed = 0.0f;
+    private float pre_FireRate = 0.0f;
+
     protected override void Awake()
     {
         Usable = true;
@@ -28,8 +32,11 @@ public class Overclock : Executable
 
         OnCooldown = true;
         Time.timeScale = 0.1f;
+        pre_MoveSpeed = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().MoveSpeed;
+        pre_FireRate = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().FireRate;
+        
         GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().MoveSpeed = 10f / Time.timeScale + 2f;
-        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().FireRate = 8f / Time.timeScale;
+        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().FireRate = 10f / Time.timeScale;
         StartCoroutine("Cooldown");
     }
 
@@ -54,8 +61,8 @@ public class Overclock : Executable
         yield return new WaitForSeconds(Stats.Duration * Time.timeScale);
         CreateImage = false;
         Time.timeScale = 1f;
-        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().MoveSpeed = 10f;
-        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().FireRate = 8f;
+        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().MoveSpeed = pre_MoveSpeed;
+        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().FireRate = pre_FireRate;
     }
 
     IEnumerator CreateAfterImage()

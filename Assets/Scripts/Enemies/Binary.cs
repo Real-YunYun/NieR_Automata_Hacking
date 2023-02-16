@@ -6,14 +6,13 @@ using UnityEngine.AI;
 public class Binary : Enemy
 {
     [Header("Biary Parameters")]
-    [SerializeField] private GameObject ProjectilePrefab;
-    private Transform ProjectileSpawn;
-    private bool FireRateDelay = false;
     private NavMeshAgent Agent;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+        
         Agent = GetComponent<NavMeshAgent>();
         ProjectileSpawn = transform.Find("Projectile Spawn");
     }
@@ -36,15 +35,5 @@ public class Binary : Enemy
             Destroy(gameObject);
         }
         else base.Death();
-    }
-
-    private void Fire() { if (!FireRateDelay) StartCoroutine("Delay"); }
-
-    IEnumerator Delay()
-    {
-        FireRateDelay = true;
-        Instantiate(ProjectilePrefab, ProjectileSpawn.position, ProjectileSpawn.rotation);
-        yield return new WaitForSeconds(1f);
-        FireRateDelay = false;
     }
 }

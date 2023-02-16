@@ -5,7 +5,6 @@ using UnityEngine;
 public class Pointer : Enemy
 {
     [Header("Pointer Parameters")]
-    [SerializeField] private new float FireRate = 2f;
     [SerializeField] private GameObject Projectile1;
     [SerializeField] private GameObject Projectile2;
     private Transform OrbTransform;
@@ -32,9 +31,10 @@ public class Pointer : Enemy
             {
                 if (Orbs[i])
                 {
+                    Execute_OnFireStarted();
                     if (i == 0 || i == 2) Instantiate(Projectile1, Orbs[i].position, Orbs[i].rotation);
                     else Instantiate(Projectile2, Orbs[i].position, Orbs[i].rotation);
-                    Execute_OnFire();
+                    Execute_OnFireEnded(null);
                 }
             }
             StartCoroutine(ShootingDelay());

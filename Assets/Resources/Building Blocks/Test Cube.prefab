@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6189575667780842941}
   - component: {fileID: 5041834835041126176}
   - component: {fileID: 2671470643675787160}
+  - component: {fileID: 9026361353150559130}
   m_Layer: 0
   m_Name: Test Cube
   m_TagString: Indestructible
@@ -102,6 +103,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Invincible: 0
   _health: 50
+  _energy: 25
+  MoveSpeed: 10
+  FireRate: 8
+  CanMove: 1
+  CanShoot: 1
+  CanExecute: 1
+  ProjectileSpawn: {fileID: 0}
+  ProjectilePrefab: {fileID: 0}
+  ShootingSource: {fileID: 0}
+  Executables:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Threads: []
 --- !u!65 &2978246665100954722
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -159,4 +175,17 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &9026361353150559130
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2978246665100954725}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}

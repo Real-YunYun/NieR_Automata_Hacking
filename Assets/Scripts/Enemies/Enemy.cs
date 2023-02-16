@@ -21,7 +21,7 @@ public class Enemy : Entity
 
     //Delegates and Events
     public delegate void OnDeathDelegate(GameObject entity);
-    public event OnDeathDelegate OnDeathEvent;
+    public event OnDeathDelegate OnEnemyDeath;
 
     public override void TakeDamage(int value = 1)
     {
@@ -34,7 +34,7 @@ public class Enemy : Entity
 
     public override void Death()
     {
-        if (OnDeathEvent != null) OnDeathEvent(gameObject);
+        if (OnEnemyDeath != null) OnEnemyDeath(gameObject);
         GameManager.Instance.Data.Bits += (int)Stats.BuildCost;
         Instantiate(DeathParticle, transform.position, DeathParticle.transform.rotation);
         Destroy(gameObject);

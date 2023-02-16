@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Projectiles;
 
 public class PlayerController : Entity
 {
@@ -37,6 +38,9 @@ public class PlayerController : Entity
         AddExecutable<Firewall>(2);
         AddExecutable<Teleport>(3);
         AddExecutable<Overclock>(4);
+        
+        AddThread<HomingThread>();
+        AddThread<TrackingMissle>();
     }
     
     // Update is called once per frame
@@ -98,9 +102,11 @@ public class PlayerController : Entity
         if (!FireRateDelay)
         {
             StartCoroutine(ShootingDelay());
-            Instantiate(ProjectilePrefab, ProjectileSpawn.position, ProjectileSpawn.rotation);
+            Execute_OnFireStarted();
+            Projectile TempProjectile = Instantiate(ProjectilePrefab, ProjectileSpawn.position, ProjectileSpawn.rotation).GetComponent<Projectile>();
+            TempProjectile.InitResult(this);
             if (ShootingSource) ShootingSource.Play();
-            Execute_OnFire();
+            Execute_OnFireEnded(TempProjectile);
         }
     }
 

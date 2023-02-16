@@ -11,6 +11,8 @@ namespace Threads
         Instantaneous,  // Movement speed increase, Health increase, etc
         Constant,       // Constantly Active
     }
+    
+    // Make a Struct or something to help things scale off of other threads! such as durations, effectiveness, etc!
 
     [Serializable]
     public struct ThreadStats
@@ -36,16 +38,24 @@ namespace Threads
     [Serializable, DefaultExecutionOrder(2)]
     public abstract class Thread : MonoBehaviour
     {
+        protected Entity Owner => transform.GetComponent<Entity>();
+        
         [Header("Thread Parameters")]
-        [SerializeField] protected ThreadStats Stats;
         protected EThreadBehaviour Type = EThreadBehaviour.EventBased;
+        [SerializeField] protected ThreadStats Stats;
 
-        /// Event Based Parameters
+        #region Event Based Parameters
+        
         public delegate void OnThreadStartedDelegate();
         public delegate void OnThreadEndedDelegate();
+        
         public event OnThreadStartedDelegate OnThreadStarted;
         public event OnThreadEndedDelegate OnThreadEnded;
- 
+
+        protected void Execute_OnThreadStarted() { if (OnThreadStarted != null) OnThreadStarted(); }
+        protected void Execute_OnThreadEnded() { if (OnThreadEnded != null) OnThreadEnded(); }
+
+        #endregion
         
         public ThreadStats GetStats() { return Stats; }
         

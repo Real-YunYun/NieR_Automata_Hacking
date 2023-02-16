@@ -5,10 +5,8 @@ using UnityEngine;
 public class NULLPointer : Enemy
 {
     [Header("Pointer Parameters")]
-    [SerializeField] private float FireRate = 0.1f;
     private GameObject NULL;
     private Transform Player;
-    private bool FireRateDelay;
     private Transform Rotator;
     private Transform SpawnTransform;
 
@@ -19,8 +17,9 @@ public class NULLPointer : Enemy
         SpawnTransform = transform.Find("Rotator/NULL Spawn Point");
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         Player = GameManager.Instance.PlayerInstance.transform;
     }
 
@@ -31,19 +30,12 @@ public class NULLPointer : Enemy
         Fire();
     }
 
-    private void Fire()
+    protected override void Fire()
     {
         if (!FireRateDelay)
         {
             Instantiate(NULL, SpawnTransform.position, SpawnTransform.rotation);
-            StartCoroutine("ShootingDelay");
+            StartCoroutine(ShootingDelay());
         }
-    }
-
-    IEnumerator ShootingDelay()
-    {
-        FireRateDelay = true;
-        yield return new WaitForSeconds(1f / FireRate);
-        FireRateDelay = false;
     }
 }

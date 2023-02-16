@@ -1,14 +1,10 @@
 using UnityEngine;
+using Projectiles;
 
 public class PlayerProjectile : Projectile
 {
-    override protected void Awake()
+    protected override void OnEnable()
     {
-        base.Awake();
-    }
-
-    override protected void OnTriggerEnter(Collider other)
-    {
-        HandleTrigger(other);
+        GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/M_Player_Projectile");
     }
 }

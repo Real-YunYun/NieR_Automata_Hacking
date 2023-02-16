@@ -12,8 +12,10 @@ public class NULL : Enemy
     private Transform Player;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+        
         Agent = GetComponent<NavMeshAgent>();
         Rigidbody = GetComponent<Rigidbody>();
         Player = GameManager.Instance.PlayerInstance.transform;

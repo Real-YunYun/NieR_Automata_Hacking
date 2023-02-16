@@ -10,12 +10,6 @@ public class BinaryPointer : Enemy
     [SerializeField] private GameObject Binary2;
     private bool SpawnDelay;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {

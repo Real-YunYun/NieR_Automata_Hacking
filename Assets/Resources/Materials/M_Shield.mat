@@ -26,7 +26,6 @@ Material:
   m_Name: M_Shield
   m_Shader: {fileID: -6465566751694194690, guid: d7a9560cc159f314fb70ae776e19342e, type: 3}
   m_ValidKeywords:
-  - _ENABLE_FOG_ON_TRANSPARENT
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords:
   - _DISABLE_DECALS
@@ -384,7 +383,7 @@ Material:
     - _EmissiveIntensity: 1
     - _EmissiveIntensityUnit: 0
     - _EnableBlendModePreserveSpecularLighting: 0
-    - _EnableFogOnTransparent: 1
+    - _EnableFogOnTransparent: 0
     - _EnableGeometricSpecularAA: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5

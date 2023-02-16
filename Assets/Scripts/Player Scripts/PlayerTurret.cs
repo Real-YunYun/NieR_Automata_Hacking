@@ -1,4 +1,5 @@
 using UnityEngine;
+using Projectiles;
 
 public class PlayerTurret : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class PlayerTurret : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnFire += OnFire;
+        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnFireStarted += OnFire;
         //Optional Detail perhaps an upgrade?
         ProjectilePrefab = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().GetProjectile();
     }
@@ -39,11 +40,12 @@ public class PlayerTurret : MonoBehaviour
 
     public void OnFire()
     {
-        Instantiate(ProjectilePrefab, transform.Find("Projectile Spawn").position, transform.Find("Projectile Spawn").rotation);
+        Projectile TempProjectile = Instantiate(ProjectilePrefab, transform.Find("Projectile Spawn").position, transform.Find("Projectile Spawn").rotation).GetComponent<Projectile>();
+        TempProjectile.InitResult(GameManager.Instance.PlayerInstance.GetComponent<PlayerController>());
     }
 
     void OnDisable()
     {
-        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnFire -= OnFire;
+        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnFireStarted -= OnFire;
     }
 }

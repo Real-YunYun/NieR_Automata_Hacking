@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Projectiles;
 
 public class RocketProjectile : Projectile
 {
@@ -9,14 +10,19 @@ public class RocketProjectile : Projectile
     private float ExplosionTime = 0.75f;
     private GameObject RocketParticle;
 
-    override protected void Awake()
+    protected override void Awake()
     {
         base.Awake();
         RocketParticle = Resources.Load<GameObject>("General/Explosion Particle");
         StartCoroutine("TriggerExplosion");
     }
 
-    override protected void OnTriggerEnter(Collider other)
+    protected override void OnEnable()
+    {
+        GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/M_Enemy_Projectile2");
+    }
+
+    protected new void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Indestructible") || other.gameObject.CompareTag("Destructible") || other.gameObject.CompareTag("Entity") || other.CompareTag("Enemy Projectile")) Explode();
     }
