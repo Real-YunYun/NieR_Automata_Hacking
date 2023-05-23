@@ -13,6 +13,7 @@ Material:
   - _DISABLE_DECALS
   - _DISABLE_SSR
   - _DISABLE_SSR_TRANSPARENT
+  - _MATERIAL_FEATURE_SUBSURFACE_SCATTERING
   - _NORMALMAP_TANGENT_SPACE
   - _SPECULAR_OCCLUSION_NONE
   m_InvalidKeywords: []
@@ -137,7 +138,7 @@ Material:
     - _AORemapMin: 0
     - _ATDistance: 1
     - _AddPrecomputedVelocity: 0
-    - _AlbedoAffectEmissive: 1
+    - _AlbedoAffectEmissive: 0
     - _AlphaCutoff: 0.5
     - _AlphaCutoffEnable: 0
     - _AlphaCutoffPostpass: 0.5
@@ -183,7 +184,7 @@ Material:
     - _DstBlend: 0
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 0
-    - _EmissiveIntensity: 250
+    - _EmissiveIntensity: 333.76962
     - _EmissiveIntensityUnit: 0
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 0
@@ -204,7 +205,7 @@ Material:
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
     - _LinkDetailsWithBase: 1
-    - _MaterialID: 1
+    - _MaterialID: 0
     - _Metallic: 0
     - _MetallicRemapMax: 1
     - _MetallicRemapMin: 0
@@ -227,10 +228,10 @@ Material:
     - _SpecularAAThreshold: 0.2
     - _SpecularOcclusionMode: 0
     - _SrcBlend: 1
-    - _StencilRef: 0
+    - _StencilRef: 4
     - _StencilRefDepth: 0
     - _StencilRefDistortionVec: 4
-    - _StencilRefGBuffer: 2
+    - _StencilRefGBuffer: 6
     - _StencilRefMV: 32
     - _StencilWriteMask: 6
     - _StencilWriteMaskDepth: 8
@@ -243,7 +244,7 @@ Material:
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
-    - _TransmissionEnable: 1
+    - _TransmissionEnable: 0
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
@@ -262,14 +263,14 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.042222384, g: 0.026432894, b: 0.16981131, a: 1}
+    - _BaseColor: {r: 0.16862746, g: 0.027450975, b: 0.027450975, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0.042222373, g: 0.026432894, b: 0.16981128, a: 1}
+    - _Color: {r: 0.16862741, g: 0.027450973, b: 0.027450973, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissiveColor: {r: 100.63102, g: 0, b: 250, a: 250}
-    - _EmissiveColorLDR: {r: 0.66707516, g: 0, b: 1, a: 1}
+    - _EmissiveColor: {r: 15.081782, g: 0, b: 0, a: 333.76962}
+    - _EmissiveColorLDR: {r: 0.23529412, g: 0, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}

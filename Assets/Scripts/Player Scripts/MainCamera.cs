@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
+using Items;
+using Items.Executables;
+using Items.Threads;
 
 public class MainCamera : MonoBehaviour
 {
@@ -156,7 +159,7 @@ public class MainCamera : MonoBehaviour
 
     private void UpdateExecutable(int slot)
     {
-        Executables.ExecutableStats stats = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[slot].GetStats();
+        Items.Stats stats = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().Executables[slot].GetStats();
         UI_Executables_Canvas[slot].transform.Find("Fill").GetComponent<Image>().fillAmount = 1 - (stats.Upkeep / stats.Cooldown);
     }
 

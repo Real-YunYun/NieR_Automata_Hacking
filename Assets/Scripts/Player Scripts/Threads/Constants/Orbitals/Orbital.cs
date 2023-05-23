@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Unity.Collections;
 
-namespace Threads.Constant.Obritals
+namespace Items.Threads.Constant.Obritals
 {
     public enum EOrbitalBehaviour
     {

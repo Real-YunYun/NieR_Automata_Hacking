@@ -1,7 +1,7 @@
 using UnityEngine;
 using Unity.Collections;
 
-namespace Threads.EventBased.Proc
+namespace Items.Threads.EventBased.Proc
 {
     public abstract class Proc : EventBased
     {

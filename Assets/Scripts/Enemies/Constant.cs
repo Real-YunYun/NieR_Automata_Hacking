@@ -11,6 +11,6 @@ public class Constant : Enemy
 	{
 		base.Start();
 		
-		AddThread<PointerOrbital>();
+		AddThread<Items.PointerOrbital>();
 	}
 }

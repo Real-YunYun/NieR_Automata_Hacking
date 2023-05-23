@@ -31,8 +31,8 @@ namespace Projectiles
         public HitResult Result => _Result;
         protected float ProjectileSpeed = 2500f;
         protected Rigidbody Rigidbody;
-        protected float LifeSpan = 5f;
-        protected int Damage = 1;
+        protected float LifeSpan = 3f;
+        protected float Damage = 1;
         
         #region Events and Delegates
         

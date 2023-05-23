@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Threads.Constant.Obritals
+namespace Items.Threads.Constant.Obritals
 {
     public class OrbitalCollider : MonoBehaviour
     {

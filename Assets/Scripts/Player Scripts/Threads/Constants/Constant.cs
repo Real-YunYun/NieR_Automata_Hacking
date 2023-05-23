@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Threads.Constant
+namespace Items.Threads.Constant
 {
     public abstract class Constant : Thread
     {

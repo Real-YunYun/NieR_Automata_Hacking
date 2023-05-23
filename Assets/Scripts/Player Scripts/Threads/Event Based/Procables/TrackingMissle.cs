@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Threads;
-using Threads.EventBased.Proc;
+using Items.Threads;
+using Items.Threads.EventBased.Proc;
 using Projectiles;
 
 public class TrackingMissle : Proc

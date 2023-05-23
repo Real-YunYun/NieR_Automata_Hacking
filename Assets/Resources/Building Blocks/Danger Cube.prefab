@@ -21,7 +21,7 @@ GameObject:
   m_TagString: Indestructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2978246665100954721
 Transform:
@@ -102,6 +102,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Invincible: 1
   _health: 50
+  _energy: 25
+  MoveSpeed: 10
+  FireRate: 8
+  CanMove: 1
+  CanShoot: 1
+  CanExecute: 1
+  ProjectileSpawn: {fileID: 0}
+  ProjectilePrefab: {fileID: 0}
+  ShootingSource: {fileID: 0}
+  Executables:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Threads: []
 --- !u!65 &2978246665100954722
 BoxCollider:
   m_ObjectHideFlags: 0

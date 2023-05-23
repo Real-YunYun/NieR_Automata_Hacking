@@ -1,45 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Executables {
-
-    [System.Serializable]
-    public struct ExecutableStats
-    {
-        public string Name;
-        public string Description;
-        public string Sprite;
-        public float Duration;
-        public float Cooldown;
-        public float Upkeep;
-
-        public ExecutableStats(string name = "None", string description = "None", string sprite = "Player/UI Images/None", float duration = 0f, float cooldown = 0f, float upkeep = 0f)
-        {
-            Name = name;
-            Description = description;
-            Sprite = sprite;
-            Duration = duration;
-            Cooldown = cooldown;
-            Upkeep = upkeep;
-        }
-    }
-
+namespace Items.Executables {
     [System.Serializable, DefaultExecutionOrder(2)]
-    public abstract class Executable : MonoBehaviour
+    public abstract class Executable : Item
     {
-        [Header("Executable Fields")] 
-        protected ExecutableStats Stats;
-
+        [Header("Executable Fields")]
         public bool OnCooldown = false;
         public bool Usable = true;
 
-        public ExecutableStats GetStats()
-        {
-            return Stats;
-        }
-
-        protected virtual void Awake()
-        {
+        protected new virtual void Awake() {
             Usable = false;
             Stats.Name = "";
             Stats.Description = "";
@@ -50,8 +20,7 @@ namespace Executables {
             this.enabled = false;
         }
 
-        protected virtual void Update()
-        {
+        protected virtual void Update() {
             if (GameManager.Instance.IsGamePaused) return;
             
             Stats.Upkeep += Time.unscaledDeltaTime;

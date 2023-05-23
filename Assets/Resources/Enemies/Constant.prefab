@@ -321,7 +321,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: eaa60ad4e85ce9b43b429e7c6306018e, type: 2}
+  - {fileID: 2100000, guid: 0d7b310066a81854f80855b2d7df612c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -541,6 +541,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Invincible: 0
   _health: 25
+  _energy: 25
+  MoveSpeed: 10
+  FireRate: 8
+  CanMove: 1
+  CanShoot: 1
+  CanExecute: 1
+  ProjectileSpawn: {fileID: 0}
+  ProjectilePrefab: {fileID: 0}
+  ShootingSource: {fileID: 0}
+  Executables:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Threads: []
   Stats:
     BuildTime: 10
     BuildCost: 15

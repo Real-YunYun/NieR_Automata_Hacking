@@ -23,7 +23,7 @@ public class Enemy : Entity
     public delegate void OnDeathDelegate(GameObject entity);
     public event OnDeathDelegate OnEnemyDeath;
 
-    public override void TakeDamage(int value = 1)
+    public override void TakeDamage(float value = 1f)
     {
         if (!Invincible)
         {

@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Projectiles;
+using Items;
+using Items.Executables;
+using Items.Threads;
 
 public class PlayerController : Entity
 {
@@ -40,14 +43,13 @@ public class PlayerController : Entity
         AddExecutable<Overclock>(4);
         
         AddThread<HomingThread>();
-        AddThread<TrackingMissle>();
+        //AddThread<TrackingMissle>();
     }
     
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.Instance.IsGamePaused)
-        {
+        if (!GameManager.Instance.IsGamePaused) {
             if (_health > 50) _health = 50;
 
             #region Player Input Devices
@@ -130,10 +132,8 @@ public class PlayerController : Entity
         //Turning the Character Model relative to the Movement Direction
         if (Direction.magnitude >= 0.1f)
         {
-            float TurningAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg +
-                                 Camera.main.transform.eulerAngles.y;
-            float ResultAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TurningAngle, ref TurnSmoothVelocity,
-                TurningSmoothing);
+            float TurningAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
+            float ResultAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TurningAngle, ref TurnSmoothVelocity, TurningSmoothing); 
             transform.rotation = Quaternion.Euler(0f, ResultAngle, 0f);
             MoveDir = Quaternion.Euler(0f, TurningAngle, 0f) * Vector3.forward;
 
@@ -145,7 +145,7 @@ public class PlayerController : Entity
         #endregion
     }
 
-    public override void TakeDamage(int value = 1)
+    public override void TakeDamage(float value = 1f)
     {
         //Checking if the Player is Invincible
         if (Invincible) return;

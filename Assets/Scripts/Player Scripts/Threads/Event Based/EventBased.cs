@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Threads.EventBased
+namespace Items.Threads.EventBased
 {
     public abstract class EventBased : Thread
     {

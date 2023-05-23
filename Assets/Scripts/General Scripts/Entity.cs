@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Executables;
-using Threads;
 using Projectiles;
+
+using Items;
+using Items.Executables;
+using Items.Threads;
 
 public class Entity : MonoBehaviour
 {
@@ -12,9 +14,9 @@ public class Entity : MonoBehaviour
     protected bool Invincible = false;
 
     [Tooltip("Dictates this Entity Health")] [SerializeField]
-    protected int _health = 50;
+    protected float _health = 50;
 
-    public int Health
+    public float Health
     {
         get { return _health; }
         set { _health = value; }
@@ -228,7 +230,7 @@ public class Entity : MonoBehaviour
 
     #endregion
 
-    public virtual void TakeDamage(int value = 1)
+    public virtual void TakeDamage(float value = 1f)
     {
         if (!Invincible)
         {

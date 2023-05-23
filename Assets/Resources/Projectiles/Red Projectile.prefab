@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 451969341457040868}
   - component: {fileID: 1975193494391339551}
   m_Layer: 2
-  m_Name: Purple Projectile
+  m_Name: Red Projectile
   m_TagString: Enemy Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

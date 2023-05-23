@@ -29,7 +29,7 @@ public enum GameState
 }
 
 [DefaultExecutionOrder(-1)]
-public class GameManager : MonoBehaviour
+public class GameManager : SingletonPersistent<GameManager>
 {
     [Header("Game Manager Parameters")]
     public string CurrentLevel = "HUB";
@@ -50,25 +50,10 @@ public class GameManager : MonoBehaviour
     //Game Manager Parameters
     public PlayerData Data;
     private static readonly string key = "43286579693697635478639456395002084630948674278724";
-    static GameManager _instance = null;    
-    public static GameManager Instance
-    {
-        get 
-        {
-            if (_instance == null) _instance = new GameManager();
-            return _instance; 
-        }
-    }
 
     // Start is called before the first frame update
-    void Awake()
-    {
-        if (_instance) Destroy(gameObject);
-        else
-        {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+    protected override void Awake() {
+        base.Awake();
         GarbageCollector.incrementalTimeSliceNanoseconds = 25000;
         Application.targetFrameRate = 165;
     }

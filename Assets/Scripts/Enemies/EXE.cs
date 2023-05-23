@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EXE : Enemy
 {
-    public override void TakeDamage(int value = 1)
+    public override void TakeDamage(float value = 1f)
     {
         if (!transform.parent.Find("Shield").gameObject.activeSelf) base.TakeDamage(value);
     }

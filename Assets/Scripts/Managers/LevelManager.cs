@@ -1,100 +1,106 @@
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
+using System.Linq;
 using UnityEngine;
 
-public static class RoomTemplate
-{
+public static class RoomTemplate {
     [Header("Room Template Parameters")]
-    static private string Path = "Ground/";
-    static private int RoomBias = 2;
+    private static string Path;
+    private static int RoomBias;
+    
+    #region Static Resources for Loading
 
     // Bridges
-    static public GameObject BUD { get { return Resources.Load<GameObject>(Path + "BUD"); } }
-    static public GameObject BLR { get { return Resources.Load<GameObject>(Path + "BLR"); } }
+    public static GameObject BUD => Resources.Load<GameObject>(Path + "BUD");
+    public static GameObject BLR => Resources.Load<GameObject>(Path + "BLR");
 
     // Single
-    static public GameObject N { get { return Resources.Load<GameObject>(Path + "N"); } }
-    static public GameObject U { get { return Resources.Load<GameObject>(Path + "U"); } }
-    static public GameObject D { get { return Resources.Load<GameObject>(Path + "D"); } }
-    static public GameObject L { get { return Resources.Load<GameObject>(Path + "L"); } }
-    static public GameObject R { get { return Resources.Load<GameObject>(Path + "R"); } }
+    public static GameObject N => Resources.Load<GameObject>(Path + "N");
+    public static GameObject U => Resources.Load<GameObject>(Path + "U");
+    public static GameObject D => Resources.Load<GameObject>(Path + "D");
+    public static GameObject L => Resources.Load<GameObject>(Path + "L");
+    public static GameObject R => Resources.Load<GameObject>(Path + "R");
 
     // Double
-    static public GameObject UD { get { return Resources.Load<GameObject>(Path + "UD"); } }
-    static public GameObject UL { get { return Resources.Load<GameObject>(Path + "UL"); } }
-    static public GameObject UR { get { return Resources.Load<GameObject>(Path + "UR"); } }
-    static public GameObject DL { get { return Resources.Load<GameObject>(Path + "DL"); } }
-    static public GameObject DR { get { return Resources.Load<GameObject>(Path + "DR"); } }
-    static public GameObject LR { get { return Resources.Load<GameObject>(Path + "LR"); } }
+    public static GameObject UD => Resources.Load<GameObject>(Path + "UD");
+    public static GameObject UL => Resources.Load<GameObject>(Path + "UL");
+    public static GameObject UR => Resources.Load<GameObject>(Path + "UR");
+    public static GameObject DL => Resources.Load<GameObject>(Path + "DL");
+    public static GameObject DR => Resources.Load<GameObject>(Path + "DR");
+    public static GameObject LR => Resources.Load<GameObject>(Path + "LR");
 
     // Triple
-    static public GameObject UDL { get { return Resources.Load<GameObject>(Path + "UDL"); } }
-    static public GameObject UDR { get { return Resources.Load<GameObject>(Path + "UDR"); } }
-    static public GameObject ULR { get { return Resources.Load<GameObject>(Path + "ULR"); } }
-    static public GameObject DLR { get { return Resources.Load<GameObject>(Path + "DLR"); } }
+    public static GameObject UDL => Resources.Load<GameObject>(Path + "UDL");
+    public static GameObject UDR => Resources.Load<GameObject>(Path + "UDR");
+    public static GameObject ULR => Resources.Load<GameObject>(Path + "ULR");
+    public static GameObject DLR => Resources.Load<GameObject>(Path + "DLR");
 
     // Quad
-    static public GameObject UDLR { get { return Resources.Load<GameObject>(Path + "UDLR"); } }
+    public static GameObject UDLR => Resources.Load<GameObject>(Path + "UDLR");
+    
+    #endregion
 
     // Rooms (Non Alphabetical)
-    static public GameObject None = N;
-    static public GameObject[] UpRooms = { U, UD, UDL, UDLR, UDR, UL, ULR, UR };
-    static public GameObject[] DownRooms = { D, DL, DLR, DR, UD, UDL, UDLR, UDR };
-    static public GameObject[] LeftRooms = { L, DL, DLR, LR, UDL, UDLR, UL, ULR };
-    static public GameObject[] RightRooms = { R, DLR, DR, LR, UDLR, UDR, ULR, UR };
+    public static GameObject None;
+    public static GameObject[] UpRooms;
+    public static GameObject[] DownRooms;
+    public static GameObject[] LeftRooms;
+    public static GameObject[] RightRooms;
 
     // Extra Subrooms (Bridges, Secret Rooms, etc.)
-    static public GameObject[] Bridges = { BUD, BLR };
+    public static GameObject[] Bridges;
 
     // Starter Room Criteria
-    static public GameObject[] StarterRooms = { U, UD, UL, UR, D, DL, DR, L, LR, R };
+    private static GameObject[] StarterRooms;
+
+    static RoomTemplate()
+    {
+        Path = "Ground/";
+        RoomBias = 2;
+        None = N;
+        UpRooms = new[] { U, UD, UDL, UDLR, UDR, UL, ULR, UR };
+        DownRooms = new[] { D, DL, DLR, DR, UD, UDL, UDLR, UDR };
+        LeftRooms = new[] { L, DL, DLR, LR, UDL, UDLR, UL, ULR };
+        RightRooms = new[] { R, DLR, DR, LR, UDLR, UDR, ULR, UR };
+        Bridges = new[] { BUD, BLR };
+        StarterRooms = new[] { D, DL, DLR, DR, L, LR, R, U, UD, UDL, UDLR, UDR, UL, ULR, UR };
+    }
 
     //Random Room Getters
-    static public GameObject Up
-    {
-        get
-        {
+    public static GameObject Up {
+        get {
             if (Random.Range(0, RoomBias) == 0) return U;
-            else return UpRooms[Random.Range(0, UpRooms.Length)];
+            return UpRooms[Random.Range(0, UpRooms.Length)];
         }
     }
 
-    static public GameObject Down
-    {
-        get
-        {
+    public static GameObject Down {
+        get {
             if (Random.Range(0, RoomBias) == 0) return D;
-            else return DownRooms[Random.Range(0, DownRooms.Length)];
+            return DownRooms[Random.Range(0, DownRooms.Length)];
         }
     }
 
-    static public GameObject Left
-    {
-        get
-        {
+    public static GameObject Left {
+        get {
             if (Random.Range(0, RoomBias) == 0) return L;
-            else return LeftRooms[Random.Range(0, LeftRooms.Length)];
+            return LeftRooms[Random.Range(0, LeftRooms.Length)];
         }
     }
 
-    static public GameObject Right
-    {
-        get
-        {
+    public static GameObject Right {
+        get {
             if (Random.Range(0, RoomBias) == 0) return R;
-            else return RightRooms[Random.Range(0, RightRooms.Length)];
+            return RightRooms[Random.Range(0, RightRooms.Length)];
         }
     }
 
     // Random Starter Room Getter
-    static public GameObject StarterRoom { get { return StarterRooms[Random.Range(0, StarterRooms.Length)]; } }
-
+    public static GameObject StarterRoom => StarterRooms[Random.Range(0, StarterRooms.Length)];
 }
 
 [System.Serializable]
-public class RoomDictionary
-{
+public class RoomDictionary {
     public List<RoomInformation> D = new List<RoomInformation>();
     public List<RoomInformation> DL = new List<RoomInformation>();
     public List<RoomInformation> DLR = new List<RoomInformation>();
@@ -109,156 +115,181 @@ public class RoomDictionary
     public List<RoomInformation> UDR = new List<RoomInformation>();
     public List<RoomInformation> UL = new List<RoomInformation>();
     public List<RoomInformation> ULR = new List<RoomInformation>();
-    public List<RoomInformation> UR = new List<RoomInformation>();    
-}
-
-public static class RoomBlocks
-{
-    [Header("Room Blocks Parameters")]
-    static private string Path = "Building Blocks/";
-
-    // Blocks
-    static public GameObject Default { get { return Resources.Load<GameObject>(Path + "Default Cube"); } }
-    static public GameObject Default4x4 { get { return Resources.Load<GameObject>(Path + "Default Cube 4x4"); } }
-    static public GameObject Default6x6 { get { return Resources.Load<GameObject>(Path + "Default Cube 6x6"); } }
-    static public GameObject Default8x8 { get { return Resources.Load<GameObject>(Path + "Default Cube 8x8"); } }
-    static public GameObject Default10x10 { get { return Resources.Load<GameObject>(Path + "Default Cube 10x10"); } }
-    static public GameObject Destructible { get { return Resources.Load<GameObject>(Path + "Destructible Cube"); } }
-    static public GameObject Danger { get { return Resources.Load<GameObject>(Path + "Danger Cube"); } }
-}
-
-[DefaultExecutionOrder(1)]
-public class LevelManager : MonoBehaviour
-{
-    [Header("Generation Parameters")]
-    private RoomDictionary Dictionary;
-
-    [Header("Level Manager Parameters")]
-    public int GenerateSeed = -1;
-    public bool CanStart = true;
-    private GameObject StartingRoom;
-
-    [Header("Importing/Overwriting Parameters")]
-    public TextAsset RoomFile;
-    public int ImportingDictionaryIndex = -1;
-
-    [Header("Removing Parameters")]
-    public RoomType RemovingRoomType = RoomType.U;
-    public int RemovingDictionaryIndex = 0;
-
-
-    static public void ImportRoom(TextAsset Asset)
-    {
-        RoomInformation ImportedInformation = JsonUtility.FromJson<RoomInformation>(Asset.ToString());
-        Debug.Log("RoomType: " + ImportedInformation.RoomType);
-    } 
-
-    void Awake()
-    {
-        if (CanStart)
-        {
-            if (GenerateSeed != -1 && GenerateSeed >= 0) Random.InitState(GenerateSeed);
-            StartingRoom = Instantiate(RoomTemplate.StarterRoom, Vector3.zero, Quaternion.identity);
-            StartingRoom.transform.parent = transform;
-        }
-    }
-
-    public void ImportInformation()
-    {
-        // Importing to the last of the List
-        if (RoomFile == null)
-        {
-            Debug.LogError("Uploaded file field is null");
-            return;
-        }
-
-        RoomInformation ImportingInformation = JsonUtility.FromJson<RoomInformation>(RoomFile.text);
-        RoomType ImportingRoomType = ImportingInformation.RoomType;
-
-        // Appending to Lists
-        if (ImportingDictionaryIndex == -1)
-        {
-            // D, DL, DLR, DR, L, LR, R, U, UD, UDL, UDLR, UDR, UL, ULR, UR
-            if (ImportingRoomType == RoomType.D) Dictionary.D.Add(ImportingInformation);
-            else if (ImportingRoomType == RoomType.DL) Dictionary.DL.Add(ImportingInformation);
-            else if (ImportingRoomType == RoomType.DLR) Dictionary.DLR.Add(ImportingInformation);
-            else if (ImportingRoomType == RoomType.DR) Dictionary.DR.Add(ImportingInformation);
-            else if (ImportingRoomType == RoomType.L) Dictionary.L.Add(ImportingInformation);
-            else if (ImportingRoomType == RoomType.LR) Dictionary.LR.Add(ImportingInformation);
-            else if (ImportingRoomType == RoomType.R) Dictionary.R.Add(ImportingInformation);
-            else if (ImportingRoomType == RoomType.U) Dictionary.U.Add(ImportingInformation);
-            else if (ImportingRoomType == RoomType.UD) Dictionary.UD.Add(ImportingInformation);
-            else if (ImportingRoomType == RoomType.UDL) Dictionary.UDL.Add(ImportingInformation);
-            else if (ImportingRoomType == RoomType.UDLR) Dictionary.UDLR.Add(ImportingInformation);
-            else if (ImportingRoomType == RoomType.UDR) Dictionary.UDR.Add(ImportingInformation);
-            else if (ImportingRoomType == RoomType.UL) Dictionary.UL.Add(ImportingInformation);
-            else if (ImportingRoomType == RoomType.ULR) Dictionary.ULR.Add(ImportingInformation);
-            else if (ImportingRoomType == RoomType.UR) Dictionary.UR.Add(ImportingInformation);
-
-            Debug.Log("Imported Room at " + ImportingRoomType + " [" + ImportingDictionaryIndex + "]");
-        }
-        else if (ImportingDictionaryIndex != -1 && ImportingDictionaryIndex >= 0) OverwriteInformation();
-        else Debug.LogError("Dictionary Index was Invalid");
-
-        SaveDictionary();
-    }
-
-    public void OverwriteInformation()
-    {
-        RoomInformation OverwritingInformation = JsonUtility.FromJson<RoomInformation>(RoomFile.ToString());
-        RoomType ImportingRoomType = OverwritingInformation.RoomType;
-
-        if (ImportingDictionaryIndex > 0)
-        {
-            if (ImportingRoomType == RoomType.D) Dictionary.D.Insert(ImportingDictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.DL) Dictionary.DL.Insert(ImportingDictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.DLR) Dictionary.DLR.Insert(ImportingDictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.DR) Dictionary.DR.Insert(ImportingDictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.L) Dictionary.L.Insert(ImportingDictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.LR) Dictionary.LR.Insert(ImportingDictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.R) Dictionary.R.Insert(ImportingDictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.U) Dictionary.U.Insert(ImportingDictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.UD) Dictionary.UD.Insert(ImportingDictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.UDL) Dictionary.UDL.Insert(ImportingDictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.UDLR) Dictionary.UDLR.Insert(ImportingDictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.UDR) Dictionary.UDR.Insert(ImportingDictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.UL) Dictionary.UL.Insert(ImportingDictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.ULR) Dictionary.ULR.Insert(ImportingDictionaryIndex, OverwritingInformation);
-            else if (ImportingRoomType == RoomType.UR) Dictionary.UR.Insert(ImportingDictionaryIndex, OverwritingInformation);
-
-            Debug.Log("Overwriten Room at " + ImportingRoomType + " [" + ImportingDictionaryIndex + "]");
-        }
-        else Debug.LogError("Index for Dictionary was Invalid");
-    }
-
-    public void RemoveInformation()
-    {
-        if (RemovingRoomType == RoomType.D) Dictionary.D.RemoveAt(RemovingDictionaryIndex);
-        else if (RemovingRoomType == RoomType.DL) Dictionary.DL.RemoveAt(RemovingDictionaryIndex);
-        else if (RemovingRoomType == RoomType.DLR) Dictionary.DLR.RemoveAt(RemovingDictionaryIndex);
-        else if (RemovingRoomType == RoomType.DR) Dictionary.DR.RemoveAt(RemovingDictionaryIndex);
-        else if (RemovingRoomType == RoomType.L) Dictionary.L.RemoveAt(RemovingDictionaryIndex);
-        else if (RemovingRoomType == RoomType.LR) Dictionary.LR.RemoveAt(RemovingDictionaryIndex);
-        else if (RemovingRoomType == RoomType.R) Dictionary.R.RemoveAt(RemovingDictionaryIndex);
-        else if (RemovingRoomType == RoomType.U) Dictionary.U.RemoveAt(RemovingDictionaryIndex);
-        else if (RemovingRoomType == RoomType.UD) Dictionary.UD.RemoveAt(RemovingDictionaryIndex);
-        else if (RemovingRoomType == RoomType.UDL) Dictionary.UDL.RemoveAt(RemovingDictionaryIndex);
-        else if (RemovingRoomType == RoomType.UDLR) Dictionary.UDLR.RemoveAt(RemovingDictionaryIndex);
-        else if (RemovingRoomType == RoomType.UDR) Dictionary.UDR.RemoveAt(RemovingDictionaryIndex);
-        else if (RemovingRoomType == RoomType.UL) Dictionary.UL.RemoveAt(RemovingDictionaryIndex);
-        else if (RemovingRoomType == RoomType.ULR) Dictionary.ULR.RemoveAt(RemovingDictionaryIndex);
-        else if (RemovingRoomType == RoomType.UR) Dictionary.UR.RemoveAt(RemovingDictionaryIndex);
-    }
-
-    public void SaveDictionary()
-    {
-        string SavingInformation = JsonUtility.ToJson(Dictionary);
+    public List<RoomInformation> UR = new List<RoomInformation>();
+    
+    public void SaveDictionary(bool FilterAll = false) {
+        if (!FilterAll) FilterAllDictionaries();
+        string SavingInformation = JsonUtility.ToJson(this, true); 
         File.WriteAllText(Application.dataPath + "/Dictionary/Rooms.dictionary", SavingInformation);
     }
 
-    public void LoadDictionary()
-    {
-        Dictionary = JsonUtility.FromJson<RoomDictionary>(File.ReadAllText(Application.dataPath + "/Dictionary/Rooms.dictionary"));
+    public RoomInformation Traverse(List<RoomInformation> List, int FindID) {
+        RoomInformation FoundRoom = List.Find(FoundRoom => FoundRoom.ID == FindID);
+        return FoundRoom;
     }
 
+    public List<RoomInformation> GetList(RoomType Type) {
+        List<RoomInformation> ReturnList;
+        
+        if (Type == RoomType.D) ReturnList = D;
+        else if (Type == RoomType.DL) ReturnList = DL;
+        else if (Type == RoomType.DLR) ReturnList = DLR;
+        else if (Type == RoomType.DR) ReturnList = DR;
+        else if (Type == RoomType.L) ReturnList = L;
+        else if (Type == RoomType.LR) ReturnList = LR;
+        else if (Type == RoomType.R) ReturnList = R;
+        else if (Type == RoomType.U) ReturnList = U;
+        else if (Type == RoomType.UD) ReturnList = UD;
+        else if (Type == RoomType.UDL) ReturnList = UDL;
+        else if (Type == RoomType.UDLR) ReturnList = UDLR;
+        else if (Type == RoomType.UDR) ReturnList = UDR;
+        else if (Type == RoomType.UL) ReturnList = UL;
+        else if (Type == RoomType.ULR) ReturnList = ULR;
+        else ReturnList = UR;
+
+        return ReturnList;
+    }
+
+    public void AddToDictionary(RoomInformation Room) {
+        List<RoomInformation> List = GetList(Room.Type);
+
+        if (Room.ID == 0) {
+            Debug.LogError($"Can not add Room to ID [0]");
+            return;
+        }
+
+        if (!(Room.Blocks.Count > 0) && !(Room.Enemies.Count > 0)) {
+            Debug.LogError($"Could not add Room To dictionary since it's empty!");
+            return;
+        }
+
+        // Checking for Conflicts and overwriting them!
+        for (int i = 0; i < List.Count; i++) {
+            if (List[i].ID == Room.ID) {
+                Debug.LogWarning($"Conflict with pre-existing Room ID [{Room.ID.ToString()}]");
+                List[i] = Room;
+                return;
+            }
+        }
+
+        List.Add(Room);
+        FilterDictionary(List, Room.Type);
+    }
+
+    public RoomInformation GetRoomInformation(int RoomID, RoomType Type) {
+        List<RoomInformation> List = new List<RoomInformation>();
+
+        if (Type == RoomType.D) List = D;
+        else if (Type == RoomType.DL) List = DL;
+        else if (Type == RoomType.DLR) List = DLR;
+        else if (Type == RoomType.DR) List = DR;
+        else if (Type == RoomType.L) List = L;
+        else if (Type == RoomType.LR) List = LR;
+        else if (Type == RoomType.R) List = R;
+        else if (Type == RoomType.U) List = U;
+        else if (Type == RoomType.UD) List = UD;
+        else if (Type == RoomType.UDL) List = UDL;
+        else if (Type == RoomType.UDLR) List = UDLR;
+        else if (Type == RoomType.UDR) List = UDR;
+        else if (Type == RoomType.UL) List = UL;
+        else if (Type == RoomType.ULR) List = ULR;
+        else List = UR;
+
+        return Traverse(List, RoomID);
+    }
+
+    public void FilterDictionary(List<RoomInformation> DirtyList, RoomType Type) {
+        // For Comparison
+        Dictionary<int, RoomInformation> CleanedListDictionary = new Dictionary<int, RoomInformation>();
+        List<RoomInformation> RoomsToRemove = new List<RoomInformation>();
+
+        foreach (RoomInformation DirtyRoom in DirtyList) {
+            if (!(DirtyRoom.Blocks.Count > 0) && !(DirtyRoom.Enemies.Count > 0)) 
+                continue;
+            
+            CleanedListDictionary.TryAdd(DirtyRoom.ID, DirtyRoom);
+        }
+
+        // Adding Empty Room in case!
+        if (!CleanedListDictionary.ContainsKey(0))
+            CleanedListDictionary.Add(0,  new RoomInformation(0, Type));
+        
+        // Generate a List from Dictionary
+        List<RoomInformation> CleanedList = CleanedListDictionary.Values.ToList();
+
+        // Adding this List back into the Dictionary
+        if (Type == RoomType.D) D = CleanedList;
+        if (Type == RoomType.DL) DL = CleanedList;
+        if (Type == RoomType.DLR) DLR = CleanedList;
+        if (Type == RoomType.DR) DR = CleanedList;
+        if (Type == RoomType.L) L = CleanedList;
+        if (Type == RoomType.LR) LR = CleanedList;
+        if (Type == RoomType.R) R = CleanedList;
+        if (Type == RoomType.U) U = CleanedList;
+        if (Type == RoomType.UD) UD = CleanedList;
+        if (Type == RoomType.UDL) UDL = CleanedList;
+        if (Type == RoomType.UDLR) UDLR = CleanedList;
+        if (Type == RoomType.UDR) UDR = CleanedList;
+        if (Type == RoomType.UL) UL = CleanedList;
+        if (Type == RoomType.ULR) ULR = CleanedList;
+        if (Type == RoomType.UR) UR = CleanedList;
+
+        // Saving the new Dictionary!
+        File.WriteAllText(Application.dataPath + "/Dictionary/Rooms.dictionary", JsonUtility.ToJson(this, true));
+    }
+
+    public void FilterAllDictionaries() {
+        FilterDictionary(D, RoomType.D);
+        FilterDictionary(DL, RoomType.DL);
+        FilterDictionary(DLR, RoomType.DLR);
+        FilterDictionary(DR, RoomType.DR);
+        FilterDictionary(L, RoomType.L);
+        FilterDictionary(LR, RoomType.LR);
+        FilterDictionary(R, RoomType.R);
+        FilterDictionary(U, RoomType.U);
+        FilterDictionary(UD, RoomType.UD);
+        FilterDictionary(UDL, RoomType.UDL);
+        FilterDictionary(UDLR, RoomType.UDLR);
+        FilterDictionary(UDR, RoomType.UDR);
+        FilterDictionary(UL, RoomType.UL);
+        FilterDictionary(ULR, RoomType.ULR);
+        FilterDictionary(UR, RoomType.UR);
+    }
+}
+
+[DefaultExecutionOrder(1)]
+public class LevelManager : SingletonPersistent<LevelManager> {
+    [Header("Generation Parameters")] 
+    [SerializeField] private RoomDictionary _Dictionary = new RoomDictionary();
+    public RoomDictionary Dictionary { get { return _Dictionary; } }
+
+    [Header("Level Manager Parameters")] public int GenerateSeed = -1;
+    public bool CanStart = true;
+    private GameObject StartingRoom;
+
+    private void OnValidate()
+    {
+        BuildDictionary();
+    }
+
+    protected override void Awake() {
+        base.Awake();
+        BuildDictionary();
+        
+        if (CanStart) {
+            if (GenerateSeed != -1 && GenerateSeed >= 0) Random.InitState(GenerateSeed);
+            StartingRoom = Instantiate(RoomTemplate.StarterRoom, Vector3.zero, Quaternion.identity);
+            StartingRoom.transform.parent = transform;
+            StartingRoom.GetComponent<Room>().StarterRoom = true;
+            StartingRoom.name = "Starting Room";
+        }
+    }
+    
+    private void BuildDictionary() {
+        string JSONFile = System.IO.File.ReadAllText(Application.dataPath + "/Dictionary/Rooms.dictionary");
+        _Dictionary = JsonUtility.FromJson<RoomDictionary>(JSONFile);
+    }
+    
+    // Try a requesting System for generating levels
+    
 }

@@ -7,12 +7,12 @@ public class HomingProjectile : Projectile
 {
     [Header("Homing Projectile Variables")]
     [SerializeField] private float TrackingRadius = 5f;
-    [SerializeField] private float TurningForce = 100f;
+    [SerializeField] private float TurningForce = 200f;
     [SerializeField] private float Delay = 1f;
-    private const float TurningPity = 5f;
+    private const float TurningPity = 10f;
     private const float MaxVelocity = 300f;
     private bool TargetAcquired = false;
-    
+
     private Transform TargetTransform;
     public void SetTargetTransform(Transform Target)
     {
@@ -22,15 +22,17 @@ public class HomingProjectile : Projectile
 
     protected override void OnEnable()
     {
-        GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/M_Enemy_Projectile1");
+        GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/M_Homing_Projectile");
+        InvokeRepeating(nameof(TrackUpdate), 0f, 0.01f);
     }
 
-    void FixedUpdate()
+    void TrackUpdate()
     {
         if (!TargetAcquired) Track();
         if (TargetAcquired && TargetTransform) EvaluateRadialForce();
         if (TargetAcquired && !TargetTransform) Destroy(gameObject);
     }
+    
 
     private void EvaluateRadialForce()
     {
@@ -43,26 +45,18 @@ public class HomingProjectile : Projectile
 
     private void Track()
     {
-        Collider[] Colliders = new Collider[12];
-        var size = Physics.OverlapSphereNonAlloc(transform.position, TrackingRadius, Colliders);
+        Collider[] Collider = Physics.OverlapSphere(transform.position, TrackingRadius, 0b_100_0000_0000);
 
-        for (int i = 0; i < size; i++)
-        {
-            if (gameObject.GetComponent<Collider>() != Colliders[i] 
-                && Colliders[i].gameObject.GetComponent<Entity>() 
-                && Colliders[i].gameObject.GetComponent<Entity>() != Result.Instigator
-                && !Colliders[i].gameObject.CompareTag("Indestructible"))
+        if (Collider.Length > 0) {
+            if (gameObject.GetComponent<Collider>() != Collider[0] 
+                && Collider[0].gameObject.GetComponent<Entity>() 
+                && Collider[0].gameObject.GetComponent<Entity>() != Result.Instigator
+                && !Collider[0].gameObject.CompareTag("Indestructible"))
             {
                 TargetAcquired = true;
-                TargetTransform = Colliders[i].gameObject.transform;
-                StartCoroutine(DestroyDelay());
+                TargetTransform = Collider[0].gameObject.transform;
+                Destroy(gameObject, Delay);
             }
         }
-    }
-
-    IEnumerator DestroyDelay()
-    {
-        yield return new WaitForSeconds(Delay);
-        Destroy(gameObject);
     }
 }
