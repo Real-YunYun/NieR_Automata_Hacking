@@ -1,12 +1,15 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public static class RoomTemplate {
+public static class RoomLoader {
     [Header("Room Template Parameters")]
     private static string Path;
-    private static int RoomBias;
+    private static float DeadEndChance = 0.33f;
+    private static float StraightRoomChance = 0.25f;
     
     #region Static Resources for Loading
 
@@ -53,10 +56,8 @@ public static class RoomTemplate {
     // Starter Room Criteria
     private static GameObject[] StarterRooms;
 
-    static RoomTemplate()
-    {
+    static RoomLoader() {
         Path = "Ground/";
-        RoomBias = 2;
         None = N;
         UpRooms = new[] { U, UD, UDL, UDLR, UDR, UL, ULR, UR };
         DownRooms = new[] { D, DL, DLR, DR, UD, UDL, UDLR, UDR };
@@ -69,34 +70,35 @@ public static class RoomTemplate {
     //Random Room Getters
     public static GameObject Up {
         get {
-            if (Random.Range(0, RoomBias) == 0) return U;
+            if (Random.Range(0.0f, 1.0f) <= StraightRoomChance) return UD;
+            if (Random.Range(0.0f, 1.0f) <= DeadEndChance) return U;
             return UpRooms[Random.Range(0, UpRooms.Length)];
         }
     }
 
     public static GameObject Down {
         get {
-            if (Random.Range(0, RoomBias) == 0) return D;
+            if (Random.Range(0.0f, 1.0f) <= StraightRoomChance) return UD;
+            if (Random.Range(0.0f, 1.0f) <= DeadEndChance) return D;
             return DownRooms[Random.Range(0, DownRooms.Length)];
         }
     }
 
     public static GameObject Left {
         get {
-            if (Random.Range(0, RoomBias) == 0) return L;
+            if (Random.Range(0.0f, 1.0f) <= StraightRoomChance) return LR;
+            if (Random.Range(0.0f, 1.0f) <= DeadEndChance) return L;
             return LeftRooms[Random.Range(0, LeftRooms.Length)];
         }
     }
 
     public static GameObject Right {
         get {
-            if (Random.Range(0, RoomBias) == 0) return R;
+            if (Random.Range(0.0f, 1.0f) <= StraightRoomChance) return LR;
+            if (Random.Range(0.0f, 1.0f) <= DeadEndChance) return R;
             return RightRooms[Random.Range(0, RightRooms.Length)];
         }
     }
-
-    // Random Starter Room Getter
-    public static GameObject StarterRoom => StarterRooms[Random.Range(0, StarterRooms.Length)];
 }
 
 [System.Serializable]
@@ -126,6 +128,11 @@ public class RoomDictionary {
     public RoomInformation Traverse(List<RoomInformation> List, int FindID) {
         RoomInformation FoundRoom = List.Find(FoundRoom => FoundRoom.ID == FindID);
         return FoundRoom;
+    }
+
+    public RoomInformation GetStarterRoomInformation() {
+        RoomType RandomType = (RoomType)Enum.GetValues(typeof(RoomType)).GetValue((int)Random.Range(0f, 14f));
+        return GetList(RandomType)[^1];
     }
 
     public List<RoomInformation> GetList(RoomType Type) {
@@ -257,18 +264,18 @@ public class RoomDictionary {
     }
 }
 
-[DefaultExecutionOrder(1)]
+[DefaultExecutionOrder(1), System.Serializable]
 public class LevelManager : SingletonPersistent<LevelManager> {
     [Header("Generation Parameters")] 
     [SerializeField] private RoomDictionary _Dictionary = new RoomDictionary();
     public RoomDictionary Dictionary { get { return _Dictionary; } }
 
-    [Header("Level Manager Parameters")] public int GenerateSeed = -1;
+    [Header("Level Manager Parameters")] 
+    public int GenerateSeed = -1;
     public bool CanStart = true;
     private GameObject StartingRoom;
 
-    private void OnValidate()
-    {
+    private void OnValidate() {
         BuildDictionary();
     }
 
@@ -278,9 +285,11 @@ public class LevelManager : SingletonPersistent<LevelManager> {
         
         if (CanStart) {
             if (GenerateSeed != -1 && GenerateSeed >= 0) Random.InitState(GenerateSeed);
-            StartingRoom = Instantiate(RoomTemplate.StarterRoom, Vector3.zero, Quaternion.identity);
-            StartingRoom.transform.parent = transform;
+            RoomInformation StartingRoomInformation = Dictionary.GetStarterRoomInformation();
+            StartingRoom = Instantiate(Resources.Load<GameObject>("Ground/" + StartingRoomInformation.Type), Vector3.zero, Quaternion.identity);
+            StartingRoom.GetComponent<Room>().Information = StartingRoomInformation;
             StartingRoom.GetComponent<Room>().StarterRoom = true;
+            StartingRoom.transform.parent = transform;
             StartingRoom.name = "Starting Room";
         }
     }
@@ -289,7 +298,7 @@ public class LevelManager : SingletonPersistent<LevelManager> {
         string JSONFile = System.IO.File.ReadAllText(Application.dataPath + "/Dictionary/Rooms.dictionary");
         _Dictionary = JsonUtility.FromJson<RoomDictionary>(JSONFile);
     }
-    
+
     // Try a requesting System for generating levels
     
 }

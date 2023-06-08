@@ -1,7 +1,8 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using Projectiles;
+using Entities;
+using Entities.Projectiles;
 
 public class HomingProjectile : Projectile
 {
@@ -45,7 +46,7 @@ public class HomingProjectile : Projectile
 
     private void Track()
     {
-        Collider[] Collider = Physics.OverlapSphere(transform.position, TrackingRadius, 0b_100_0000_0000);
+        Collider[] Collider = Physics.OverlapSphere(transform.position, TrackingRadius, 0b_1_0000_0000);
 
         if (Collider.Length > 0) {
             if (gameObject.GetComponent<Collider>() != Collider[0] 

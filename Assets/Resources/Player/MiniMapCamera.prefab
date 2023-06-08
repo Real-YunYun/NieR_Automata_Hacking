@@ -58,14 +58,14 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 2500
+  far clip plane: 40
   field of view: 60.000004
   orthographic: 1
-  orthographic size: 40
+  orthographic size: 30
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1544
+    m_Bits: 1577
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8600000, guid: 6a1a4c0850b401749a9f88b514fe7941, type: 2}
   m_TargetDisplay: 0
@@ -151,8 +151,8 @@ MonoBehaviour:
     materialQuality: 1
   renderingPathCustomFrameSettingsOverrideMask:
     mask:
-      data1: 17365951911646626589
-      data2: 4395513236448870423
+      data1: 17365881268024541981
+      data2: 135266327
   defaultFrameSettings: 0
   m_Version: 8
   m_ObsoleteRenderingPath: 0
@@ -213,5 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a4d5cffc02d93448be533eb3f39eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanZoom: 0
   CameraRotation: 0
   CameraRotationAiming: 0
+  CameraLerpCenterRoom: 1

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6609628885180666621}
   - component: {fileID: 4919665902319350093}
   - component: {fileID: 1340504318870525959}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 791854568349920624}
   - component: {fileID: 7129642910918461235}
   - component: {fileID: 2012830674124788533}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 18178091899021444}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Components
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 8283523348712375705}
   - component: {fileID: 8283523348712375708}
   - component: {fileID: 8283523348712375711}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,10 +302,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8283523349450054655}
   - component: {fileID: 8283523349450054648}
+  - component: {fileID: 4700446655848782568}
   - component: {fileID: 8283523349450054654}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Binary Pointer 1
-  m_TagString: Entity
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -339,8 +340,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e59597c9d71d20842adecdb760ec77da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Invincible: 0
-  _health: 20
+  HealthComponent: {fileID: 0}
+  _energy: 25
+  MoveSpeed: 10
+  Executables:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Threads: []
   Stats:
     BuildTime: 10
     BuildCost: 12
@@ -348,6 +356,21 @@ MonoBehaviour:
   SpawningRate: 20
   Binary1: {fileID: 3713626421213575533, guid: dc38ef1014b473847adfb7f6f165239e, type: 3}
   Binary2: {fileID: 3713626421213575533, guid: dc38ef1014b473847adfb7f6f165239e, type: 3}
+--- !u!114 &4700446655848782568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8283523349450054649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1050472bc286c488c6d336d3ba56be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Invincible: 0
+  HasInvincibilityFrames: 0
+  _health: 20
 --- !u!65 &8283523349450054654
 BoxCollider:
   m_ObjectHideFlags: 0

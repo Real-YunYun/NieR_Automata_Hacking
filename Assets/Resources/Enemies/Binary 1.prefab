@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7324357528883886416}
   - component: {fileID: 921965462215850797}
   - component: {fileID: 3541292831640490524}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2112385200710604518}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Projectile Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 8914192437487585021}
   - component: {fileID: 7041090270773499430}
   - component: {fileID: 1413338304224481043}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 6843990854003623586}
   - component: {fileID: 7250034698355740585}
   - component: {fileID: 6907098784018313584}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,11 +301,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6869340418308665810}
   - component: {fileID: 7703544688001063669}
+  - component: {fileID: 2004484245708097370}
+  - component: {fileID: 609546604191441065}
   - component: {fileID: 7417108363715820076}
   - component: {fileID: 8572017080934572295}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Binary 1
-  m_TagString: Entity
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -341,27 +343,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 751117a31a6234c45bb087fa16aa47ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Invincible: 0
-  _health: 6
+  HealthComponent: {fileID: 2004484245708097370}
+  ExectuableComponent: {fileID: 0}
+  ThreadComponent: {fileID: 0}
   _energy: 25
   MoveSpeed: 10
-  FireRate: 3
-  CanMove: 1
-  CanShoot: 1
-  CanExecute: 1
-  ProjectileSpawn: {fileID: 0}
-  ProjectilePrefab: {fileID: 8968688179754820819, guid: 3b14888c0cc7d054e919f4de3ac76140, type: 3}
-  ShootingSource: {fileID: 0}
-  Executables:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  Threads: []
   Stats:
     BuildTime: 2
     BuildCost: 5
   DeathParticle: {fileID: 1963909997120546418, guid: f2a4b7626a244a04c83f06a5d8b0fbdc, type: 3}
+--- !u!114 &2004484245708097370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3713626421213575533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1050472bc286c488c6d336d3ba56be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Invincible: 0
+  HasInvincibilityFrames: 0
+  _health: 4
+--- !u!114 &609546604191441065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3713626421213575533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb281116520adab47bb4e6832a3051bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProjectileSpawn: {fileID: 2112385200710604518}
+  ProjectilePrefab: {fileID: 1629816792860340948, guid: 255e61b7c9e1a0e4c81e59141e222092, type: 3}
+  CanShoot: 1
+  FireRate: 3
+  FireRateDelay: 0
+  ComponentInstigator: {fileID: 0}
+  ShootingSource: {fileID: 0}
 --- !u!195 &7417108363715820076
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -409,7 +433,7 @@ GameObject:
   - component: {fileID: 9006022374355540369}
   - component: {fileID: 4733770348790435366}
   - component: {fileID: 1565844987537690255}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Pyramid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -663,7 +687,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6678418844439730514}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Components
   m_TagString: Untagged
   m_Icon: {fileID: 0}

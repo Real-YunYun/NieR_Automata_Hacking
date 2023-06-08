@@ -3,18 +3,20 @@ using Items.Executables;
 
 namespace Items {
     public class Nodes : Executable {
-        [Header("Abilities Parameters")] private GameObject TurretPrefab;
+        [Header("Abilities Parameters")] 
+        private GameObject TurretPrefab;
         private Transform TurretSpawn1;
         private Transform TurretSpawn2;
 
         protected override void Awake() {
+            Name = "Nodes";
+            Description = "Summon 2 Turrets to assist you during combat!";
+            Sprite = "Player/UI Images/Nodes";
+            Duration = 10f;
+            Cooldown = 20f;
+            Upkeep = 0f;
+
             Usable = true;
-            Stats.Name = "Nodes";
-            Stats.Description = "Summon 2 Turrets to assit you during combat";
-            Stats.Sprite = "Player/UI Images/Nodes";
-            Stats.Duration = 10f;
-            Stats.Cooldown = 20f;
-            Stats.Upkeep = 0f;
             this.enabled = false;
         }
 
@@ -31,8 +33,8 @@ namespace Items {
             Turret1.GetComponent<PlayerTurret>().PlayerTurretSpawn = TurretSpawn1;
             Turret2.GetComponent<PlayerTurret>().PlayerTurretSpawn = TurretSpawn2;
 
-            Destroy(Turret1, Stats.Duration);
-            Destroy(Turret2, Stats.Duration);
+            Destroy(Turret1, Duration);
+            Destroy(Turret2, Duration);
         }
     }
 }

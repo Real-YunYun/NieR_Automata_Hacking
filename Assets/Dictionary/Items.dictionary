@@ -1,0 +1,9 @@
+{
+Items: [
+		{
+			ComponentName: "Items.HomingThread",
+			InGameName: "Homing Thread",
+			Description: ""
+		}
+	]
+}

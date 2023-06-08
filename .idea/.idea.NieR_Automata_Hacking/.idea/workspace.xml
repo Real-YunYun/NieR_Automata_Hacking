@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="601aba2f-4656-49f9-b513-015185909590" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Dictionary/Items.dictionary" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Dictionary/Items.dictionary.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Danger Cube 1x1.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Danger Cube 1x1.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Danger Cube 2x2.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Danger Cube 2x2.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 10x30.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 10x30.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 12x12.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 12x12.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 14x14.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 14x14.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 16x16.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 16x16.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 1x1.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 1x1.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 20x20.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 20x20.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 20x50.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 20x50.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 26x26.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 26x26.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 2x2.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 2x2.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 2x4.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 2x4.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 4x12.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 4x12.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 4x24.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 4x24.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 4x32.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 4x32.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 4x50.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 4x50.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Destructible Cube 1x1.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Destructible Cube 1x1.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Destructible Cube 4x4.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Destructible Cube 4x4.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Player/Player Controller.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Player/Player Controller.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/User Interface.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/User Interface/Button.uss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/User Interface/Button.uss.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/User Interface/Pause Menu.uxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/User Interface/Pause Menu.uxml.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Components.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Components/DamageFieldComponent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Components/ExectuableComponent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Components/HealthComponent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Components/HealthComponent.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Components/IDamageable.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Components/MovementComponent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Components/MovementComponent.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Components/ShootingComponent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Components/ShootingComponent.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Components/ThreadComponent.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Item.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Item.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/PlayerCharacter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/PlayerCharacter.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Event Based/Procables/TrackingMissile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dictionary/Rooms.dictionary" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dictionary/Rooms.dictionary" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dictionary/Rooms.dictionary.backup" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dictionary/Rooms.dictionary.backup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dictionary/Rooms.dictionary.prebackup" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dictionary/Rooms.dictionary.prebackup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HDRPDefaultResources/DefaultLookDevProfile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HDRPDefaultResources/DefaultLookDevProfile.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Input Actions/PlayerControls.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Input Actions/PlayerControls.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Input Actions/PlayerControls.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Input Actions/PlayerControls.inputactions" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Post Processing/Main Camera Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Post Processing/Main Camera Profile.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Danger Cube.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Danger Cube.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 10x10.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 10x10.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 4x4.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 4x4.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 6x6.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 6x6.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 8x8.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube 8x8.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Default Cube.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Destructible Cube.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Building Blocks/Destructible Cube.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Building Blocks/RoomBuilderPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Building Blocks/RoomBuilderPrefab.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Enemies/Binary 0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Enemies/Binary 0.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Enemies/Binary 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Enemies/Binary 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Enemies/Binary Pointer 0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Enemies/Binary Pointer 0.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Enemies/Binary Pointer 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Enemies/Binary Pointer 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Enemies/Constant.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Enemies/Constant.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Enemies/EXE.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Enemies/EXE.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Enemies/NULL Pointer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Enemies/NULL Pointer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Enemies/NULL.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Enemies/NULL.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Enemies/Pointer 0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Enemies/Pointer 0.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Enemies/Pointer 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Enemies/Pointer 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Enemies/Pointer 2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Enemies/Pointer 2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Enemies/Shield Binary 0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Enemies/Shield Binary 0.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Enemies/Shield Binary 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Enemies/Shield Binary 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Ground/D.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Ground/D.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Ground/DL.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Ground/DL.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Ground/DLR.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Ground/DLR.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Ground/DR.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Ground/DR.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Ground/L.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Ground/L.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Ground/LR.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Ground/LR.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Ground/None.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Ground/None.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Ground/R.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Ground/R.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Ground/U.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Ground/U.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Ground/UD.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Ground/UD.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Ground/UDL.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Ground/UDL.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Ground/UDLR.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Ground/UDLR.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Ground/UDR.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Ground/UDR.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Ground/UL.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Ground/UL.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Ground/ULR.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Ground/ULR.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Ground/UR.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Ground/UR.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Materials/M_Danger.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Materials/M_Danger.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player/Firewall.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player/Firewall.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player/Main Camera.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player/Main Camera.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player/MiniMapCamera.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player/MiniMapCamera.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player/Player Turret.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player/Player Turret.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Projectiles/Homing Projectile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Projectiles/Homing Projectile.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Saves/0.sav" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Saves/0.sav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Dev Level.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Dev Level.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Dev Level/NavMesh.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Dev Level/NavMesh.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/HUB.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/HUB.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Binary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Binary.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/BinaryPointer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/BinaryPointer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Constant.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Constant.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/DangerCube.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/DangerCube.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/DestructibleCube.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/DestructibleCube.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/EXE.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/EXE.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Enemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/NULL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/NULL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/NULLPointer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/NULLPointer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Pointer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Pointer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Block.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Block.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Entity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Entity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/General Scripts/HealthComponent.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/General Scripts/HealthComponent.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/General Scripts/IDamage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Components/ThreadComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/General Scripts/IDamage.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Components/IDamageable.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Interactable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Interactable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/General Scripts/ItemPedestal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/ItemPedestal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Level/RoomBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Level/RoomBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Level/SpawnPlayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Level/SpawnPlayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Level/SpawnRoom.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Level/SpawnRoom.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Director.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Director.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/LevelManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/LevelManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Executables/Executable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Executables/Executable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Executables/Firewall.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Executables/Firewall.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Executables/Homing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Executables/Homing.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Executables/NoExecutable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Executables/NoExecutable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Executables/Nodes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Executables/Nodes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Executables/Overclock.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Executables/Overclock.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Executables/Rockets.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Executables/Rockets.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Components/ExectuableComponent.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Executables/Teleport.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Executables/Teleport.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Item.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Item.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/MainCamera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/MainCamera.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/MinimapManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/MinimapManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/PlayerController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/PlayerController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/PlayerTurret.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/PlayerTurret.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Constants/Orbitals/Orbital.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Constants/Orbitals/Orbital.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Constants/Orbitals/OrbitalCollider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Constants/Orbitals/OrbitalCollider.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Constants/Orbitals/PointerOrbital.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Constants/Orbitals/PointerOrbital.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Event Based/Procables/HomingThread.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Event Based/Procables/HomingThread.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Event Based/Procables/Proc.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Event Based/Procables/Proc.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Event Based/Procables/TrackingMissle.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Event Based/Procables/TrackingMissle.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Event Based/Procables/TrackingMissile.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Thread.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Thread.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Projectiles/EnemyProjectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Projectiles/EnemyProjectile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Projectiles/HomingProjectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Projectiles/HomingProjectile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Projectiles/PlayerProjectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Projectiles/PlayerProjectile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Projectiles/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Projectiles/Projectile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Projectiles/RocketProjectile.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Projectiles/RocketProjectile.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/General Scripts/Components/DamageFieldComponent.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Room/Room.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Room/Room.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Room/RoomInformation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Room/RoomInformation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/janfr/Documents/NieR_Automata_Hacking/Assets/Scripts/General Scripts/Entity.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/janfr/Documents/NieR_Automata_Hacking/Assets/Scripts/General Scripts/Entity.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/janfr/Documents/NieR_Automata_Hacking/Assets/Scripts/General Scripts/Entity.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/janfr/Documents/NieR_Automata_Hacking/Assets/Scripts/General Scripts/Entity.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/General Scripts/Interactable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/General Scripts/ItemPedestal.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/Singleton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Constants/Orbitals/OrbitalCollider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Event Based/Procables/Proc.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Event Based/Procables/TrackingMissile.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player Scripts/Threads/Thread.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.probuilder@5.0.6/Runtime/Core/PreferenceDictionary.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2LFeJDqRlS89R756A86i2eyX4kU" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Discover.Launch.Via.Unity": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\janfr\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\janfr\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\janfr\\AppData\\Local\\Symbols\\src"
+    ]
+  }
+}]]></component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Build/Nier Automata Hacking.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\janfr\Documents\NieR_Automata_Hacking\Build" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Unity\2021.3.4f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;F:\Games Creating\NieR_Automata_Hacking&quot; -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="F:\Games Creating\NieR_Automata_Hacking" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Unity\2021.3.4f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;F:\Games Creating\NieR_Automata_Hacking&quot; -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="F:\Games Creating\NieR_Automata_Hacking" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="601aba2f-4656-49f9-b513-015185909590" name="Changes" comment="" />
+      <created>1675471184820</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1675471184820</updated>
+      <workItem from="1675471188752" duration="139000" />
+      <workItem from="1675471378938" duration="43000" />
+      <workItem from="1675471495762" duration="97000" />
+      <workItem from="1675471688253" duration="5231000" />
+      <workItem from="1675482234154" duration="24000" />
+      <workItem from="1675482327162" duration="8151000" />
+      <workItem from="1675545690707" duration="1109000" />
+      <workItem from="1675582387552" duration="6153000" />
+      <workItem from="1675663021930" duration="1918000" />
+      <workItem from="1675665223196" duration="6800000" />
+      <workItem from="1675707397807" duration="1480000" />
+      <workItem from="1675835115486" duration="7448000" />
+      <workItem from="1675881253762" duration="5473000" />
+      <workItem from="1675933955954" duration="190000" />
+      <workItem from="1676176185429" duration="5193000" />
+      <workItem from="1676329070109" duration="13014000" />
+      <workItem from="1676490753772" duration="5952000" />
+      <workItem from="1679457732987" duration="46000" />
+      <workItem from="1679615657642" duration="597000" />
+      <workItem from="1680221235801" duration="29000" />
+      <workItem from="1680223392468" duration="3600000" />
+      <workItem from="1680389923746" duration="646000" />
+      <workItem from="1681323148253" duration="14263000" />
+      <workItem from="1681342287413" duration="29143000" />
+      <workItem from="1681400331795" duration="5851000" />
+      <workItem from="1681450083050" duration="6154000" />
+      <workItem from="1681498580805" duration="1570000" />
+      <workItem from="1681540459273" duration="3520000" />
+      <workItem from="1684266306289" duration="1387000" />
+      <workItem from="1684467682112" duration="59000" />
+      <workItem from="1684797742889" duration="10745000" />
+      <workItem from="1684819581818" duration="972000" />
+      <workItem from="1684820594084" duration="9795000" />
+      <workItem from="1684830511957" duration="264000" />
+      <workItem from="1684853947764" duration="28861000" />
+      <workItem from="1685320618873" duration="9080000" />
+      <workItem from="1685333213053" duration="7301000" />
+      <workItem from="1685343079454" duration="2000" />
+      <workItem from="1685373385858" duration="30012000" />
+      <workItem from="1685460444202" duration="18944000" />
+      <workItem from="1685498072182" duration="18080000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Frame#RoomBuilder.Analyze" memberName="TempEnemyName" />
+        <PinnedItemInfo parentTag="Frame#RoomBuilder.Analyze" memberName="FilteredName" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="UNITY_DEBUG_RUN_CONFIGURATION">
+        <watch expression="Colliders[3]" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>

@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Constant : Enemy
-{
-	[Header("Constant Parameters")]
-	public int random;
+namespace Entities.Enemies {
+	public class Constant : Enemy {
+		protected void Awake() {
+			TryGetComponent(out ThreadComponent);
+		}
 
-	protected override void Start()
-	{
-		base.Start();
-		
-		AddThread<Items.PointerOrbital>();
+		protected void Start() {
+			if (ThreadComponent) ThreadComponent.AddThread<Items.PointerOrbital>();
+		}
 	}
 }

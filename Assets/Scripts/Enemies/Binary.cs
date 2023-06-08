@@ -1,39 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Entities.Projectiles;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Binary : Enemy
-{
-    [Header("Biary Parameters")]
-    private NavMeshAgent Agent;
+namespace Entities.Enemies {
+    public class Binary : Enemy {
+        [Header("Biary Parameters")] 
+        private NavMeshAgent Agent;
+        private ShootingComponent ShootingComponent;
 
-    // Start is called before the first frame update
-    protected override void Start()
-    {
-        base.Start();
-        
-        Agent = GetComponent<NavMeshAgent>();
-        ProjectileSpawn = transform.Find("Projectile Spawn");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Agent.enabled)
-        {
-            Agent.SetDestination(GameManager.Instance.PlayerInstance.transform.position);
-            if (Agent.remainingDistance < 15f) Fire();
+        // Start is called before the first frame update
+        protected void Start() {
+            Agent = GetComponent<NavMeshAgent>();
+            ShootingComponent = GetComponent<ShootingComponent>();
         }
-    }
 
-    public override void Death()
-    {
-        if (transform.parent)
-        {
-            Instantiate(base.DeathParticle, gameObject.transform.position, transform.rotation);
-            Destroy(gameObject);
+        // Update is called once per frame
+        void Update() {
+            if (Agent.enabled && GameManager.Instance.PlayerControllerInstance.Character != null) {
+                Agent.SetDestination(GameManager.Instance.PlayerControllerInstance.Character.transform.position);
+                if (Agent.remainingDistance < 15f) ShootingComponent.Fire();
+            }
         }
-        else base.Death();
     }
 }

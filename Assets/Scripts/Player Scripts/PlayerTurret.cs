@@ -1,5 +1,6 @@
 using UnityEngine;
-using Projectiles;
+using Entities;
+using Entities.Projectiles;
 
 public class PlayerTurret : MonoBehaviour
 {
@@ -11,18 +12,16 @@ public class PlayerTurret : MonoBehaviour
     private float VelocityZ = 0.0f;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnFireStarted += OnFire;
+    void Start() {
+        if (GameManager.Instance.PlayerControllerInstance.PlayerShootingComponent == null) return; 
+        GameManager.Instance.PlayerControllerInstance.PlayerShootingComponent.OnFireStarted += OnFire;
         //Optional Detail perhaps an upgrade?
-        ProjectilePrefab = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().GetProjectile();
+        ProjectilePrefab = GameManager.Instance.PlayerControllerInstance.PlayerShootingComponent.GetProjectile();
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (!GameManager.Instance.IsGamePaused)
-        {
+    void Update() {
+        if (!GameManager.Instance.IsGamePaused) {
             float NewX = Mathf.SmoothDamp(transform.position.x, PlayerTurretSpawn.position.x, ref VelocityX, SmoothTime, Mathf.Infinity, Time.unscaledDeltaTime);
             float NewY = PlayerTurretSpawn.position.y;
             float NewZ = Mathf.SmoothDamp(transform.position.z, PlayerTurretSpawn.position.z, ref VelocityZ, SmoothTime, Mathf.Infinity, Time.unscaledDeltaTime);
@@ -38,14 +37,13 @@ public class PlayerTurret : MonoBehaviour
         }
     }
 
-    public void OnFire()
-    {
+    public void OnFire() {
         Projectile TempProjectile = Instantiate(ProjectilePrefab, transform.Find("Projectile Spawn").position, transform.Find("Projectile Spawn").rotation).GetComponent<Projectile>();
-        TempProjectile.InitResult(GameManager.Instance.PlayerInstance.GetComponent<PlayerController>());
+        TempProjectile.Result = new(GameManager.Instance.PlayerControllerInstance.PlayerCharacter);
     }
 
-    void OnDisable()
-    {
-        GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().OnFireStarted -= OnFire;
+    void OnDisable() {
+        if (GameManager.Instance.PlayerControllerInstance.PlayerShootingComponent == null) return;
+        GameManager.Instance.PlayerControllerInstance.PlayerShootingComponent.OnFireStarted -= OnFire;
     }
 }

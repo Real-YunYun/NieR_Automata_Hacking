@@ -1,21 +1,19 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-
-[System.Serializable] public enum RoomType { D, DL, DLR, DR, L, LR, R, U, UD, UDL, UDLR, UDR, UL, ULR, UR }
+using Entities.Enemies;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(BoxCollider))]
 public class Room : MonoBehaviour {
-    
-    [SerializeField] private bool isSpawnRoom;
-    [SerializeField] private bool hasSpawnedEnemies;
     [SerializeField] public bool StarterRoom = false;
 
     public RoomInformation Information {
         set => _RoomInformation = value;
+        get => _RoomInformation;
     }
 
     [SerializeField] private RoomInformation _RoomInformation;
-    public RoomType Type = RoomType.D;
     private List<Enemy> Enemies = new List<Enemy>();
 
     // Room Entering Mechanics, not for Endless mode, for campaign
@@ -42,37 +40,16 @@ public class Room : MonoBehaviour {
         InRoomCollider.size = new Vector3(50, 20, 50);
         InRoomCollider.center = new Vector3(0, 5, 0);
         
-        BuildRoom();
+        if (!StarterRoom) BuildRoom();
     }
     
     #endregion 
     
     #region Room Spawners / Handlers
 
-    private static List<RoomInformation> GetList(RoomDictionary Dictionary, RoomType Type) {
-        if (Type == RoomType.D) return Dictionary.D;
-        if (Type == RoomType.DL) return Dictionary.DL;
-        if (Type == RoomType.DLR) return Dictionary.DLR;
-        if (Type == RoomType.DR) return Dictionary.DR;
-        if (Type == RoomType.L) return Dictionary.L;
-        if (Type == RoomType.LR) return Dictionary.LR;
-        if (Type == RoomType.R) return Dictionary.R;
-        if (Type == RoomType.U) return Dictionary.U;
-        if (Type == RoomType.UD) return Dictionary.UD;
-        if (Type == RoomType.UDL) return Dictionary.UDL;
-        if (Type == RoomType.UDLR) return Dictionary.UDLR;
-        if (Type == RoomType.UDR) return Dictionary.UDR;
-        if (Type == RoomType.UL) return Dictionary.UL;
-        if (Type == RoomType.ULR) return Dictionary.ULR;
-        if (Type == RoomType.UR) return Dictionary.UR;
-        return null;
-    }
-
     private void BuildRoom() {
-        if (StarterRoom) return;
-        
         // Get Room Information for making the room
-        List<RoomInformation> GottenInformation = GetList(LevelManager.Instance.Dictionary, Type);
+        List<RoomInformation> GottenInformation = LevelManager.Instance.Dictionary.GetList(_RoomInformation.Type);
         int RandomAccessor = Random.Range(0, GottenInformation.Count);
         if (GottenInformation.Count == 0) return;
         _RoomInformation = GottenInformation[RandomAccessor];
@@ -84,7 +61,7 @@ public class Room : MonoBehaviour {
         // Instantiating GameObjects
         if (_RoomInformation != null) {
             foreach (Block Block in _RoomInformation.Blocks) {
-                GameObject CreatedBlock = Instantiate(Resources.Load<GameObject>("Building Blocks/" + Block.Name), Block.Position + transform.position, Quaternion.identity);
+                GameObject CreatedBlock = Instantiate(Resources.Load<GameObject>("Building Blocks/" + Block.Name), Block.Position + transform.position, Quaternion.Euler(Block.Rotation));
                 CreatedBlock.name = Block.Name + " (Clone)";
                 CreatedBlock.transform.parent = Layout;
             }
@@ -92,12 +69,13 @@ public class Room : MonoBehaviour {
     }
 
     private void SpawnEnemies() {
-        hasSpawnedEnemies = true;
+        _RoomInformation.HasSpawnedEnemies = true;
         if (StarterRoom) return;
         Transform Layout = transform.Find("Layout");
 
-        Debug.Log("Spawned Enemies");
         if (_RoomInformation.Enemies.Count == 0) return;
+        
+        // should rooms be randomly spawn enemies? perhaps have a toggle? so best of both worlds?
         
         //Create Enemies
         foreach (EnemyTemplate EnemyToSpawn in _RoomInformation.Enemies) {
@@ -112,8 +90,10 @@ public class Room : MonoBehaviour {
     #region Handling Room Enteries and Exits
 
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject != GameManager.Instance.PlayerInstance) return;
-        if (!hasSpawnedEnemies) SpawnEnemies();
+        if (other.gameObject != GameManager.Instance.PlayerControllerInstance.Character && GameManager.Instance.MainCameraInstance) return;
+        GameManager.Instance.MainCameraInstance.GetComponent<MainCamera>().UpdateRoomInformation(_RoomInformation, this);
+
+        if (!_RoomInformation.HasSpawnedEnemies) SpawnEnemies();
     }
 
     #endregion

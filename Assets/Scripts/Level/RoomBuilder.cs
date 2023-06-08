@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.IO;
+using System.Collections.Generic;
 using UnityEditor;
+using Entities;
+using Entities.Enemies;
 
 #if UNITY_EDITOR
 public class RoomBuilder : MonoBehaviour {
@@ -13,9 +16,14 @@ public class RoomBuilder : MonoBehaviour {
     [Tooltip("Creates 2 versions of backups, one with pre-saved Dictionary, along with the same data just saved as the *.backup format")]
     public bool BackupDictionaries = true;
     
-    [Header("Room Parameters")]
+    [Header("Unique Identifiers")]
     [SerializeField] int RoomID = 0;
     [SerializeField] RoomType RoomType = RoomType.U;
+    [SerializeField] RoomSpecialType SpecialType = RoomSpecialType.None;
+    
+    [Header("Room Gameplay Variables")]
+    public bool ChanceToSpawnEnemies = false;
+    public List<string> SpecialRoomArguments = new List<string>();
 
     [Header("Importing Room Parameters")]
     [SerializeField] public int ImportingRoomID;
@@ -25,9 +33,16 @@ public class RoomBuilder : MonoBehaviour {
         RoomInformation CurrentRoom = new RoomInformation();
         CurrentRoom.ID = RoomID;
         CurrentRoom.Type = RoomType;
+        CurrentRoom.SpecialType = SpecialType;
+
+        CurrentRoom.ClearedRoom = false;
+        CurrentRoom.HasSpawnedEnemies = false;
+        CurrentRoom.ChanceToSpawnEnemies = ChanceToSpawnEnemies;
+        CurrentRoom.SpecialRoomArguments = SpecialRoomArguments;
         
         Transform Layout = transform.Find("Layout");
-
+        RoomID++;
+        
         //Getting All Children
         for (int i = 0; i < Layout.childCount; ++i) {
             // Unpack the GameObject if it's a prefab!
@@ -79,6 +94,8 @@ public class RoomBuilder : MonoBehaviour {
                         1,
                         (int)Layout.GetChild(i).gameObject.transform.position.z
                     );
+
+                    TempBlock.Rotation = Layout.GetChild(i).gameObject.transform.rotation.eulerAngles;
 
                     CurrentRoom.Blocks.Add(TempBlock);
                 }
@@ -141,7 +158,7 @@ public class RoomBuilder : MonoBehaviour {
         
         // Creating Blocks
         foreach (Block Block in ImportedInformation.Blocks) {
-            GameObject CreatedBlock = Instantiate(Resources.Load<GameObject>("Building Blocks/" + Block.Name), Block.Position, Quaternion.identity);
+            GameObject CreatedBlock = Instantiate(Resources.Load<GameObject>("Building Blocks/" + Block.Name), Block.Position, Quaternion.Euler(Block.Rotation));
             CreatedBlock.name = Block.Name + " (Clone)";
             CreatedBlock.transform.parent = Layout;
         }

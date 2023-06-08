@@ -2,24 +2,18 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering.HighDefinition.Attributes;
 
-namespace Projectiles
-{
-
-    public struct HitResult
-    {
+namespace Entities.Projectiles {
+    public struct HitResult {
         // Entity that fired this Projectile
         public Entity Instigator;
         public Entity HitEntity;
-        public float Distance;
-        public Vector3 Location;
+        public System.Type EntityType;
 
         // Pre Initialization of the Projectile shot, although not all the information needs to be acquired yet
-        public void Init(Entity _Instigator, Entity _hitEntity, float _Distance = 0.0f, Vector3 _Location = default)
-        {
-            Instigator = _Instigator;
+        public HitResult(Entity _instigator, Entity _hitEntity = null, System.Type _EntityType = null) {
+            Instigator = _instigator;
             HitEntity = _hitEntity;
-            Distance = _Distance;
-            Location = _Location;
+            EntityType = _EntityType;
         }
     }
 
@@ -28,11 +22,14 @@ namespace Projectiles
     {
         [Header("Projectile Parameters")] 
         protected HitResult _Result;
-        public HitResult Result => _Result;
+        public HitResult Result {
+            get => _Result;
+            set => _Result = value;
+        }
         protected float ProjectileSpeed = 2500f;
         protected Rigidbody Rigidbody;
         protected float LifeSpan = 3f;
-        protected float Damage = 1;
+        protected float Damage = 1f;
         
         #region Events and Delegates
         
@@ -40,6 +37,7 @@ namespace Projectiles
         public delegate void OnProjectileHitDelegate(Entity HitEntity);
 
         public event OnProjectileSpawnedDelegate OnProjectileSpawned;
+        [Tooltip("Only Generates \"OnHit\" when it hits an Entity with a HealthComponent")]
         public event OnProjectileHitDelegate OnProjectileHit;
 
         protected void Execute_OnProjectileSpawned() { if (OnProjectileSpawned != null) OnProjectileSpawned(); }
@@ -47,16 +45,13 @@ namespace Projectiles
 
         #endregion
 
-        protected virtual void Awake()
-        {
+        protected virtual void Awake() {
             Rigidbody = gameObject.GetComponent<Rigidbody>();
             Rigidbody.AddRelativeForce(new Vector3(0, 0, ProjectileSpeed));
             Destroy(gameObject, LifeSpan);
             
-            foreach (Projectile removing in GetComponents<Projectile>())
-            {
-                if (removing.GetType() != GetType())
-                {
+            foreach (Projectile removing in GetComponents<Projectile>()) {
+                if (removing.GetType() != GetType()) {
                     _Result = removing.Result;
                     Destroy(removing);
                 }
@@ -65,8 +60,7 @@ namespace Projectiles
             if (OnProjectileSpawned != null) OnProjectileSpawned();
         }
 
-        public void ChangeDirection(Vector3 NewDirection)
-        {
+        public void ChangeDirection(Vector3 NewDirection) {
             Rigidbody.velocity = Vector3.zero;
             Rigidbody.AddRelativeForce(NewDirection * ProjectileSpeed);
             transform.rotation = Quaternion.LookRotation(Rigidbody.velocity);
@@ -74,25 +68,23 @@ namespace Projectiles
 
         protected abstract void OnEnable();
 
-        public void InitResult(Entity _instigator)
-        {
-            _Result.Instigator = _instigator;
-        }
+        protected void OnTriggerEnter(Collider other) {
+            if (other.CompareTag("Indestructible")) Destroy(gameObject);
 
-        protected void OnTriggerEnter(Collider other)
-        {
             if (other.gameObject.GetComponent<Entity>() == _Result.Instigator) return;
             if (!other.gameObject.GetComponent<Entity>()) return;
             
-            _Result.Init(_Result.Instigator, other.gameObject.GetComponent<Entity>(), Vector3.Distance(Result.Instigator.transform.position, transform.position));
-            if (OnProjectileHit != null) OnProjectileHit(_Result.HitEntity);
+            _Result = new(_Result.Instigator, other.gameObject.GetComponent<Entity>(),  other.gameObject.GetComponent<Entity>().GetType());
             HandleTrigger(other);
         }
 
-        protected void HandleTrigger(Collider other)
-        {
-            other.gameObject.GetComponent<Entity>().TakeDamage(Damage);
-            Destroy(gameObject);
+        protected void HandleTrigger(Collider other) {
+            HealthComponent EntityHealthComponent;
+            if (other.gameObject.TryGetComponent(out EntityHealthComponent)) {
+                if (OnProjectileHit != null) OnProjectileHit(_Result.HitEntity);
+                EntityHealthComponent.TakeDamage(Damage, Result.Instigator, out _Result);
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -1,9 +1,23 @@
+using System;
 using UnityEngine;
 
-public class DestructibleCube : Entity
-{
-    public override void Death()
-    {
-        Destroy(gameObject);
+namespace Entities.Enemies {
+    public class DestructibleCube : Entity {
+
+        private void Awake() {
+            TryGetComponent(out HealthComponent);
+        }
+
+        private void OnEnable() {
+            HealthComponent.OnDeath += Death;
+        }
+
+        private void Death() {
+            Destroy(gameObject);
+        }
+        
+        private void OnDisable() {
+            HealthComponent.OnDeath -= Death;
+        }
     }
 }

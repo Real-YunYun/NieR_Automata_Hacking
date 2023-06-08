@@ -1,19 +1,21 @@
+using Entities.Projectiles;
 using UnityEngine;
 using Items.Executables;
 
 namespace Items {
     public class Firewall : Executable {
-        [Header("Abilities Parameters")] private GameObject FirewallPrefab;
+        [Header("Abilities Parameters")] 
+        private GameObject FirewallPrefab;
 
-        protected override void Awake()
-        {
+        protected override void Awake() {
+            Name = "Firewall";
+            Description = "Summon a Firewall to block projectiles and move enemies";
+            Sprite = "Player/UI Images/Firewall";
+            Duration = 10f;
+            Cooldown = 25f;
+            Upkeep = 0f;
+
             Usable = true;
-            Stats.Name = "Firewall";
-            Stats.Description = "Summon a Firewall to block projectiles and move enemies";
-            Stats.Sprite = "Player/UI Images/Firewall";
-            Stats.Duration = 10f;
-            Stats.Cooldown = 15f;
-            Stats.Upkeep = 0f;
             this.enabled = false;
         }
 
@@ -21,10 +23,10 @@ namespace Items {
         {
             OnCooldown = true;
             FirewallPrefab = Resources.Load<GameObject>("Player/Firewall");
-            Transform ProjectileSpawn = transform.Find("Player Mesh/Projectile Spawn");
+            Transform ProjectileSpawn = Owner.GetComponent<ShootingComponent>().GetProjectileSpawn();
             GameObject Firewall = Instantiate(FirewallPrefab, ProjectileSpawn.position, ProjectileSpawn.rotation);
             Firewall.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, 5), ForceMode.Impulse);
-            Destroy(Firewall, Stats.Duration);
+            Destroy(Firewall, Duration);
         }
     }
 }

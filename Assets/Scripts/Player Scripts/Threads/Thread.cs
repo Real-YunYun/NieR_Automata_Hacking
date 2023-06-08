@@ -1,4 +1,5 @@
 using System;
+using Entities;
 using UnityEngine;
 
 namespace Items.Threads {
@@ -12,10 +13,20 @@ namespace Items.Threads {
 
     [Serializable, DefaultExecutionOrder(2)]
     public abstract class Thread : Item {
-        protected Entity Owner => transform.GetComponent<Entity>();
-        
         [Header("Thread Parameters")]
         protected EThreadBehaviour Type = EThreadBehaviour.EventBased;
+        
+        protected new virtual void Awake() {
+            Name = "None";
+            Description = "";
+            Sprite = "Player/UI Images/None";
+            Duration = 0f;
+            Cooldown = 0f;
+            Upkeep = 0f;
+            
+            Type = EThreadBehaviour.EventBased;
+            this.enabled = true;
+        }
 
         #region Event Based Parameters
         
@@ -29,15 +40,5 @@ namespace Items.Threads {
         protected void Execute_OnThreadEnded() { if (OnThreadEnded != null) OnThreadEnded(); }
 
         #endregion
-        
-        
-        protected new virtual void Awake() {
-            Stats.Name = "None";
-            Stats.Description = "";
-            Stats.Sprite = "Player/UI Images/None";
-            Stats.Duration = 0f;
-            Stats.Cooldown = 0f;
-            Stats.Upkeep = 0f;
-        }
     }
 }

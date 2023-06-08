@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using Unity.Collections;
+using Entities;
+using Entities.Projectiles;
 
 namespace Items.Threads.Constant.Obritals
 {
@@ -10,8 +12,7 @@ namespace Items.Threads.Constant.Obritals
         Lagged,
     }
 
-    public abstract class Orbital : Constant
-    {
+    public abstract class Orbital : Constant {
         [Header("Orbital Fields")] 
         protected GameObject OrbitingPrefab;
 
@@ -40,15 +41,15 @@ namespace Items.Threads.Constant.Obritals
         [SerializeField]
         protected float TickDamage = 0.1f;
 
-        protected virtual void OnEnable()
-        {
-            OrbitingPrefab = Instantiate(Resources.Load<GameObject>("Building Blocks/Danger Cube"));
+        protected virtual void OnEnable() {
+            OrbitingPrefab = Instantiate(Resources.Load<GameObject>("Building Blocks/Danger Cube 1x1"));
             OrbitingPrefab.transform.position = transform.position + new Vector3(Range, 0.0f, 0.0f);
+            Entity preExistingEntity;
+            if (OrbitingPrefab.TryGetComponent(out preExistingEntity)) Destroy(preExistingEntity);
             Execute_OnThreadStarted();
         }
 
-        protected virtual void OnDisable()
-        {
+        protected virtual void OnDisable() {
             Destroy(OrbitingPrefab);
             Execute_OnThreadEnded();
         }
@@ -86,11 +87,12 @@ namespace Items.Threads.Constant.Obritals
             return positionOffset;
         }
 
-        protected virtual void DealDamage(Entity OverlappedEntity)
-        {
+        protected virtual void DealDamage(Entity OverlappedEntity) {
             if (OverlappedEntity == Owner) return;
-            
-            OverlappedEntity.TakeDamage();
+            HealthComponent OverlappedEntityHealthComponent;
+            HitResult Result = new HitResult(Owner);
+            if (OverlappedEntity.TryGetComponent(out OverlappedEntityHealthComponent)) 
+                OverlappedEntityHealthComponent.TakeDamage(TickDamage, Owner, out Result);
         }
 
         #if UNITY_EDITOR

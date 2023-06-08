@@ -1,47 +1,57 @@
 using System.Collections;
 using UnityEngine;
 using Items.Executables;
+using Entities;
+using Entities.Projectiles;
 
 namespace Items {
     public class Overclock : Executable {
-        [Header("Overclock Parameter")] private Transform PlayerBody;
+        [Header("Overclock Parameter")] 
+        private Transform PlayerBody;
         private GameObject AfterImage;
         GameObject[] Trail = new GameObject[10];
         private bool CreateImage = true;
 
-        [Header("Previous Parameters")] private float pre_MoveSpeed = 0.0f;
+        [Header("Previous Parameters")] 
+        private float pre_MoveSpeed = 0.0f;
         private float pre_FireRate = 0.0f;
 
         protected override void Awake() {
+            Name = "Overclock";
+            Description = "Slows down time and makes you move faster";
+            Sprite = "Player/UI Images/None";
+            Duration = 3f;
+            Cooldown = 20f;
+            Upkeep = 0f;
+
             Usable = true;
-            Stats.Name = "Overclock";
-            Stats.Description = "Slows down time and makes you move faster";
-            Stats.Sprite = "Player/UI Images/None";
-            Stats.Duration = 3f;
-            Stats.Cooldown = 20f;
-            Stats.Upkeep = 0f;
             this.enabled = false;
         }
 
         void OnEnable() {
+            MovementComponent MovementComponent = GameManager.Instance.PlayerControllerInstance.PlayerMovementComponent;
+            ShootingComponent ShootingComponent = GameManager.Instance.PlayerControllerInstance.PlayerShootingComponent;
+            if (MovementComponent == null || ShootingComponent == null) return;
+            
             AfterImage = Resources.Load<GameObject>("Player/Player Overclock Clone");
-            PlayerBody = GameManager.Instance.PlayerInstance.transform.Find("Player Mesh").transform;
+            if (GameManager.Instance.PlayerControllerInstance.PlayerCharacter != null)
+                PlayerBody = GameManager.Instance.PlayerControllerInstance.PlayerCharacter.transform.Find("Player Mesh").transform;
 
             OnCooldown = true;
             Time.timeScale = 0.1f;
-            pre_MoveSpeed = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().MoveSpeed;
-            pre_FireRate = GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().FireRate;
+            pre_MoveSpeed = MovementComponent.MoveSpeed;
+            pre_FireRate = ShootingComponent.FireRate;
 
-            GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().MoveSpeed = 10f / Time.timeScale + 2f;
-            GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().FireRate = 10f / Time.timeScale;
-            StartCoroutine("Cooldown");
+            MovementComponent.MoveSpeed = 10f / Time.timeScale + 2f;
+            ShootingComponent.FireRate = 10f / Time.timeScale + 2f;
+            StartCoroutine("ExecutableCooldown");
         }
 
         protected override void Update() {
             if (!GameManager.Instance.IsGamePaused) {
-                Stats.Upkeep += Time.unscaledDeltaTime;
-                if (Stats.Upkeep >= Stats.Cooldown) {
-                    Stats.Upkeep = 0;
+                Upkeep += Time.unscaledDeltaTime;
+                if (Upkeep >= Cooldown) {
+                    Upkeep = 0;
                     OnCooldown = false;
                     this.enabled = false;
                 }
@@ -50,12 +60,17 @@ namespace Items {
             }
         }
 
-        IEnumerator Cooldown() {
-            yield return new WaitForSeconds(Stats.Duration * Time.timeScale);
+        IEnumerator ExecutableCooldown() {
+            yield return new WaitForSeconds(Duration * Time.timeScale);
+            
+            MovementComponent MovementComponent = GameManager.Instance.PlayerControllerInstance.PlayerMovementComponent;
+            ShootingComponent ShootingComponent = GameManager.Instance.PlayerControllerInstance.PlayerShootingComponent;
+            if (MovementComponent == null || ShootingComponent == null) yield break;
+            
             CreateImage = false;
             Time.timeScale = 1f;
-            GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().MoveSpeed = pre_MoveSpeed;
-            GameManager.Instance.PlayerInstance.GetComponent<PlayerController>().FireRate = pre_FireRate;
+            MovementComponent.MoveSpeed = pre_MoveSpeed;
+            ShootingComponent.FireRate = pre_FireRate;
         }
 
         IEnumerator CreateAfterImage() {

@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Entity
-  - Damage
   - Player Projectile
   - Enemy Projectile
   - Indestructible
@@ -13,6 +12,7 @@ TagManager:
   - Interact
   - Room
   - Room Spawner
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -22,9 +22,9 @@ TagManager:
   - UI
   - NavMeshBaker
   - Aiming
-  - Player
+  - Entity
   - Minimap Icon
-  - Enemy
+  - 
   - 
   - 
   - 

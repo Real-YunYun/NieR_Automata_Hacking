@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1825998501019621343}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Components
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8414637782633587916}
   - component: {fileID: 1709438699890778585}
   - component: {fileID: 769000352926174946}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 7748990404378012080}
   - component: {fileID: 758141307955804775}
   - component: {fileID: 1324376401286105988}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,12 +219,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6980814868325675224}
   - component: {fileID: 6980814868325675227}
+  - component: {fileID: 8135208645944036224}
   - component: {fileID: 6980814868325675226}
   - component: {fileID: 6980814868325675221}
   - component: {fileID: 6980814868325675220}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: NULL
-  m_TagString: Entity
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -260,12 +261,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159feaa0162f819459e65af793cdb8c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Invincible: 1
-  _health: 1
+  HealthComponent: {fileID: 8135208645944036224}
+  _energy: 25
+  MoveSpeed: 10
+  Executables:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Threads: []
   Stats:
     BuildTime: 0
     BuildCost: 0
   DeathParticle: {fileID: 1963909997120546418, guid: f2a4b7626a244a04c83f06a5d8b0fbdc, type: 3}
+--- !u!114 &8135208645944036224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6980814868325675225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1050472bc286c488c6d336d3ba56be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Invincible: 1
+  HasInvincibilityFrames: 0
+  _health: 1
 --- !u!195 &6980814868325675226
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -328,7 +351,7 @@ GameObject:
   - component: {fileID: 6980814869066202632}
   - component: {fileID: 6980814869066202629}
   - component: {fileID: 6980814869066202634}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,7 +434,7 @@ GameObject:
   - component: {fileID: 6980814870247506932}
   - component: {fileID: 6980814870247506929}
   - component: {fileID: 6980814870247506934}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -540,7 +563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3607896280079042863, guid: c788cc7df6ed8b847b3c88a65f49e304, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c788cc7df6ed8b847b3c88a65f49e304, type: 3}

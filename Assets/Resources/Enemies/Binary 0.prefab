@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9053712510651710937}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Components
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7503463704677041683}
   - component: {fileID: 6073602353829993961}
   - component: {fileID: 3604081479698309647}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 8474667200779579213}
   - component: {fileID: 4103934861719023920}
   - component: {fileID: 5446234379743073256}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4480985203291866616}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Projectile Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 7153527409274578853}
   - component: {fileID: 7153527409274578850}
   - component: {fileID: 7153527409274578851}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,11 +333,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7153527409479970419}
   - component: {fileID: 5390808604659530307}
+  - component: {fileID: 1677859708}
+  - component: {fileID: 6940126549289613346}
   - component: {fileID: 5433964428004556738}
   - component: {fileID: 7153527409479970418}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Binary 0
-  m_TagString: Entity
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -373,27 +375,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 751117a31a6234c45bb087fa16aa47ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Invincible: 0
-  _health: 8
+  HealthComponent: {fileID: 1677859708}
+  ExectuableComponent: {fileID: 0}
+  ThreadComponent: {fileID: 0}
   _energy: 25
   MoveSpeed: 10
-  FireRate: 3
-  CanMove: 1
-  CanShoot: 1
-  CanExecute: 1
-  ProjectileSpawn: {fileID: 0}
-  ProjectilePrefab: {fileID: 1629816792860340948, guid: 255e61b7c9e1a0e4c81e59141e222092, type: 3}
-  ShootingSource: {fileID: 0}
-  Executables:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  Threads: []
   Stats:
     BuildTime: 2
     BuildCost: 2
   DeathParticle: {fileID: 1963909997120546418, guid: f2a4b7626a244a04c83f06a5d8b0fbdc, type: 3}
+--- !u!114 &1677859708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153527409479970420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1050472bc286c488c6d336d3ba56be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Invincible: 0
+  HasInvincibilityFrames: 0
+  _health: 4
+--- !u!114 &6940126549289613346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153527409479970420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb281116520adab47bb4e6832a3051bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProjectileSpawn: {fileID: 4480985203291866616}
+  ProjectilePrefab: {fileID: 8968688179754820819, guid: 3b14888c0cc7d054e919f4de3ac76140, type: 3}
+  CanShoot: 1
+  FireRate: 3
+  FireRateDelay: 0
+  ComponentInstigator: {fileID: 0}
+  ShootingSource: {fileID: 0}
 --- !u!195 &5433964428004556738
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -441,7 +465,7 @@ GameObject:
   - component: {fileID: 7153527410632956350}
   - component: {fileID: 7153527410632956351}
   - component: {fileID: 7153527410632956336}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Pyramid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -631,7 +655,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 0
+  m_VersionIndex: 6
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8771266884766623767}
   - component: {fileID: 3028068937327091745}
   - component: {fileID: 229320363010202629}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 5452731952160005910}
   - component: {fileID: 8066502141522476727}
   - component: {fileID: 3537253842796688251}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 8142690492785500584}
   - component: {fileID: 8142690492785500590}
   - component: {fileID: 8142690492785500591}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Pyramid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 8142690492878304507}
   - component: {fileID: 8142690492878304505}
   - component: {fileID: 8142690492878304506}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Base Plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 8142690493156904096}
   - component: {fileID: 8142690493156904102}
   - component: {fileID: 8142690493156904103}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,7 +435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8142690493260669238}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,7 +469,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8142690493574750540}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Projectile Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -501,10 +501,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8142690493675382237}
   - component: {fileID: 8142690493675382211}
+  - component: {fileID: 6021705606371158625}
   - component: {fileID: 8142690493675382236}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Constant
-  m_TagString: Entity
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -539,17 +540,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52fc729c63dca942bf96a861a790bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Invincible: 0
-  _health: 25
+  HealthComponent: {fileID: 6021705606371158625}
   _energy: 25
   MoveSpeed: 10
-  FireRate: 8
-  CanMove: 1
-  CanShoot: 1
-  CanExecute: 1
-  ProjectileSpawn: {fileID: 0}
-  ProjectilePrefab: {fileID: 0}
-  ShootingSource: {fileID: 0}
   Executables:
   - {fileID: 0}
   - {fileID: 0}
@@ -561,6 +554,21 @@ MonoBehaviour:
     BuildCost: 15
   DeathParticle: {fileID: 1963909997120546418, guid: f2a4b7626a244a04c83f06a5d8b0fbdc, type: 3}
   random: 0
+--- !u!114 &6021705606371158625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8142690493675382238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1050472bc286c488c6d336d3ba56be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Invincible: 1
+  HasInvincibilityFrames: 0
+  _health: 50
 --- !u!65 &8142690493675382236
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -583,7 +591,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5934723174545415421}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Components
   m_TagString: Untagged
   m_Icon: {fileID: 0}

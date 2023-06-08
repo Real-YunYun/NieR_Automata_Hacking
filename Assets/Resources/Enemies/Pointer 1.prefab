@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6392322776426647915}
   - component: {fileID: 4870880585716492053}
   - component: {fileID: 439654014125095070}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 1850655493713721251}
   - component: {fileID: 1850655493713721254}
   - component: {fileID: 1850655493713721253}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,10 +195,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1850655494181906885}
   - component: {fileID: 4903064140447576219}
+  - component: {fileID: -7388397298078997083}
   - component: {fileID: 1850655494181906884}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Pointer 1
-  m_TagString: Entity
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,15 +233,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9979e98e0659d7a4a9ca6f511dc60cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Invincible: 0
-  _health: 15
+  HealthComponent: {fileID: -7388397298078997083}
+  _energy: 25
+  MoveSpeed: 10
+  Executables:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Threads: []
   Stats:
     BuildTime: 9
     BuildCost: 12
   DeathParticle: {fileID: 1963909997120546418, guid: f2a4b7626a244a04c83f06a5d8b0fbdc, type: 3}
-  FireRate: 2
-  Projectile1: {fileID: 8968688179754820819, guid: 3b14888c0cc7d054e919f4de3ac76140, type: 3}
-  Projectile2: {fileID: 1629816792860340948, guid: 255e61b7c9e1a0e4c81e59141e222092, type: 3}
+  OrbTransform: {fileID: 0}
+--- !u!114 &-7388397298078997083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850655494181906883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1050472bc286c488c6d336d3ba56be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Invincible: 0
+  HasInvincibilityFrames: 0
+  _health: 24
 --- !u!65 &1850655494181906884
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -265,7 +286,7 @@ GameObject:
   - component: {fileID: 7621701834815088641}
   - component: {fileID: 373727516458859600}
   - component: {fileID: 8186265754618205126}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +362,8 @@ GameObject:
   - component: {fileID: 2277367625375278599}
   - component: {fileID: 7316022240392334277}
   - component: {fileID: 3582206843239059627}
-  m_Layer: 10
+  - component: {fileID: 8095559817693778347}
+  m_Layer: 8
   m_Name: Pointer2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,6 +435,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8095559817693778347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4211890244094217733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb281116520adab47bb4e6832a3051bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProjectileSpawn: {fileID: 2277367625375278599}
+  ProjectilePrefab: {fileID: 1629816792860340948, guid: 255e61b7c9e1a0e4c81e59141e222092, type: 3}
+  CanShoot: 1
+  FireRate: 6
+  FireRateDelay: 0
+  ShootingSource: {fileID: 0}
 --- !u!1 &5350342292496527282
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,7 +464,8 @@ GameObject:
   - component: {fileID: 7923345529470278984}
   - component: {fileID: 13268791209107852}
   - component: {fileID: 4292491201003327047}
-  m_Layer: 10
+  - component: {fileID: 2875629807393180708}
+  m_Layer: 8
   m_Name: Pointer4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,6 +537,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2875629807393180708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5350342292496527282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb281116520adab47bb4e6832a3051bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProjectileSpawn: {fileID: 7923345529470278984}
+  ProjectilePrefab: {fileID: 8968688179754820819, guid: 3b14888c0cc7d054e919f4de3ac76140, type: 3}
+  CanShoot: 1
+  FireRate: 6
+  FireRateDelay: 0
+  ShootingSource: {fileID: 0}
 --- !u!1 &5439114847356622799
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,7 +564,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3793295694027701301}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Components
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,7 +596,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8399380505102845596}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Orbs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -574,7 +633,8 @@ GameObject:
   - component: {fileID: 2934978366276525770}
   - component: {fileID: 4261574397486197759}
   - component: {fileID: 5510916834171210627}
-  m_Layer: 10
+  - component: {fileID: 7241600498527713383}
+  m_Layer: 8
   m_Name: Pointer3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,6 +706,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7241600498527713383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7099610830383329319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb281116520adab47bb4e6832a3051bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProjectileSpawn: {fileID: 2934978366276525770}
+  ProjectilePrefab: {fileID: 8968688179754820819, guid: 3b14888c0cc7d054e919f4de3ac76140, type: 3}
+  CanShoot: 1
+  FireRate: 6
+  FireRateDelay: 0
+  ShootingSource: {fileID: 0}
 --- !u!1 &8268809480950886937
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,7 +735,8 @@ GameObject:
   - component: {fileID: 8268809480950886938}
   - component: {fileID: 8268809480950886941}
   - component: {fileID: 8268809480950886940}
-  m_Layer: 10
+  - component: {fileID: 7174542402069592650}
+  m_Layer: 8
   m_Name: Pointer1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -729,3 +808,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7174542402069592650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8268809480950886937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb281116520adab47bb4e6832a3051bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProjectileSpawn: {fileID: 8268809480950886938}
+  ProjectilePrefab: {fileID: 1629816792860340948, guid: 255e61b7c9e1a0e4c81e59141e222092, type: 3}
+  CanShoot: 1
+  FireRate: 6
+  FireRateDelay: 0
+  ShootingSource: {fileID: 0}

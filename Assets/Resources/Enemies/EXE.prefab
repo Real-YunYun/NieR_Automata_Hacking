@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7355659850751585728}
   - component: {fileID: 7355659850751585735}
   - component: {fileID: 7355659850751585734}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Shield
   m_TagString: Indestructible
   m_Icon: {fileID: 0}
@@ -106,11 +106,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7355659851928208816}
+  - component: {fileID: 1874074771129586949}
+  - component: {fileID: 1548538724728806954}
   - component: {fileID: 7355659851928208819}
   - component: {fileID: 7355659851928208818}
   - component: {fileID: 7355659851928208817}
-  - component: {fileID: 1874074771129586949}
-  m_Layer: 10
+  - component: {fileID: 3408306835377405743}
+  m_Layer: 8
   m_Name: Sphere
   m_TagString: Entity
   m_Icon: {fileID: 0}
@@ -132,6 +134,41 @@ Transform:
   m_Father: {fileID: 7355659852577145036}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1874074771129586949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355659851928208823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13157362a13c21a49967d247b84d4a5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthComponent: {fileID: 1548538724728806954}
+  ExectuableComponent: {fileID: 0}
+  ThreadComponent: {fileID: 0}
+  MoveSpeed: 10
+  Stats:
+    BuildTime: 0
+    BuildCost: 0
+  DeathParticle: {fileID: 1963909997120546418, guid: f2a4b7626a244a04c83f06a5d8b0fbdc, type: 3}
+--- !u!114 &1548538724728806954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355659851928208823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1050472bc286c488c6d336d3ba56be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Invincible: 0
+  HasInvincibilityFrames: 0
+  _health: 5
 --- !u!33 &7355659851928208819
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -190,29 +227,24 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7355659851928208823}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1874074771129586949
-MonoBehaviour:
+--- !u!135 &3408306835377405743
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7355659851928208823}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13157362a13c21a49967d247b84d4a5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Invincible: 0
-  _health: 15
-  Stats:
-    BuildTime: 0
-    BuildCost: 0
-  DeathParticle: {fileID: 1963909997120546418, guid: f2a4b7626a244a04c83f06a5d8b0fbdc, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7355659852577145075
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7355659852577145036}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: EXE
   m_TagString: Untagged
   m_Icon: {fileID: 0}

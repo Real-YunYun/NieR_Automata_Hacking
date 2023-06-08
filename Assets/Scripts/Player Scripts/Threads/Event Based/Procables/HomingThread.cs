@@ -1,27 +1,32 @@
 using UnityEngine;
-using Items.Threads.EventBased.Proc;
+using Items.Threads.EventBased;
 using Items.Threads;
-using Projectiles;
+using Entities.Projectiles;
+using Entities;
 
 namespace Items {
     public class HomingThread : Proc {
-        [Header("Proc Parameters")] protected new float ChanceToProc = 0.15f;
-
-        protected override void Awake() {
-            Stats.Name = "";
-            Stats.Description = "DEBUG ONLY";
-            Stats.Sprite = "Player/UI Images/None";
-            Stats.Duration = 0f;
-            Stats.Cooldown = 0f;
-            Stats.Upkeep = 0f;
-
+        protected new virtual void Awake() {
+            Name = "HomingThread";
+            Description = "DEBUG ONLY";
+            Sprite = "Player/UI Images/None";
+            Duration = 0f;
+            Cooldown = 0f;
+            Upkeep = 0f;
+            
             Type = EThreadBehaviour.EventBased;
+            ChanceToProc = 0.15f;
+            this.enabled = true;
+        }
+        
+        private void OnEnable() {
+            if (!Owner || Owner.GetComponent<ShootingComponent>() == null) return;
+            Owner.GetComponent<ShootingComponent>().OnFireStarted += TryProc;
+            Owner.GetComponent<ShootingComponent>().OnFireEnded += OnReset;
         }
 
-        // Start is called before the first frame update
-        private void OnEnable() {
-            Owner.OnFireStarted += TryProc;
-            Owner.OnFireEnded += OnReset;
+        protected override void OnHit(Entity HitEntity) {
+            throw new System.NotImplementedException();
         }
 
         protected override void TryProc() {
@@ -30,17 +35,18 @@ namespace Items {
 
         protected override void OnProc() {
             Execute_OnThreadStarted();
-            Owner.ChangeProjectile(Resources.Load<GameObject>("Projectiles/Homing Projectile"));
+            Owner.GetComponent<ShootingComponent>().ChangeProjectile(Resources.Load<GameObject>("Projectiles/Homing Projectile"));
         }
 
         private void OnReset(Projectile TempProjectile) {
             Execute_OnThreadEnded();
-            Owner.ChangeProjectile(Resources.Load<GameObject>("Projectiles/Player Projectile"));
+            Owner.GetComponent<ShootingComponent>().ChangeProjectile(Resources.Load<GameObject>("Projectiles/Player Projectile"));
         }
 
         private void OnDisable() {
-            Owner.OnFireStarted -= TryProc;
-            Owner.OnFireEnded -= OnReset;
+            if (!Owner || Owner.GetComponent<ShootingComponent>() == null) return;
+            Owner.GetComponent<ShootingComponent>().OnFireStarted -= TryProc;
+            Owner.GetComponent<ShootingComponent>().OnFireEnded -= OnReset;
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Entities;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +11,6 @@ public class PlayerData
 {
     public string CurrentDate = "\0";
     public int MaxHealth = 50;
-    public int MaxEnergy = 25;
     public int Bits = 0;
 
     public int KillCount = 0;
@@ -29,8 +29,7 @@ public enum GameState
 }
 
 [DefaultExecutionOrder(-1)]
-public class GameManager : SingletonPersistent<GameManager>
-{
+public class GameManager : SingletonPersistent<GameManager> {
     [Header("Game Manager Parameters")]
     public string CurrentLevel = "HUB";
     [SerializeField] private GameObject MainCamera;
@@ -40,6 +39,7 @@ public class GameManager : SingletonPersistent<GameManager>
     public bool PossibleSaveGame = true;
     public float DifficultyModifier = 2.25f; //Easy: 1f, Normal: 1.5f, Hard: 2.25f
     public int StangeCount = 0;
+    [HideInInspector] public PlayerController PlayerControllerInstance;
     [HideInInspector] public GameObject PlayerInstance;
     [HideInInspector] public GameObject MainCameraInstance;
     [HideInInspector] public GameObject DirectorInstance;
@@ -53,27 +53,26 @@ public class GameManager : SingletonPersistent<GameManager>
 
     // Start is called before the first frame update
     protected override void Awake() {
+        if (SceneManager.GetActiveScene().name != "Title Screen") SpawnPlayer(transform);
         base.Awake();
         GarbageCollector.incrementalTimeSliceNanoseconds = 25000;
-        Application.targetFrameRate = 165;
+        Application.targetFrameRate = -1;
+        QualitySettings.vSyncCount = 0;
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) PauseGame();
         if (CurrentLevel == "Title Screen") CurrentGameState = GameState.Title;
     }
 
-    public void PlayGame()
-    {
+    public void PlayGame() {
         CurrentGameState = GameState.Playing;
         CurrentLevel = "HUB";
         SceneManager.LoadScene("Loading");
     }
 
-    public void SaveGame()
-    {
+    public void SaveGame() {
         //Getting Data
         Data.CurrentDate = DateTime.Now.ToString("f");
 
@@ -81,43 +80,38 @@ public class GameManager : SingletonPersistent<GameManager>
         string playerDataJSON = EncryptDecrypt(JsonUtility.ToJson(Data)); 
         File.WriteAllText(Application.dataPath + "/Saves/0.sav", playerDataJSON);
     }
-    public void LoadGame()
-    {
+    public void LoadGame() {
         //re-Loading Game
         if (IsGamePaused) PauseGame();
         CurrentGameState = GameState.Playing;
         SceneManager.LoadScene("HUB");
     }
 
-    public void PauseGame()
-    {
+    public void PauseGame() {
         IsGamePaused = !IsGamePaused;
-        if (IsGamePaused)
-        {
+        if (IsGamePaused) {
             CurrentGameState = GameState.Pause;
             Time.timeScale = 0;
         }
-        else
-        {
+        else {
             if (CurrentLevel == "Title") CurrentGameState = GameState.Title;
             else CurrentGameState = GameState.Playing;
             Time.timeScale = 1;
         }
     }
 
-    public void SpawnPlayer(Transform spawnLocation)
-    {
+    public void SpawnPlayer(Transform spawnLocation) {
+        PlayerControllerInstance = Instantiate(Resources.Load<GameObject>("Player/Player Controller"), spawnLocation.position, spawnLocation.rotation).GetComponent<PlayerController>() ;
         PlayerInstance = Instantiate(PlayerPrefab, spawnLocation.position, spawnLocation.rotation);
+        PlayerControllerInstance.Posses(PlayerInstance.GetComponent<Entity>()); 
         MainCameraInstance = Instantiate(MainCamera, MainCamera.transform.position, MainCamera.transform.rotation);
         MainCameraInstance.GetComponent<MainCamera>().Player = PlayerInstance.transform;
 
-        switch (SceneManager.GetActiveScene().name)
-        {
+        switch (SceneManager.GetActiveScene().name) {
             case "Loading":
             case "Main Game":
                 if (DirectorInstance) DirectorInstance.GetComponent<Director>().enabled = true;
-                else
-                {
+                else {
                     DirectorInstance = Instantiate(DirectorPrefab, new Vector3(0, 10, 0), Quaternion.identity);
                     DirectorInstance.transform.parent = transform;
                 }
@@ -135,24 +129,21 @@ public class GameManager : SingletonPersistent<GameManager>
         JsonUtility.FromJsonOverwrite(EncryptDecrypt(playerDataJSON), Data);
     }
 
-    private static string EncryptDecrypt(string data)
-    {
+    private static string EncryptDecrypt(string data) {
         string result = "";
         for (int i = 0; i < data.Length; i++) { result += (char)(data[i] ^ key[i % key.Length]); }
         return result;
     }
 
-    public void ExitGame()
-    {
-#if UNITY_EDITOR
+    public void ExitGame() {
+        #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-#else
+        #else
             Application.Quit();
-#endif
+        #endif
     }
 
-    public void PromptInteract(string Message = "\0", bool state = false)
-    {
+    public void PromptInteract(string Message = "\0", bool state = false) {
         if (Message != "\0") MainCameraInstance.GetComponent<MainCamera>().InteractText.GetComponent<Text>().text = "[E]: " + Message;
         else MainCameraInstance.GetComponent<MainCamera>().InteractText.GetComponent<Text>().text = "[E]: Use";
 

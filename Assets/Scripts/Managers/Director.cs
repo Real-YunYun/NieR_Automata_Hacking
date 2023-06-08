@@ -1,8 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using Entities;
+using Entities.Enemies;
+using Random = UnityEngine.Random;
+
 public enum BountyType
 {
     Kill,          //Kill x Entities in a time-frame
@@ -10,8 +15,7 @@ public enum BountyType
     //Survival,       //Survive x Seconds
 }
 
-public struct Bounty
-{   
+public struct Bounty {   
     //Bounty Parameters
     public BountyType Type;     //Type of Bounty this is
     public int Current;         //Current Goal to Target
@@ -22,8 +26,7 @@ public struct Bounty
     public bool Completed;      //Has it been completed (EXE is vulnerable)
     public int Reward;          //In Bits
 
-    public Bounty(BountyType type = BountyType.Kill, int current = 0, int target = 0, float timeissued = 0f, float deltatime = 0, float duration = 0, bool expired = false, bool completed = false, int reward = 0)
-    {
+    public Bounty(BountyType type = BountyType.Kill, int current = 0, int target = 0, float timeissued = 0f, float deltatime = 0, float duration = 0, bool expired = false, bool completed = false, int reward = 0) {
         Type = type;
         Current = current;
         Target = target;
@@ -63,20 +66,16 @@ public struct Bounty
         }
     }
 
-    public void HandleBounty(GameObject entity)
-    {
-        if (Type == BountyType.Kill)
-        {
+    public void HandleBounty(GameObject entity) {
+        if (Type == BountyType.Kill) {
             Current++;
-            if (Current >= Target)
-            {
+            if (Current >= Target) {
                 Completed = true;
                 if (!Expired) GameManager.Instance.Data.Bits += Reward;
                 DeltaTime = 0;
             }
         }
-        if (Type == BountyType.Earn)
-        {
+        if (Type == BountyType.Earn) {
             Current += (int)entity.GetComponent<Enemy>().Stats.BuildCost;
             if (Current >= Target)
             {
@@ -87,8 +86,7 @@ public struct Bounty
         }
     }
 
-    private static T RandomType<T>()
-    {
+    private static T RandomType<T>() {
         System.Array values = System.Enum.GetValues(typeof(T));
         System.Random random = new System.Random();
         return (T)values.GetValue(random.Next(values.Length));
@@ -97,8 +95,7 @@ public struct Bounty
 }
 
 
-public class Director : MonoBehaviour
-{
+public class Director : MonoBehaviour {
     //Directors private Variables
     private GameObject PlayerCamera;
 
@@ -134,8 +131,7 @@ public class Director : MonoBehaviour
     RaycastHit hit;
     Vector3 RandomCoordinate;
 
-    void Start()
-    {
+    void Start() {
         RandomEntityIndex = Random.Range(0, Entities.Length);
         
         //Burnout System
@@ -143,19 +139,21 @@ public class Director : MonoBehaviour
         BuildingTime = 13f * 1.15f * GameManager.Instance.DifficultyModifier;
     }
 
-    void OnEnable()
-    {
+    void OnEnable() {
         Vector3 ExecutableObjectSpawn;
         RaycastHit hit;
         CurrentBounty.GenerateBounty(RunTime);
 
-        while (!ExecutableObject)
-        {
-            ExecutableObjectSpawn = new Vector3(Random.Range(GameManager.Instance.PlayerInstance.transform.position.x - SpawningBounds.x - 2.5f, GameManager.Instance.PlayerInstance.transform.position.x + SpawningBounds.x + 2.5f), transform.position.y, Random.Range(GameManager.Instance.PlayerInstance.transform.position.z - SpawningBounds.y - 2.5f, GameManager.Instance.PlayerInstance.transform.position.z + SpawningBounds.y + 2.5f));
-            if (Physics.Raycast(ExecutableObjectSpawn, transform.TransformDirection(Vector3.down), out hit, 999f, 0b_1000))
-            {
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
-                {
+        GameObject PlayerObject = GameManager.Instance.PlayerControllerInstance.gameObject;
+
+        while (!ExecutableObject && PlayerObject != null) {
+            ExecutableObjectSpawn = new Vector3(
+                Random.Range(PlayerObject.transform.position.x - SpawningBounds.x - 2.5f, PlayerObject.transform.position.x + SpawningBounds.x + 2.5f), 
+                transform.position.y, 
+                Random.Range(PlayerObject.transform.position.z - SpawningBounds.y - 2.5f, PlayerObject.transform.position.z + SpawningBounds.y + 2.5f));
+            
+            if (Physics.Raycast(ExecutableObjectSpawn, transform.TransformDirection(Vector3.down), out hit, 999f, 0b_1000)) {
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) {
                     hit.point = new Vector3(hit.point.x, hit.point.y + 1, hit.point.z);
                     ExecutableObject = Instantiate(Resources.Load<GameObject>("Enemies/EXE"), hit.point, Quaternion.identity);
                 }
@@ -164,16 +162,16 @@ public class Director : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+        
+        GameObject PlayerObject = GameManager.Instance.PlayerControllerInstance.gameObject;
+        
         //UI Debugging stuff
-        if (Debugging)
-        {
+        if (Debugging) {
             if (GameManager.Instance.MainCameraInstance) PlayerCamera = GameManager.Instance.MainCameraInstance;
             else Debug.LogError("Could not find 'PlayerCamera'");
 
-            if (PlayerCamera)
-            {
+            if (PlayerCamera) {
                 string BuildTime;
                 if (SpawningQueue.Count != 0) BuildTime = SpawningQueue.Peek().GetComponent<Enemy>().Stats.BuildCost.ToString();
                 else BuildTime = "0";
@@ -193,24 +191,24 @@ public class Director : MonoBehaviour
         }
 
         RunTime += Time.deltaTime;
-        if (Time.timeScale == 1)
-        {
+        if (Math.Abs(Time.timeScale - 1) < 0.05f) {
             //Actual Director Algorithm
             DifficultyTime += 0.005f + Mathf.Pow(Time.deltaTime, 2) * GameManager.Instance.DifficultyModifier;
-            if (ExecutableObject)
-            {
+            if (ExecutableObject) {
                 //Enqueuing Entites
-                if (SpawningQueue.Count < MaxQueue)
-                {
+                if (SpawningQueue.Count < MaxQueue) {
                     RandomEntityIndex = Random.Range(0, Entities.Length);
                     SpawningQueue.Enqueue(Entities[RandomEntityIndex]);
                 }
 
                 if (Credit >= SpawningQueue.Peek().GetComponent<Enemy>().Stats.BuildCost) Credit -= SpawningQueue.Peek().GetComponent<Enemy>().Stats.BuildCost;
 
-                if (!CanSpawn)
-                {
-                    RandomCoordinate = new Vector3(Random.Range(GameManager.Instance.PlayerInstance.transform.position.x - SpawningBounds.x - 2.5f, GameManager.Instance.PlayerInstance.transform.position.x + SpawningBounds.x + 2.5f), transform.position.y, Random.Range(GameManager.Instance.PlayerInstance.transform.position.z - SpawningBounds.y - 2.5f, GameManager.Instance.PlayerInstance.transform.position.z + SpawningBounds.y + 2.5f));
+                if (!CanSpawn) {
+                    RandomCoordinate = new Vector3(
+                        Random.Range(PlayerObject.transform.position.x - SpawningBounds.x - 2.5f, PlayerObject.transform.position.x + SpawningBounds.x + 2.5f), 
+                        transform.position.y, 
+                        Random.Range(PlayerObject.transform.position.z - SpawningBounds.y - 2.5f, PlayerObject.transform.position.z + SpawningBounds.y + 2.5f));
+                    
                     if (Physics.Raycast(RandomCoordinate, transform.TransformDirection(Vector3.down), out hit, 999f, 0b_1000))
                     {
                         if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) CanSpawn = true;
@@ -229,7 +227,12 @@ public class Director : MonoBehaviour
                 if (!CurrentBounty.Expired && !CurrentBounty.Completed) CurrentBounty.DeltaTime += Time.deltaTime;
 
                 if (CurrentBounty.Duration - CurrentBounty.DeltaTime <= 0) CurrentBounty.Expired = true;
-                if (CurrentBounty.Completed) ExecutableObject.transform.Find("Shield").gameObject.SetActive(false);
+                if (CurrentBounty.Completed) {
+                    ExecutableObject.transform.Find("Shield").gameObject.SetActive(false);
+                    HealthComponent EXEHealthComponent;
+                    if (ExecutableObject.TryGetComponent(out EXEHealthComponent))
+                        EXEHealthComponent.Invincible = false;
+                }
             }
         }
 
@@ -239,17 +242,14 @@ public class Director : MonoBehaviour
         if (Keyboard.current.minusKey.wasPressedThisFrame) GameManager.Instance.DifficultyModifier--;
     }
 
-    public void OnEntityDeath(GameObject entity)
-    {
+    public void OnEntityDeath(GameObject entity) {
         if (!CurrentBounty.Completed || !CurrentBounty.Expired) CurrentBounty.HandleBounty(entity);
         GameManager.Instance.Data.KillCount++;
         SpawnedEntities.Remove(SpawnedEntities.Find(GetHashCode => entity));
     }
 
-    IEnumerator Spawn()
-    {
-        if (SpawnedEntities.Count < MaxEntities)
-        {
+    IEnumerator Spawn() {
+        if (SpawnedEntities.Count < MaxEntities) {
             BuildingTime -= SpawningQueue.Peek().GetComponent<Enemy>().Stats.BuildTime;
             RandomCoordinate.y = hit.point.y + 1;
             var entity = Instantiate(SpawningQueue.Peek(), RandomCoordinate, Quaternion.identity);
@@ -261,11 +261,9 @@ public class Director : MonoBehaviour
         CanSpawn = false;
     }
 
-    private string ShowListEntities()
-    {
+    private string ShowListEntities() {
         string List = "";
-        for (int i = 0; i < Entities.Length; i++)
-        {
+        for (int i = 0; i < Entities.Length; i++) {
             List += Entities[i].name + " ";
         }
         return List;

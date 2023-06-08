@@ -124,6 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7036974816215796909}
   - component: {fileID: -8242082919132573522}
+  - component: {fileID: 3612950001048091149}
   m_Layer: 0
   m_Name: Player Turret
   m_TagString: Untagged
@@ -163,6 +164,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectilePrefab: {fileID: 1206404090263812217, guid: 58293f22b1ec5b0478598cce74ad874a, type: 3}
   PlayerTurretSpawn: {fileID: 0}
+--- !u!114 &3612950001048091149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7036974816215796908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb281116520adab47bb4e6832a3051bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProjectileSpawn: {fileID: 7036974815580830995}
+  ProjectilePrefab: {fileID: 0}
+  CanShoot: 1
+  FireRate: 8
+  FireRateDelay: 0
+  ShootingSource: {fileID: 0}
 --- !u!1 &7036974816476160897
 GameObject:
   m_ObjectHideFlags: 0

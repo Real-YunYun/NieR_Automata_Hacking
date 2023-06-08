@@ -1,5 +1,5 @@
 using UnityEngine;
-using Projectiles;
+using Entities.Projectiles;
 
 public class PlayerProjectile : Projectile
 {

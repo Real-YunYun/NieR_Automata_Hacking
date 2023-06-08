@@ -4,13 +4,15 @@ using Items.Threads.Constant.Obritals;
 
 namespace Items {
     public class PointerOrbital : Orbital {
-        protected override void Awake() {
-            Stats.Name = "Pointer Orbital!";
-            Stats.Description = "Summons a permanent Pointer Orbital!";
-            Stats.Sprite = "Player/UI Images/None";
-            Stats.Duration = 0f;
-            Stats.Cooldown = 0f;
-            Stats.Upkeep = 0f;
+        #pragma warning disable
+        protected void Awake() {
+            string Name = "Pointer Orbital";
+            string Description = "Summons a permanent Pointer Orbital!";
+            string Sprite = "Player/UI Images/None";
+            float Duration = 0f;
+            float Cooldown = 0f;
+            float Upkeep = 0f;
         }
+        #pragma warning restore
     }
 }
