@@ -51,6 +51,9 @@ public class MainCamera : MonoBehaviour {
     private void OnEnable() {
         //Events and Delegates
         if (GameManager.Instance == null) return;
+        
+        GameManager.Instance.PlayerControllerInstance.PlayerCharacter.OnCharacterDisabled += OnCharacterDisable;
+        
         ExectuableComponent ExecutableComponent = GameManager.Instance.PlayerControllerInstance.PlayerExecutableComponent;
         if (ExecutableComponent != null) {
             ExecutableComponent.OnExecutableUsed += OnExecutableUsed;
@@ -65,18 +68,16 @@ public class MainCamera : MonoBehaviour {
             ExecutableComponent.OnExecutableUsed += OnExecutableUsed;
             ExecutableComponent.OnExecutableAdded += OnExecutableAdded;
         }
-
-        GameManager.Instance.PlayerControllerInstance.PlayerCharacter.OnCharacterDisabled += OnDisable;
     }
 
-    private void OnDisable() {
+    private void OnCharacterDisable() {
         //Events and Delegates
         ExectuableComponent ExecutableComponent = GameManager.Instance.PlayerControllerInstance.PlayerExecutableComponent;
         if (ExecutableComponent != null) {
             ExecutableComponent.OnExecutableUsed -= OnExecutableUsed;
             ExecutableComponent.OnExecutableAdded -= OnExecutableAdded;
         }
-        GameManager.Instance.PlayerControllerInstance.PlayerCharacter.OnCharacterDisabled -= OnDisable;
+        GameManager.Instance.PlayerControllerInstance.PlayerCharacter.OnCharacterDisabled -= OnCharacterDisable;
     }
 
     // Update is called once per frame
@@ -143,8 +144,7 @@ public class MainCamera : MonoBehaviour {
             UI_HUD_Canvas.transform.Find("Bits/Text").GetComponent<Text>().text = "Bits: " + GameManager.Instance.Data.Bits.ToString();
 
             //Handling Bounty Text
-            if (GameManager.Instance.DirectorInstance)
-            {
+            if (GameManager.Instance.DirectorInstance) {
                 UI_HUD_Canvas.transform.Find("Bounty").gameObject.SetActive(true);
                 Bounty CurrentBounty = GameManager.Instance.DirectorInstance.GetComponent<Director>().GetBounty();
                 string Objective = "";
@@ -168,16 +168,18 @@ public class MainCamera : MonoBehaviour {
             }
             else UI_HUD_Canvas.transform.Find("Bounty").gameObject.SetActive(false);
 
+            if (GameManager.Instance.PlayerControllerInstance == null) return;
+
             //Handling Abilities 
             ExectuableComponent PlayerExectuableComponent;
-            bool ComponentExists = GameManager.Instance.PlayerControllerInstance.PlayerCharacter != null;
-            if (ComponentExists && GameManager.Instance.PlayerControllerInstance.PlayerCharacter.TryGetComponent(out PlayerExectuableComponent)) {
-                if (PlayerExectuableComponent.Executables[0].OnCooldown) UpdateExecutable(0);
-                if (PlayerExectuableComponent.Executables[1].OnCooldown) UpdateExecutable(1);
-                if (PlayerExectuableComponent.Executables[2].OnCooldown) UpdateExecutable(2);
+            if (GameManager.Instance.PlayerControllerInstance.PlayerCharacter.TryGetComponent(out PlayerExectuableComponent)) {
+                if (PlayerExectuableComponent.Executables[0].OnCooldown) UpdateExecutable(0); 
+                if (PlayerExectuableComponent.Executables[1].OnCooldown) UpdateExecutable(1); 
+                if (PlayerExectuableComponent.Executables[2].OnCooldown) UpdateExecutable(2); 
                 if (PlayerExectuableComponent.Executables[3].OnCooldown) UpdateExecutable(3);
             }
         }
+        
         if (GameManager.Instance.CurrentGameState == GameState.Exiting) {
             UI_HUD_Canvas.SetActive(false);
             UI_Menu_Canvas.SetActive(true);

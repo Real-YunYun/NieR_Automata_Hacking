@@ -98,6 +98,42 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Map Toggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""43da51a8-4229-4b83-8a11-6b0320cee15c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.5,pressPoint=1)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Map Zoom In"",
+                    ""type"": ""Button"",
+                    ""id"": ""3f8d5451-2451-4f72-a823-3440cf9d24bc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Map Zoom Out"",
+                    ""type"": ""Button"",
+                    ""id"": ""8f101658-2aee-47b4-b8b7-f98442bd5266"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DEBUG - Serialize Player Data"",
+                    ""type"": ""Button"",
+                    ""id"": ""c4bb6d1d-cba4-458f-8fdc-272061354573"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -351,6 +387,83 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Executable 4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""adf08243-ad4a-4905-a133-507e314adb68"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": ""Hold(duration=0.5,pressPoint=1)"",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Map Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c5c61e8-5e68-466f-a865-eeb879ce460c"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": ""Tap(duration=0.1)"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Map Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20262d2f-8312-4c7f-b42a-f69e55943f0e"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Map Zoom In"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c75eb68c-06c5-45c8-87a5-ffa2ad99bfe3"",
+                    ""path"": ""<Keyboard>/equals"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Map Zoom In"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a480dbc-d1bb-4eec-9b44-60ca4bbfc46b"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": ""MultiTap(tapTime=0.1,tapDelay=0.25)"",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Map Zoom Out"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eb5ca932-7f19-49e5-af28-026e283d3bea"",
+                    ""path"": ""<Keyboard>/minus"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Map Zoom Out"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df41dfca-e2b4-4819-b754-c1a513b1b5d4"",
+                    ""path"": ""<Keyboard>/backquote"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""DEBUG - Serialize Player Data"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -814,6 +927,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_MapToggle = m_Player.FindAction("Map Toggle", throwIfNotFound: true);
+        m_Player_MapZoomIn = m_Player.FindAction("Map Zoom In", throwIfNotFound: true);
+        m_Player_MapZoomOut = m_Player.FindAction("Map Zoom Out", throwIfNotFound: true);
+        m_Player_DEBUGSerializePlayerData = m_Player.FindAction("DEBUG - Serialize Player Data", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -893,6 +1010,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_MapToggle;
+    private readonly InputAction m_Player_MapZoomIn;
+    private readonly InputAction m_Player_MapZoomOut;
+    private readonly InputAction m_Player_DEBUGSerializePlayerData;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -905,6 +1026,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @MapToggle => m_Wrapper.m_Player_MapToggle;
+        public InputAction @MapZoomIn => m_Wrapper.m_Player_MapZoomIn;
+        public InputAction @MapZoomOut => m_Wrapper.m_Player_MapZoomOut;
+        public InputAction @DEBUGSerializePlayerData => m_Wrapper.m_Player_DEBUGSerializePlayerData;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -938,6 +1063,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @MapToggle.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMapToggle;
+                @MapToggle.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMapToggle;
+                @MapToggle.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMapToggle;
+                @MapZoomIn.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMapZoomIn;
+                @MapZoomIn.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMapZoomIn;
+                @MapZoomIn.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMapZoomIn;
+                @MapZoomOut.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMapZoomOut;
+                @MapZoomOut.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMapZoomOut;
+                @MapZoomOut.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMapZoomOut;
+                @DEBUGSerializePlayerData.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUGSerializePlayerData;
+                @DEBUGSerializePlayerData.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUGSerializePlayerData;
+                @DEBUGSerializePlayerData.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDEBUGSerializePlayerData;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -966,6 +1103,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @MapToggle.started += instance.OnMapToggle;
+                @MapToggle.performed += instance.OnMapToggle;
+                @MapToggle.canceled += instance.OnMapToggle;
+                @MapZoomIn.started += instance.OnMapZoomIn;
+                @MapZoomIn.performed += instance.OnMapZoomIn;
+                @MapZoomIn.canceled += instance.OnMapZoomIn;
+                @MapZoomOut.started += instance.OnMapZoomOut;
+                @MapZoomOut.performed += instance.OnMapZoomOut;
+                @MapZoomOut.canceled += instance.OnMapZoomOut;
+                @DEBUGSerializePlayerData.started += instance.OnDEBUGSerializePlayerData;
+                @DEBUGSerializePlayerData.performed += instance.OnDEBUGSerializePlayerData;
+                @DEBUGSerializePlayerData.canceled += instance.OnDEBUGSerializePlayerData;
             }
         }
     }
@@ -1103,6 +1252,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnMapToggle(InputAction.CallbackContext context);
+        void OnMapZoomIn(InputAction.CallbackContext context);
+        void OnMapZoomOut(InputAction.CallbackContext context);
+        void OnDEBUGSerializePlayerData(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

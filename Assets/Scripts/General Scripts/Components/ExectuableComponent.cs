@@ -5,7 +5,6 @@ using UnityEngine;
 using Entities;
 
 namespace Items.Executables {
-    [DefaultExecutionOrder(1)]
     public class ExectuableComponent : MonoBehaviour {
         [Header("Abillites")] 
         [SerializeField] public bool InItemPedstalVolume = false;

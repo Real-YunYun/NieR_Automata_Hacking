@@ -76,6 +76,42 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Map Toggle",
+                    "type": "Button",
+                    "id": "43da51a8-4229-4b83-8a11-6b0320cee15c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.5,pressPoint=1)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Map Zoom In",
+                    "type": "Button",
+                    "id": "3f8d5451-2451-4f72-a823-3440cf9d24bc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Map Zoom Out",
+                    "type": "Button",
+                    "id": "8f101658-2aee-47b4-b8b7-f98442bd5266",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DEBUG - Serialize Player Data",
+                    "type": "Button",
+                    "id": "c4bb6d1d-cba4-458f-8fdc-272061354573",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -329,6 +365,83 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Executable 4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "adf08243-ad4a-4905-a133-507e314adb68",
+                    "path": "<Gamepad>/select",
+                    "interactions": "Hold(duration=0.5,pressPoint=1)",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Map Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9c5c61e8-5e68-466f-a865-eeb879ce460c",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "Tap(duration=0.1)",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Map Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "20262d2f-8312-4c7f-b42a-f69e55943f0e",
+                    "path": "<Gamepad>/select",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Map Zoom In",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c75eb68c-06c5-45c8-87a5-ffa2ad99bfe3",
+                    "path": "<Keyboard>/equals",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Map Zoom In",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a480dbc-d1bb-4eec-9b44-60ca4bbfc46b",
+                    "path": "<Gamepad>/select",
+                    "interactions": "MultiTap(tapTime=0.1,tapDelay=0.25)",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Map Zoom Out",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eb5ca932-7f19-49e5-af28-026e283d3bea",
+                    "path": "<Keyboard>/minus",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Map Zoom Out",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "df41dfca-e2b4-4819-b754-c1a513b1b5d4",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "DEBUG - Serialize Player Data",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

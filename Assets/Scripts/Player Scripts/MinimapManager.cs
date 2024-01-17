@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
-[DefaultExecutionOrder(1)]
-public class MinimapManager : MonoBehaviour
-{
+[DefaultExecutionOrder(10)]
+public class MinimapManager : MonoBehaviour {
     [Header("Camera Parameters")]
     private Vector3 Position = new Vector3(0, 30, 0);
     private float SmoothTime = 0.25f;
@@ -43,21 +42,15 @@ public class MinimapManager : MonoBehaviour
     }
 
     void Update() {
-        Keyboard keyboard = Keyboard.current;
-
-        if (keyboard.tabKey.wasPressedThisFrame) UpdateMinimap();
-
-        if (CanZoom && !CameraLerpCenterRoom) {
-            if (keyboard.equalsKey.wasPressedThisFrame) ZoomIn = true;
-            if (keyboard.minusKey.wasPressedThisFrame) ZoomOut = true;
-        }
-        else if (CameraLerpCenterRoom) {
+        if (CameraLerpCenterRoom) {
             CanZoom = false;
             ZoomLevel = 0;
         }
         else if (!CameraLerpCenterRoom && !CanZoom) CanZoom = true;
 
-        MiniMapCamera.orthographicSize = Mathf.SmoothDamp(MiniMapCamera.orthographicSize, ZoomLevels[ZoomLevel], ref VelocityZoom, SmoothTime, Mathf.Infinity, Time.deltaTime);
+        if (GameManager.Instance.PlayerInstance != null)
+            MiniMapCamera.orthographicSize = Mathf.SmoothDamp(MiniMapCamera.orthographicSize, ZoomLevels[ZoomLevel], 
+                ref VelocityZoom, SmoothTime, Mathf.Infinity, Time.deltaTime);
     }
 
     void FixedUpdate() {
@@ -116,7 +109,7 @@ public class MinimapManager : MonoBehaviour
         }
     }
 
-    void UpdateMinimap() {
+    public void UpdateMinimap() {
         // Turning off Minimap
         if (ActiveMinimap) {
             GetComponent<Camera>().enabled = false;
@@ -131,4 +124,9 @@ public class MinimapManager : MonoBehaviour
             GameManager.Instance.MainCameraInstance.GetComponent<MainCamera>().HandleMinimap(true);
         }
     }
+
+    public void OnZoomIn() { ZoomIn = true; }
+
+    public void OnZoomOut() { ZoomOut = true; }
+    
 }

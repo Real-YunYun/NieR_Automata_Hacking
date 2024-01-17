@@ -22,17 +22,7 @@ namespace Entities.Projectiles {
 
         public event OnFireStartedDelegate OnFireStarted;
         public event OnFireEndedDelegate OnFireEnded;
-
-        // Make for Each Event!
-        protected void Execute_OnFireStarted()
-        {
-            if (OnFireStarted != null) OnFireStarted();
-        }
-
-        protected void Execute_OnFireEnded(Projectile SpawnedProjectile)
-        {
-            if (OnFireEnded != null) OnFireEnded(SpawnedProjectile);
-        }
+        
         #endregion
 
         // Used for cases where the intimidate GameObject isn't an Entity 
@@ -46,7 +36,7 @@ namespace Entities.Projectiles {
     
         // Attempts to shoot a projectile, if the attempt doesn't happen but the method is still called, the projectile returns null
         public void Fire() {
-            if (FireRateDelay || !CanShoot) return;
+            if (GameManager.Instance.IsGamePaused || FireRateDelay || !CanShoot) return;
 
             if (ShootingSource) ShootingSource.Play();
             StartCoroutine(ShootingDelay());

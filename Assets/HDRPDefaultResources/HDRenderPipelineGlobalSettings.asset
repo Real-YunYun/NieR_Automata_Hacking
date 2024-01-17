@@ -16,7 +16,7 @@ MonoBehaviour:
   m_LookDevVolumeProfile: {fileID: 11400000, guid: 5743a55642c7bb04ab14225f89135304, type: 2}
   m_RenderingPathDefaultCameraFrameSettings:
     bitDatas:
-      data1: 72058701069845260
+      data1: 72076293255889677
       data2: 9223372036990042128
     lodBias: 1
     lodBiasMode: 0
@@ -82,8 +82,8 @@ MonoBehaviour:
   decalLayerName5: Decal Layer 5
   decalLayerName6: Decal Layer 6
   decalLayerName7: Decal Layer 7
-  shaderVariantLogLevel: 2
-  lensAttenuationMode: 0
+  shaderVariantLogLevel: 1
+  lensAttenuationMode: 1
   diffusionProfileSettingsList:
   - {fileID: 11400000, guid: c843e0f25a456d44280a57af940538a5, type: 2}
   - {fileID: 11400000, guid: dcbeaa0182faf1f4281226e75e822079, type: 2}

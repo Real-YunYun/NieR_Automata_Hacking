@@ -1,24 +1,13 @@
 using System;
 using System.IO;
 using Entities;
+using UnityEditor;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Scripting;
 
-[Serializable]
-public class PlayerData
-{
-    public string CurrentDate = "\0";
-    public int MaxHealth = 50;
-    public int Bits = 0;
-
-    public int KillCount = 0;
-    public int RunCount = 0;
-}
-
-public enum GameState
-{
+public enum GameState {
     Title   = 0b_0000_0000,
     Pause   = 0b_0100_0001,
     Playing = 0b_1000_0010,
@@ -39,10 +28,12 @@ public class GameManager : SingletonPersistent<GameManager> {
     public bool PossibleSaveGame = true;
     public float DifficultyModifier = 2.25f; //Easy: 1f, Normal: 1.5f, Hard: 2.25f
     public int StangeCount = 0;
-    [HideInInspector] public PlayerController PlayerControllerInstance;
-    [HideInInspector] public GameObject PlayerInstance;
-    [HideInInspector] public GameObject MainCameraInstance;
-    [HideInInspector] public GameObject DirectorInstance;
+    
+    [Header("Player Instances")]
+    public PlayerController PlayerControllerInstance;
+    public GameObject PlayerInstance;
+    public GameObject MainCameraInstance;
+    public GameObject DirectorInstance;
 
     //Game State Variables
     public GameState CurrentGameState { get; set; }
@@ -53,11 +44,13 @@ public class GameManager : SingletonPersistent<GameManager> {
 
     // Start is called before the first frame update
     protected override void Awake() {
-        if (SceneManager.GetActiveScene().name != "Title Screen") SpawnPlayer(transform);
+        //if (SceneManager.GetActiveScene().name != "Title Screen") SpawnPlayer(transform);
         base.Awake();
         GarbageCollector.incrementalTimeSliceNanoseconds = 25000;
         Application.targetFrameRate = -1;
         QualitySettings.vSyncCount = 0;
+        //PlayerSettings.fullScreenMode = FullScreenMode.FullScreenWindow;
+        //PlayerSettings.useFlipModelSwapchain = false;
     }
 
     // Update is called once per frame
@@ -80,6 +73,7 @@ public class GameManager : SingletonPersistent<GameManager> {
         string playerDataJSON = EncryptDecrypt(JsonUtility.ToJson(Data)); 
         File.WriteAllText(Application.dataPath + "/Saves/0.sav", playerDataJSON);
     }
+    
     public void LoadGame() {
         //re-Loading Game
         if (IsGamePaused) PauseGame();
@@ -143,12 +137,12 @@ public class GameManager : SingletonPersistent<GameManager> {
         #endif
     }
 
-    public void PromptInteract(string Message = "\0", bool state = false) {
+    public void PromptInteract(string Message = "\0", bool state = false)
+    {
         if (Message != "\0") MainCameraInstance.GetComponent<MainCamera>().InteractText.GetComponent<Text>().text = "[E]: " + Message;
         else MainCameraInstance.GetComponent<MainCamera>().InteractText.GetComponent<Text>().text = "[E]: Use";
 
-        if (state) MainCameraInstance.GetComponent<MainCamera>().InteractText.SetActive(state);
-        else MainCameraInstance.GetComponent<MainCamera>().InteractText.SetActive(false);
+        MainCameraInstance.GetComponent<MainCamera>().InteractText.SetActive(state);
     }
 
 }
