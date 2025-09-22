@@ -541,19 +541,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthComponent: {fileID: 6021705606371158625}
-  _energy: 25
-  MoveSpeed: 10
-  Executables:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  Threads: []
+  ExectuableComponent: {fileID: 0}
+  ThreadComponent: {fileID: 0}
+  MovementComponent: {fileID: 0}
   Stats:
     BuildTime: 10
     BuildCost: 15
   DeathParticle: {fileID: 1963909997120546418, guid: f2a4b7626a244a04c83f06a5d8b0fbdc, type: 3}
-  random: 0
 --- !u!114 &6021705606371158625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,7 +560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1050472bc286c488c6d336d3ba56be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Invincible: 1
+  Invincible: 0
   HasInvincibilityFrames: 0
   _health: 50
 --- !u!65 &8142690493675382236

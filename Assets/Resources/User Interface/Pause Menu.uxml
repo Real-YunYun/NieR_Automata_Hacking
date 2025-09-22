@@ -1,5 +1,2 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/Resources/User%20Interface/Button.uss?fileID=7433441132597879392&amp;guid=3aee96ef4ffc9f74f8626c8847f97ce5&amp;type=3#Button" />
-    <ui:VisualElement name="Background" style="height: 100%; width: 100%; background-color: rgba(0, 0, 0, 0.2); display: flex; position: absolute;" />
-    <ui:ListView class="Button" />
 </ui:UXML>

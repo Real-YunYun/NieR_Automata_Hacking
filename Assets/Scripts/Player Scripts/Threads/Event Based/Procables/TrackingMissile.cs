@@ -26,12 +26,13 @@ namespace Items {
 
         // Start is called before the first frame update
         private void OnEnable() {
-            Owner.GetComponent<ShootingComponent>().OnFireEnded += HandleProjectile;
+            if (!Owner) return;
+            if (!Owner.TryGetComponent(out ShootingComponent Comp)) return;
+            Comp.OnFireEnded += HandleProjectile;
         }
 
         private void HandleProjectile(Projectile SpawnedProjectile) {
-            HandlingProjectiles.Add(SpawnedProjectile);
-            HandlingProjectiles[^1].OnProjectileHit += OnHit;
+            SpawnedProjectile.OnProjectileHit += OnHit;
         }
 
         protected override void OnHit(Entity _HitEntity) {
@@ -57,9 +58,10 @@ namespace Items {
             ProcedProjectile.SetTargetTransform(HitEntity.transform);
         }
 
-        private void OnDisable()
-        {
-            Owner.GetComponent<ShootingComponent>().OnFireEnded -= HandleProjectile;
+        private void OnDisable() {
+            if (!Owner) return;
+            if (!Owner.TryGetComponent(out ShootingComponent Comp)) return;
+            Comp.OnFireEnded -= HandleProjectile;
         }
     }
 }

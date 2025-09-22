@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 namespace Entities.Enemies {
     public class Binary : Enemy {
-        [Header("Biary Parameters")] 
+        [Header("Binary Parameters")] 
         private NavMeshAgent Agent;
         private ShootingComponent ShootingComponent;
 
@@ -19,7 +19,7 @@ namespace Entities.Enemies {
         // Update is called once per frame
         void Update() {
             if (Agent.enabled && GameManager.Instance.PlayerControllerInstance.Character != null) {
-                Agent.SetDestination(GameManager.Instance.PlayerControllerInstance.Character.transform.position);
+                MovementComponent?.Move(GameManager.Instance.PlayerControllerInstance.Character.transform.position);
                 if (Agent.remainingDistance < 15f) ShootingComponent.Fire();
             }
         }

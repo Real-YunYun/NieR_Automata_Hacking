@@ -24,10 +24,14 @@ public class GameManager : SingletonPersistent<GameManager> {
     [SerializeField] private GameObject MainCamera;
     [SerializeField] private GameObject PlayerPrefab;
     [SerializeField] private GameObject DirectorPrefab;
+    
+    [Header("Game State Parameters")]
     public bool IsGamePaused = false;
+    public bool UseDirector = false;
     public bool PossibleSaveGame = true;
     public float DifficultyModifier = 2.25f; //Easy: 1f, Normal: 1.5f, Hard: 2.25f
     public int StangeCount = 0;
+    public int GenerationSeed = -1;
     
     [Header("Player Instances")]
     public PlayerController PlayerControllerInstance;
@@ -104,6 +108,7 @@ public class GameManager : SingletonPersistent<GameManager> {
         switch (SceneManager.GetActiveScene().name) {
             case "Loading":
             case "Main Game":
+                if (!UseDirector) break;
                 if (DirectorInstance) DirectorInstance.GetComponent<Director>().enabled = true;
                 else {
                     DirectorInstance = Instantiate(DirectorPrefab, new Vector3(0, 10, 0), Quaternion.identity);

@@ -6,11 +6,10 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public static class RoomLoader {
-    [Header("Room Template Parameters")]
-    private static string Path;
+    [Header("Room Template Parameters")] private static string Path;
     private static float DeadEndChance = 0.33f;
     private static float StraightRoomChance = 0.25f;
-    
+
     #region Static Resources for Loading
 
     // Bridges
@@ -40,7 +39,7 @@ public static class RoomLoader {
 
     // Quad
     public static GameObject UDLR => Resources.Load<GameObject>(Path + "UDLR");
-    
+
     #endregion
 
     // Rooms (Non Alphabetical)
@@ -118,10 +117,10 @@ public class RoomDictionary {
     public List<RoomInformation> UL = new List<RoomInformation>();
     public List<RoomInformation> ULR = new List<RoomInformation>();
     public List<RoomInformation> UR = new List<RoomInformation>();
-    
+
     public void SaveDictionary(bool FilterAll = false) {
         if (!FilterAll) FilterAllDictionaries();
-        string SavingInformation = JsonUtility.ToJson(this, true); 
+        string SavingInformation = JsonUtility.ToJson(this, true);
         File.WriteAllText(Application.dataPath + "/Dictionary/Rooms.dictionary", SavingInformation);
     }
 
@@ -132,12 +131,21 @@ public class RoomDictionary {
 
     public RoomInformation GetStarterRoomInformation() {
         RoomType RandomType = (RoomType)Enum.GetValues(typeof(RoomType)).GetValue((int)Random.Range(0f, 14f));
-        return GetList(RandomType)[^1];
+        RoomInformation StarterInfo = GetList(RandomType)[^1]; // Was [^1] -> [Size - 1]
+        Debug.Log("Starter Room Info: \n" + 
+                  "Room ID: " + StarterInfo.ID + "\n" +
+                  "Room Type: " + StarterInfo.Type + "\n" +
+                  "Room Block Count: " + StarterInfo.Blocks.Count + "\n" +
+                  "Room Enemies Count: " + StarterInfo.Enemies.Count + "\n" +
+                  "Room Iteractables Count: " + StarterInfo.Interactables.Count
+                  );
+        
+        return StarterInfo; // Was [^1] -> [Size - 1]
     }
 
     public List<RoomInformation> GetList(RoomType Type) {
         List<RoomInformation> ReturnList;
-        
+
         if (Type == RoomType.D) ReturnList = D;
         else if (Type == RoomType.DL) ReturnList = DL;
         else if (Type == RoomType.DLR) ReturnList = DLR;
@@ -211,16 +219,16 @@ public class RoomDictionary {
         List<RoomInformation> RoomsToRemove = new List<RoomInformation>();
 
         foreach (RoomInformation DirtyRoom in DirtyList) {
-            if (!(DirtyRoom.Blocks.Count > 0) && !(DirtyRoom.Enemies.Count > 0)) 
+            if (!(DirtyRoom.Blocks.Count > 0) && !(DirtyRoom.Enemies.Count > 0))
                 continue;
-            
+
             CleanedListDictionary.TryAdd(DirtyRoom.ID, DirtyRoom);
         }
 
         // Adding Empty Room in case!
         if (!CleanedListDictionary.ContainsKey(0))
-            CleanedListDictionary.Add(0,  new RoomInformation(0, Type));
-        
+            CleanedListDictionary.Add(0, new RoomInformation(0, Type));
+
         // Generate a List from Dictionary
         List<RoomInformation> CleanedList = CleanedListDictionary.Values.ToList();
 
@@ -266,12 +274,14 @@ public class RoomDictionary {
 
 [DefaultExecutionOrder(1), System.Serializable]
 public class LevelManager : SingletonPersistent<LevelManager> {
-    [Header("Generation Parameters")] 
-    [SerializeField] private RoomDictionary _Dictionary = new RoomDictionary();
-    public RoomDictionary Dictionary { get { return _Dictionary; } }
+    [Header("Generation Parameters")] [SerializeField]
+    private RoomDictionary _Dictionary = new RoomDictionary();
 
-    [Header("Level Manager Parameters")] 
-    public int GenerateSeed = -1;
+    public RoomDictionary Dictionary {
+        get { return _Dictionary; }
+    }
+
+    [Header("Level Manager Parameters")] public int GenerateSeed = -1;
     public bool CanStart = true;
     private GameObject StartingRoom;
 
@@ -282,23 +292,25 @@ public class LevelManager : SingletonPersistent<LevelManager> {
     protected override void Awake() {
         base.Awake();
         BuildDictionary();
-        
+
+        GenerateSeed = GameManager.Instance.GenerationSeed;
+
         if (CanStart) {
             if (GenerateSeed != -1 && GenerateSeed >= 0) Random.InitState(GenerateSeed);
             RoomInformation StartingRoomInformation = Dictionary.GetStarterRoomInformation();
-            StartingRoom = Instantiate(Resources.Load<GameObject>("Ground/" + StartingRoomInformation.Type), Vector3.zero, Quaternion.identity);
+            StartingRoom = Instantiate(Resources.Load<GameObject>("Ground/" + StartingRoomInformation.Type),
+                Vector3.zero, Quaternion.identity);
             StartingRoom.GetComponent<Room>().Information = StartingRoomInformation;
             StartingRoom.GetComponent<Room>().StarterRoom = true;
             StartingRoom.transform.parent = transform;
             StartingRoom.name = "Starting Room";
         }
     }
-    
+
     private void BuildDictionary() {
         string JSONFile = System.IO.File.ReadAllText(Application.dataPath + "/Dictionary/Rooms.dictionary");
         _Dictionary = JsonUtility.FromJson<RoomDictionary>(JSONFile);
     }
 
     // Try a requesting System for generating levels
-    
 }

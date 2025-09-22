@@ -24,10 +24,6 @@ namespace Entities.Enemies {
 
         public event OnDeathDelegate OnEnemyDeath;
 
-        private void Awake() {
-            TryGetComponent(out HealthComponent);
-        }
-
         private void OnEnable() {
             if (HealthComponent == null) return;
             HealthComponent.OnDeath += Death;

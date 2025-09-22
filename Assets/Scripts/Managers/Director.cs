@@ -102,7 +102,7 @@ public class Director : MonoBehaviour {
     [Header("Director Parameters")]
     [Tooltip("Enable Debugging for the Player to see Director's values")]
     [SerializeField] private bool Debugging;
-    [Tooltip("This is the Spawing Absolute Values that the Director attemps to spawn Entities around the Player in (+/- X, +/- Y)")]
+    [Tooltip("This is the Spawing Absolute Values that the Director attempts to spawn Entities around the Player in (+/- X, +/- Y)")]
     [SerializeField] private Vector2 SpawningBounds;
     [Tooltip("This is what the Director will spawn")]
     [SerializeField] private GameObject[] Entities;    
@@ -128,20 +128,20 @@ public class Director : MonoBehaviour {
     private float BuildRate = 1f; 
     private float CreditRate = 1f;
     private bool CanSpawn = false;
-    RaycastHit hit;
-    Vector3 RandomCoordinate;
+    RaycastHit Hit;
+    [SerializeField] Vector3 RandomCoordinate;
 
     void Start() {
         RandomEntityIndex = Random.Range(0, Entities.Length);
         
         //Burnout System
-        Credit = 13f * 1.15f * GameManager.Instance.DifficultyModifier;
-        BuildingTime = 13f * 1.15f * GameManager.Instance.DifficultyModifier;
+        // Credit = 1.15f * GameManager.Instance.DifficultyModifier;
+        // BuildingTime = 1.15f * GameManager.Instance.DifficultyModifier;
     }
 
     void OnEnable() {
         Vector3 ExecutableObjectSpawn;
-        RaycastHit hit;
+        RaycastHit Hit;
         CurrentBounty.GenerateBounty(RunTime);
 
         GameObject PlayerObject = GameManager.Instance.PlayerControllerInstance.gameObject;
@@ -152,10 +152,10 @@ public class Director : MonoBehaviour {
                 transform.position.y, 
                 Random.Range(PlayerObject.transform.position.z - SpawningBounds.y - 2.5f, PlayerObject.transform.position.z + SpawningBounds.y + 2.5f));
             
-            if (Physics.Raycast(ExecutableObjectSpawn, transform.TransformDirection(Vector3.down), out hit, 999f, 0b_1000)) {
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) {
-                    hit.point = new Vector3(hit.point.x, hit.point.y + 1, hit.point.z);
-                    ExecutableObject = Instantiate(Resources.Load<GameObject>("Enemies/EXE"), hit.point, Quaternion.identity);
+            if (Physics.Raycast(ExecutableObjectSpawn, transform.TransformDirection(Vector3.down), out Hit, 999f, 0b_1000)) {
+                if (Hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) {
+                    Hit.point = new Vector3(Hit.point.x, Hit.point.y + 1, Hit.point.z);
+                    ExecutableObject = Instantiate(Resources.Load<GameObject>("Enemies/EXE"), Hit.point, Quaternion.identity);
                 }
             }
         }
@@ -203,20 +203,8 @@ public class Director : MonoBehaviour {
 
                 if (Credit >= SpawningQueue.Peek().GetComponent<Enemy>().Stats.BuildCost) Credit -= SpawningQueue.Peek().GetComponent<Enemy>().Stats.BuildCost;
 
-                if (!CanSpawn) {
-                    RandomCoordinate = new Vector3(
-                        Random.Range(PlayerObject.transform.position.x - SpawningBounds.x - 2.5f, PlayerObject.transform.position.x + SpawningBounds.x + 2.5f), 
-                        transform.position.y, 
-                        Random.Range(PlayerObject.transform.position.z - SpawningBounds.y - 2.5f, PlayerObject.transform.position.z + SpawningBounds.y + 2.5f));
-                    
-                    if (Physics.Raycast(RandomCoordinate, transform.TransformDirection(Vector3.down), out hit, 999f, 0b_1000))
-                    {
-                        if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) CanSpawn = true;
-                    }
-                }
-
                 //Spawning Entity
-                if (SpawningQueue.Peek().GetComponent<Enemy>().Stats.BuildTime <= BuildingTime) StartCoroutine("Spawn");
+                if (SpawningQueue.Peek().GetComponent<Enemy>().Stats.BuildTime <= BuildingTime) StartCoroutine(Spawn());
 
                 CreditRate = (1.5f + DifficultyTime * 0.106f) * 1.15f / 3600;
                 BuildRate = (1.5f + DifficultyTime * 0.106f) * 1.15f / 3600;
@@ -230,7 +218,7 @@ public class Director : MonoBehaviour {
                 if (CurrentBounty.Completed) {
                     ExecutableObject.transform.Find("Shield").gameObject.SetActive(false);
                     HealthComponent EXEHealthComponent;
-                    if (ExecutableObject.TryGetComponent(out EXEHealthComponent))
+                    if (ExecutableObject.transform.GetChild(0).TryGetComponent(out EXEHealthComponent))
                         EXEHealthComponent.Invincible = false;
                 }
             }
@@ -251,14 +239,32 @@ public class Director : MonoBehaviour {
     IEnumerator Spawn() {
         if (SpawnedEntities.Count < MaxEntities) {
             BuildingTime -= SpawningQueue.Peek().GetComponent<Enemy>().Stats.BuildTime;
-            RandomCoordinate.y = hit.point.y + 1;
-            var entity = Instantiate(SpawningQueue.Peek(), RandomCoordinate, Quaternion.identity);
-            entity.GetComponent<Enemy>().OnEnemyDeath += OnEntityDeath;
-            SpawnedEntities.Add(entity);
+            SpawnRandomCoordinate();
+            RandomCoordinate.y = Hit.point.y + 1;
+            var Entity = Instantiate(SpawningQueue.Peek(), RandomCoordinate, Quaternion.identity);
+            Entity.GetComponent<Enemy>().OnEnemyDeath += OnEntityDeath;
+            SpawnedEntities.Add(Entity);
             SpawningQueue.Dequeue();
         }
         yield return new WaitForSeconds(0.5f);
         CanSpawn = false;
+    }
+
+    private void SpawnRandomCoordinate() {
+        GameObject PlayerObject = GameManager.Instance.PlayerInstance;
+
+        while (!CanSpawn) {
+            RandomCoordinate = new Vector3(
+                Random.Range(PlayerObject.transform.position.x - SpawningBounds.x - 2.5f,
+                    PlayerObject.transform.position.x + SpawningBounds.x + 2.5f),
+                transform.position.y,
+                Random.Range(PlayerObject.transform.position.z - SpawningBounds.y - 2.5f,
+                    PlayerObject.transform.position.z + SpawningBounds.y + 2.5f));
+            
+            if (Physics.Raycast(RandomCoordinate, transform.TransformDirection(Vector3.down), out Hit, 999f, 0b_1000)) {
+                if (Hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) CanSpawn = true;
+            }
+        }
     }
 
     private string ShowListEntities() {

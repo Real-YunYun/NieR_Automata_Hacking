@@ -61,7 +61,8 @@ namespace Entities {
 
             if (ThreadComponent) {
                 //AddThread<HomingThread>();
-                ThreadComponent.AddThread<TrackingMissile>();
+                // ThreadComponent.AddThread<TrackingMissile>();
+                // ThreadComponent.AddThread<DeathMark>();
             }
         }
 
@@ -86,8 +87,7 @@ namespace Entities {
                     rotation.x = rotation.z = 0;
                     PlayerBody.transform.rotation = Quaternion.Euler(rotation);
                     
-                    ShootingComponent ShootingComponent;
-                    if (TryGetComponent(out ShootingComponent)) {
+                    if (TryGetComponent(out ShootingComponent ShootingComponent)) {
                         /* Debug Aim Line */
                         Vector3 ProjectilePosition = ShootingComponent.GetProjectileSpawn().transform.position;
                         Debug.DrawLine(rayHit.point, rayHit.point + (Vector3.up * 5f), Color.red);

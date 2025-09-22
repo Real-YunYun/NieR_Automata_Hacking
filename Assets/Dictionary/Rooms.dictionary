@@ -1,6 +1,18 @@
 {
     "D": [
         {
+            "ID": 0,
+            "Type": 0,
+            "SpecialType": 0,
+            "ClearedRoom": false,
+            "ChanceToSpawnEnemies": false,
+            "HasSpawnedEnemies": false,
+            "SpecialRoomArguments": [],
+            "Blocks": [],
+            "Enemies": [],
+            "Interactables": []
+        },
+        {
             "ID": 1,
             "Type": 0,
             "SpecialType": 0,
@@ -1760,10 +1772,12 @@
                 }
             ],
             "Interactables": []
-        },
+        }
+    ],
+    "DL": [
         {
             "ID": 0,
-            "Type": 0,
+            "Type": 1,
             "SpecialType": 0,
             "ClearedRoom": false,
             "ChanceToSpawnEnemies": false,
@@ -1772,9 +1786,7 @@
             "Blocks": [],
             "Enemies": [],
             "Interactables": []
-        }
-    ],
-    "DL": [
+        },
         {
             "ID": 1,
             "Type": 1,
@@ -4081,10 +4093,12 @@
             ],
             "Enemies": [],
             "Interactables": []
-        },
+        }
+    ],
+    "DLR": [
         {
             "ID": 0,
-            "Type": 1,
+            "Type": 2,
             "SpecialType": 0,
             "ClearedRoom": false,
             "ChanceToSpawnEnemies": false,
@@ -4093,9 +4107,7 @@
             "Blocks": [],
             "Enemies": [],
             "Interactables": []
-        }
-    ],
-    "DLR": [
+        },
         {
             "ID": 1,
             "Type": 2,
@@ -4655,18 +4667,6 @@
                     }
                 }
             ],
-            "Interactables": []
-        },
-        {
-            "ID": 0,
-            "Type": 2,
-            "SpecialType": 0,
-            "ClearedRoom": false,
-            "ChanceToSpawnEnemies": false,
-            "HasSpawnedEnemies": false,
-            "SpecialRoomArguments": [],
-            "Blocks": [],
-            "Enemies": [],
             "Interactables": []
         }
     ],

@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Entities.Modules;
 using UnityEngine;
 
 namespace Entities.Projectiles {
-    public class ShootingComponent : MonoBehaviour {
+    public class ShootingComponent : EntityModule {
         [Header("Component Parameters")] 
         [SerializeField] protected Transform ProjectileSpawn;
         [SerializeField] protected GameObject ProjectilePrefab;
         [SerializeField] protected bool CanShoot = true;
         [SerializeField] public float FireRate = 8f;
         [SerializeField] protected bool FireRateDelay = false;
-        [SerializeField] private Entity ComponentInstigator; 
+        [SerializeField] private Entity ComponentInstigator; // Backup Instigator for changing instigators
 
         [Header("Audio Clips")] 
         [SerializeField] protected AudioSource ShootingSource;
@@ -45,11 +46,8 @@ namespace Entities.Projectiles {
 
             if (SpawnedGameObject.GetComponent<Entity>()) return;
             Projectile SpawnedProjectile = SpawnedGameObject.GetComponent<Projectile>();
-
-            Entity Instigator;
-            if (gameObject.TryGetComponent(out Instigator)) 
-                SpawnedProjectile.Result = new HitResult(Instigator);
-            else SpawnedProjectile.Result = new HitResult(ComponentInstigator);
+            
+            SpawnedProjectile.Result = new HitResult(Owner != null ? Owner : ComponentInstigator);
             
             if (OnFireEnded != null) OnFireEnded(SpawnedProjectile);
         }
@@ -62,13 +60,11 @@ namespace Entities.Projectiles {
 
         #region Projectile Funcitons
 
-        public void ChangeProjectile(GameObject Projectile)
-        {
+        public void ChangeProjectile(GameObject Projectile) {
             ProjectilePrefab = Projectile;
         }
 
-        public GameObject GetProjectile()
-        {
+        public GameObject GetProjectile() {
             return ProjectilePrefab;
         }
 

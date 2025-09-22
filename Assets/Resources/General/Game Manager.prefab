@@ -50,14 +50,17 @@ MonoBehaviour:
   DirectorPrefab: {fileID: 3883883651654620416, guid: 1442d737cfc844a4a90fbc03e8c220d4, type: 3}
   IsGamePaused: 0
   PossibleSaveGame: 1
-  DifficultyModifier: 1.3
+  DifficultyModifier: 12.5
+  StangeCount: 0
+  PlayerControllerInstance: {fileID: 0}
   PlayerInstance: {fileID: 0}
   MainCameraInstance: {fileID: 0}
   DirectorInstance: {fileID: 0}
   Data:
     CurrentDate: 
     MaxHealth: 50
-    MaxEnergy: 25
     Bits: 0
     KillCount: 0
     RunCount: 0
+    Executables: []
+    Threads: []
